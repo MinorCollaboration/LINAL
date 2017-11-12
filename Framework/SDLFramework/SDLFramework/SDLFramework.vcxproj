@@ -87,6 +87,8 @@
     <ClCompile Include="FWApplication.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ExampleGameObject.cpp" />
+    <ClCompile Include="mycanvas.cpp" />
+    <ClCompile Include="myvector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL2.dll" />
@@ -96,6 +98,8 @@
     <ClInclude Include="FWApplication.h" />
     <ClInclude Include="ExampleGameObject.h" />
     <ClInclude Include="IGameObject.h" />
+    <ClInclude Include="mycanvas.h" />
+    <ClInclude Include="myvector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

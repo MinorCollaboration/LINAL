@@ -6,6 +6,7 @@
 #include <time.h>
 
 #include "ExampleGameObject.h"
+#include "mycanvas.h"
 
 
 int main(int args[])
@@ -21,9 +22,13 @@ int main(int args[])
 	application->SetTargetFPS(60);
 	application->SetColor(Color(255, 10, 40, 255));
 
+	
+
 	// Dancing cow
-	ExampleGameObject *example = new ExampleGameObject();
-	application->AddRenderable(example);
+	//ExampleGameObject *example = new ExampleGameObject();
+	//application->AddRenderable(example);
+
+	MyCanvas *canvas = new MyCanvas();
 
 	//while (true){}
 	while (application->IsRunning())
@@ -50,8 +55,11 @@ int main(int args[])
 		// This is example code, replace with your own!
 
 		// Text drawing
-		application->SetColor(Color(0, 0, 0, 255));
-		application->DrawText("Welcome to KMint", 400, 300);
+
+		canvas->Draw(application);
+
+		//application->SetColor(Color(0, 0, 0, 255));
+		//application->DrawText("Welcome to KMint", 400, 300);
 		
 		// Graph drawing
 		application->SetColor(Color(0, 0, 0, 255));
