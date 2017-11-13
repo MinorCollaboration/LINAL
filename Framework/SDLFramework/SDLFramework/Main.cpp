@@ -23,19 +23,28 @@ int main(int args[])
 	application->SetTargetFPS(60);
 	application->SetColor(Color(255, 10, 40, 255));
 
-	
-
 	// Dancing cow
 	//ExampleGameObject *example = new ExampleGameObject();
 	//application->AddRenderable(example);
 
 	 auto canvas = std::unique_ptr<MyCanvas>{ new MyCanvas() }; // new MyCanvas();
-	 auto vector = std::unique_ptr<MyVector>{ new MyVector() };
 
-	 vector->xAxis = 2;
-	 vector->yAxis = 4;
+	 auto vector1 = std::unique_ptr<MyVector>{ new MyVector(-3, 0, 10, 10) };
+	 auto vector2 = std::unique_ptr<MyVector>{ new MyVector(-1, -5, 10, 10) };
 
-	 canvas->vectors.push_back(*vector);
+	 auto vectorSum = *vector1 + *vector2;
+
+	 canvas->vectors.push_back(*vector1);
+	 canvas->vectors.push_back(*vector2);
+
+	 auto decreased = vectorSum / 2;
+	 auto increased = vectorSum * 2;
+
+	 canvas->vectors.push_back(vectorSum);
+	 canvas->vectors.push_back(decreased);
+	 canvas->vectors.push_back(increased);
+
+
 
 	//while (true){}
 	while (application->IsRunning())

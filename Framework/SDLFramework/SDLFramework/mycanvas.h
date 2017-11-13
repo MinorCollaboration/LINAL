@@ -16,12 +16,12 @@ public:
 
 	std::vector<MyVector> vectors;
 	
-	const int	OFFSETX = 100;
-	const int	OFFSETY = 50;
-	const int	WIDTH = 500;
-	const int	HEIGHT = 500;
-	static const int	FIELDWIDTH = 50;
-	static const int	FIELDHEIGHT = 50;
+	static const int	OFFSETX = 100;
+	static const int	OFFSETY = 50;
+	static const int	WIDTH = 500;
+	static const int	HEIGHT = 500;
+	static const int	FIELDWIDTH = 25;
+	static const int	FIELDHEIGHT = 25;
 private:
 };
 
