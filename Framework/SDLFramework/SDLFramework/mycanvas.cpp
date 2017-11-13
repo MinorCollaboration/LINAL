@@ -27,4 +27,9 @@ void MyCanvas::Draw(FWApplication*& application)
 	{
 		application->DrawLine(MyCanvas::WIDTH + MyCanvas::OFFSETX, y, MyCanvas::OFFSETX, y, 2);
 	}
+
+	for (auto vector : vectors)
+	{
+		vector.Draw(application, MyCanvas::OFFSETX, MyCanvas::OFFSETY + MyCanvas::HEIGHT);
+	}
 }
