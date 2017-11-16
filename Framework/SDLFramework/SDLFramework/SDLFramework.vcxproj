@@ -87,6 +87,7 @@
     <ClCompile Include="FWApplication.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ExampleGameObject.cpp" />
+    <ClCompile Include="matrix.cpp" />
     <ClCompile Include="mycanvas.cpp" />
     <ClCompile Include="myvector.cpp" />
   </ItemGroup>
@@ -98,6 +99,7 @@
     <ClInclude Include="FWApplication.h" />
     <ClInclude Include="ExampleGameObject.h" />
     <ClInclude Include="IGameObject.h" />
+    <ClInclude Include="matrix.h" />
     <ClInclude Include="mycanvas.h" />
     <ClInclude Include="myvector.h" />
   </ItemGroup>

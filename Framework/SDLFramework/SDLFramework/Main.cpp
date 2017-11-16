@@ -37,12 +37,12 @@ int main(int args[])
 	 canvas->vectors.push_back(*vector1);
 	 canvas->vectors.push_back(*vector2);
 
-	 auto decreased = vectorSum / 2;
-	 auto increased = vectorSum * 2;
+	 //auto decreased = vectorSum / 2;
+	 //auto increased = vectorSum * 2;
 
 	 canvas->vectors.push_back(vectorSum);
-	 canvas->vectors.push_back(decreased);
-	 canvas->vectors.push_back(increased);
+	 //canvas->vectors.push_back(decreased);
+	 //canvas->vectors.push_back(increased);
 
 
 

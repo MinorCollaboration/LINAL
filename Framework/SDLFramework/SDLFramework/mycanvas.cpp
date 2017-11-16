@@ -30,10 +30,17 @@ void MyCanvas::Draw(FWApplication*& application)
 		application->DrawLine(MyCanvas::WIDTH + MyCanvas::OFFSETX, y, MyCanvas::OFFSETX, y, 2);
 	}
 
+	// Draw vectors
 	for (auto vector : vectors)
 	{
 		application->SetColor(vector.GetColor());
 		vector.Draw(application, MyCanvas::OFFSETX + (vector.startingX * MyCanvas::FIELDWIDTH), MyCanvas::OFFSETY + MyCanvas::HEIGHT - (vector.startingY * MyCanvas::FIELDHEIGHT));
 	}
+
 	application->SetColor(defaultColor);
+
+	// Print matrix
+	for (auto matrix : matrixs)
+	{
+	}
 }

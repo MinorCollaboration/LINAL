@@ -3,6 +3,7 @@
 
 #include "FWApplication.h"
 #include "myvector.h"
+#include "matrix.h"
 
 class MyVector;
 
@@ -15,6 +16,7 @@ public:
 	void Draw(FWApplication*& application);
 
 	std::vector<MyVector> vectors;
+	std::vector<Matrix> matrixs;
 	
 	static const int	OFFSETX = 100;
 	static const int	OFFSETY = 50;
