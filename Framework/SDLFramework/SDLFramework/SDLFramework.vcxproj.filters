@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="FWApplication.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="ExampleGameObject.cpp" />
+    <ClCompile Include="vector.cpp">
+      <Filter>linal</Filter>
+    </ClCompile>
+    <ClCompile Include="matrix.cpp">
+      <Filter>linal</Filter>
+    </ClCompile>
+    <ClCompile Include="canvas.cpp">
+      <Filter>linal</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="FWApplication.h" />
+    <ClInclude Include="ExampleGameObject.h" />
+    <ClInclude Include="IGameObject.h" />
+    <ClInclude Include="vector.h">
+      <Filter>linal</Filter>
+    </ClInclude>
+    <ClInclude Include="matrix.h">
+      <Filter>linal</Filter>
+    </ClInclude>
+    <ClInclude Include="canvas.h">
+      <Filter>linal</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SDL2.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="linal">
+      <UniqueIdentifier>{abf55b0b-1c6a-430a-9b78-a95e9226fb23}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

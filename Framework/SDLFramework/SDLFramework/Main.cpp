@@ -7,8 +7,7 @@
 #include <time.h>
 
 #include "ExampleGameObject.h"
-#include "mycanvas.h"
-
+#include "canvas.h"
 
 int main(int args[])
 {
@@ -27,10 +26,10 @@ int main(int args[])
 	//ExampleGameObject *example = new ExampleGameObject();
 	//application->AddRenderable(example);
 
-	 auto canvas = std::unique_ptr<MyCanvas>{ new MyCanvas() }; // new MyCanvas();
+	 auto canvas = std::unique_ptr<Linal::Canvas>{ new Linal::Canvas() }; // new MyCanvas();
 
-	 auto vector1 = std::unique_ptr<MyVector>{ new MyVector(-3, 0, 10, 10) };
-	 auto vector2 = std::unique_ptr<MyVector>{ new MyVector(-1, -5, 10, 10) };
+	 auto vector1 = std::unique_ptr<Linal::Vector>{ new Linal::Vector(-3, 0, 10, 10) };
+	 auto vector2 = std::unique_ptr<Linal::Vector>{ new Linal::Vector(-1, -5, 10, 10) };
 
 	 auto vectorSum = *vector1 + *vector2;
 

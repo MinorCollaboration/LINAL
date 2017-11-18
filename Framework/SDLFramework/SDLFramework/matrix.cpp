@@ -1,26 +1,39 @@
 #include "matrix.h"
 
-Matrix::Matrix()
+using namespace Linal;
+
+template <class T>
+Matrix<T>::Matrix() : Width(1), Height(1)
+{
+	matrix = new std::vector<std::vector<T>>();
+}
+
+template <class T>
+Matrix<T>::Matrix(int x, int y) : Width(x), Height(1)
 {
 
 }
 
-Matrix::~Matrix()
+template <class T>
+Matrix<T>::~Matrix()
 {
 }
 
-double Matrix::Get(int x, int y)
+template <class T>
+double Matrix<T>::Get(int x, int y)
 {
 	return matrix[x][y];
 }
 
-Matrix& Matrix::Set(int x, int y, double v)
+template <class T>
+Matrix<T>& Matrix<T>::Set(int x, int y, T v)
 {
 	matrix[x][y] = v;
 	return *this;
 }
 
-void Matrix::Draw(FWApplication *& application, int offsetX, int offsetY)
+template <class T>
+void Matrix<T>::Draw(FWApplication *& application, int offsetX, int offsetY)
 {
 	for (int x = 0; x < GetWidth(); x++)
 	{
@@ -31,20 +44,14 @@ void Matrix::Draw(FWApplication *& application, int offsetX, int offsetY)
 	}
 }
 
-int Matrix::GetWidth()
+template <class T>
+int Matrix<T>::GetWidth()
 {
-	return matrix.size();
+	return Width;
 }
 
-int Matrix::GetHeight()
+template <class T>
+int Matrix<T>::GetHeight()
 {
-	int maxHeight = 0;
-
-	for (auto row : matrix)
-	{
-		if (row.size() > maxHeight)
-			maxHeight = row.size();
-	}
-
-	return maxHeight;
+	return Height;
 }

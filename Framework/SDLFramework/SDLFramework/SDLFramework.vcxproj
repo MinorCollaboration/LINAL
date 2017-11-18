@@ -88,8 +88,8 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ExampleGameObject.cpp" />
     <ClCompile Include="matrix.cpp" />
-    <ClCompile Include="mycanvas.cpp" />
-    <ClCompile Include="myvector.cpp" />
+    <ClCompile Include="canvas.cpp" />
+    <ClCompile Include="vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL2.dll" />
@@ -100,8 +100,8 @@
     <ClInclude Include="ExampleGameObject.h" />
     <ClInclude Include="IGameObject.h" />
     <ClInclude Include="matrix.h" />
-    <ClInclude Include="mycanvas.h" />
-    <ClInclude Include="myvector.h" />
+    <ClInclude Include="canvas.h" />
+    <ClInclude Include="vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,21 +5,29 @@
 
 #include "FWApplication.h"
 
-class Matrix
+namespace Linal
 {
-public:
-	Matrix();
-	~Matrix();
+	template <class T>
+	class Matrix
+	{
+	public:
+		Matrix<T>();
+		Matrix<T>(int x, int y);
+		~Matrix();
 
-	void Matrix::Draw(FWApplication *& application, int offsetX, int offsetY);
+		void Matrix::Draw(FWApplication *& application, int offsetX, int offsetY);
 
-	double Get(int x, int y);
-	Matrix& Set(int x, int y, double v);
+		double Get(int x, int y);
+		Matrix& Set(int x, int y, T v);
 
-	int GetWidth();
-	int GetHeight();
-private:
-	std::vector<std::vector<double>> matrix;
-};
+		int GetWidth();
+		int GetHeight();
+	private:
+		std::vector<std::vector<T>> matrix;
+		int Width;
+		int Height;
+	};
+}
+
 
 #endif
