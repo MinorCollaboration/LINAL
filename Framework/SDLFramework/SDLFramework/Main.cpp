@@ -8,6 +8,8 @@
 
 #include "ExampleGameObject.h"
 #include "canvas.h"
+#include "matrix.h"
+
 
 int main(int args[])
 {
@@ -25,10 +27,18 @@ int main(int args[])
 	// Dancing cow
 	//ExampleGameObject *example = new ExampleGameObject();
 	//application->AddRenderable(example);
+	auto canvas{ std::unique_ptr<Linal::Canvas>{ new Linal::Canvas() } };
 
-	 auto canvas = std::unique_ptr<Linal::Canvas>{ new Linal::Canvas() }; // new MyCanvas();
+	auto matrix = new Linal::Matrix<int>(4, 2);
+	
+	matrix->Set(1, 1, 3)->Set(1, 2, 4)->Set(1, 3, 6)->Set(1, 4, 1);
+	matrix->Set(2, 1, 2)->Set(2, 2, 1)->Set(2, 3, 7)->Set(2, 4, 5);
 
-	 auto vector1 = std::unique_ptr<Linal::Vector>{ new Linal::Vector(-3, 0, 10, 10) };
+	//canvas->matrixes.push_back(*matrix);
+
+	//canvas->matrixes
+
+	 /*auto vector1 = std::unique_ptr<Linal::Vector>{ new Linal::Vector(-3, 0, 10, 10) };
 	 auto vector2 = std::unique_ptr<Linal::Vector>{ new Linal::Vector(-1, -5, 10, 10) };
 
 	 auto vectorSum = *vector1 + *vector2;
@@ -39,7 +49,7 @@ int main(int args[])
 	 //auto decreased = vectorSum / 2;
 	 //auto increased = vectorSum * 2;
 
-	 canvas->vectors.push_back(vectorSum);
+	 canvas->vectors.push_back(vectorSum);*/
 	 //canvas->vectors.push_back(decreased);
 	 //canvas->vectors.push_back(increased);
 
@@ -72,6 +82,8 @@ int main(int args[])
 		// Text drawing
 
 		canvas->Draw(application);
+
+		matrix->Draw(application, Linal::Canvas::OFFSETX, Linal::Canvas::OFFSETY);
 
 		//application->SetColor(Color(0, 0, 0, 255));
 		//application->DrawText("Welcome to KMint", 400, 300);

@@ -18,6 +18,7 @@ namespace Linal
 		void Draw(FWApplication*& application);
 
 		std::vector<Vector> vectors;
+		std::vector<Linal::Matrix<int>> matrixes;
 	
 		static const int	OFFSETX = 100;
 		static const int	OFFSETY = 50;

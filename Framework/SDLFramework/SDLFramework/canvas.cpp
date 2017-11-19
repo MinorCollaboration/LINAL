@@ -39,5 +39,10 @@ void Canvas::Draw(FWApplication*& application)
 		vector.Draw(application, Canvas::OFFSETX + (vector.startingX * Canvas::FIELDWIDTH), Canvas::OFFSETY + Canvas::HEIGHT - (vector.startingY * Canvas::FIELDHEIGHT));
 	}
 
+	for (auto matrix : matrixes)
+	{
+		application->SetColor(defaultColor);
+	}
+
 	application->SetColor(defaultColor);
 }
