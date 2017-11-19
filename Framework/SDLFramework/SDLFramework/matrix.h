@@ -57,7 +57,7 @@ namespace Linal
 	Matrix<T>* Matrix<T>::Set(int x, int y, T v)
 	{
 		//matrix->insert(x*Width + y, v);
-		int index = (x - 1)*Width + y - 1;
+		int index = (x - 1)*Width + (y - 1);
 		matrix->at(index) = v;
 		return this;
 	}
@@ -65,16 +65,17 @@ namespace Linal
 	template <typename T>
 	void Matrix<T>::Draw(FWApplication *& application, int offsetX, int offsetY)
 	{
-		for (int y = 1; y <= Width; y++)
+		
+		for (int x = 1; x <= Height; x++)
 		{
-			for (int x = 1; x <= Height; x++)
+			for (int y = 1; y <= Width; y++)
 			{
-				int index = (x - 1) * Width + y-1;
+				int index = (x - 1)*Width + (y - 1);
 				auto val = matrix->at(index);
 				application->SetColor(Color(255, 0, 0, 255));
 
-				int posX = (x * Linal::Canvas::FIELDWIDTH) + offsetX;
-				int posY = (y * Linal::Canvas::FIELDHEIGHT) + offsetY;
+				int posX = (y * Linal::Canvas::FIELDHEIGHT) + offsetX;
+				int posY = (x * Linal::Canvas::FIELDWIDTH) + offsetY;
 
 				application->SetFontSize(18);
 				application->DrawText(std::to_string(val), posX, posY);
