@@ -92,9 +92,6 @@
     <ClCompile Include="vector.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="SDL2.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Config.h" />
     <ClInclude Include="FWApplication.h" />
     <ClInclude Include="ExampleGameObject.h" />

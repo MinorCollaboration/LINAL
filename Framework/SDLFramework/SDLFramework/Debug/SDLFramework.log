@@ -1,0 +1,28 @@
+﻿  vector.cpp
+c:\users\glenn\documents\workspace\linal\framework\sdlframework\sdlframework\vector.cpp(34): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\glenn\documents\workspace\linal\framework\sdlframework\sdlframework\vector.cpp(39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\glenn\documents\workspace\linal\framework\sdlframework\sdlframework\vector.cpp(44): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\glenn\documents\workspace\linal\framework\sdlframework\sdlframework\vector.cpp(49): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\glenn\documents\workspace\linal\framework\sdlframework\sdlframework\vector.cpp(55): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  canvas.cpp
+c:\users\glenn\documents\workspace\linal\framework\sdlframework\sdlframework\canvas.cpp(39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  matrix.cpp
+  ExampleGameObject.cpp
+  Main.cpp
+c:\users\glenn\documents\workspace\linal\framework\sdlframework\sdlframework\main.cpp(87): warning C4065: switch statement contains 'default' but no 'case' labels
+c:\users\glenn\documents\workspace\linal\framework\sdlframework\sdlframework\matrix.h(87): warning C4101: 'val': unreferenced local variable
+  c:\users\glenn\documents\workspace\linal\framework\sdlframework\sdlframework\matrix.h(80): note: while compiling class template member function 'Linal::Matrix<int> &Linal::Matrix<int>::operator *(const Linal::Matrix<int> &)'
+  c:\users\glenn\documents\workspace\linal\framework\sdlframework\sdlframework\main.cpp(41): note: see reference to function template instantiation 'Linal::Matrix<int> &Linal::Matrix<int>::operator *(const Linal::Matrix<int> &)' being compiled
+  c:\users\glenn\documents\workspace\linal\framework\sdlframework\sdlframework\main.cpp(32): note: see reference to class template instantiation 'Linal::Matrix<int>' being compiled
+  FWApplication.cpp
+c:\users\glenn\documents\workspace\linal\framework\sdlframework\sdlframework\fwapplication.cpp(257): warning C4838: conversion from 'uint32_t' to 'Uint8' requires a narrowing conversion
+  Generating Code...
+c:\users\glenn\documents\workspace\linal\framework\sdlframework\sdlframework\vector.cpp(50): warning C4172: returning address of local variable or temporary: toReturn
+c:\users\glenn\documents\workspace\linal\framework\sdlframework\sdlframework\vector.cpp(44): warning C4172: returning address of local variable or temporary
+c:\users\glenn\documents\workspace\linal\framework\sdlframework\sdlframework\vector.cpp(39): warning C4172: returning address of local variable or temporary
+c:\users\glenn\documents\workspace\linal\framework\sdlframework\sdlframework\vector.cpp(34): warning C4172: returning address of local variable or temporary
+  LINK : C:\Users\Glenn\Documents\Workspace\LINAL\Framework\SDLFramework\Debug\SDLFramework.exe not found or not built by the last incremental link; performing full link
+     Creating library C:\Users\Glenn\Documents\Workspace\LINAL\Framework\SDLFramework\Debug\SDLFramework.lib and object C:\Users\Glenn\Documents\Workspace\LINAL\Framework\SDLFramework\Debug\SDLFramework.exp
+SDL2_gfx.lib(SDL2_gfxPrimitives.obj) : warning LNK4099: PDB 'SDL2_gfx.pdb' was not found with 'SDL2_gfx.lib(SDL2_gfxPrimitives.obj)' or at 'C:\Users\Glenn\Documents\Workspace\LINAL\Framework\SDLFramework\Debug\SDL2_gfx.pdb'; linking object as if no debug info
+SDL2_gfx.lib(SDL2_rotozoom.obj) : warning LNK4099: PDB 'SDL2_gfx.pdb' was not found with 'SDL2_gfx.lib(SDL2_rotozoom.obj)' or at 'C:\Users\Glenn\Documents\Workspace\LINAL\Framework\SDLFramework\Debug\SDL2_gfx.pdb'; linking object as if no debug info
+  SDLFramework.vcxproj -> C:\Users\Glenn\Documents\Workspace\LINAL\Framework\SDLFramework\Debug\SDLFramework.exe

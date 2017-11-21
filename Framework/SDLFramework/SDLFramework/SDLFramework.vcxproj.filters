@@ -30,9 +30,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="SDL2.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="linal">
       <UniqueIdentifier>{abf55b0b-1c6a-430a-9b78-a95e9226fb23}</UniqueIdentifier>
     </Filter>
