@@ -26,7 +26,6 @@ namespace Linal
 		Matrix<T>* Set(int x, int y, T v);
 
 		Matrix<T>& operator*(const Matrix<T>& rhs);
-		friend Matrix<T>& operator*(Matrix<T>& out, const Matrix<T>& rhs);
 
 		int GetWidth();
 		int GetHeight();
@@ -85,19 +84,16 @@ namespace Linal
 		{
 			for (int y = 1; y <= output->Width; y++)
 			{
+				T val;
+
+				//for (int )
+
 				auto test = Get(x, 1) * rhs.Get(1, y) + Get(x, 2) * rhs.Get(2, y);
 				output->Set(x, y, test);
 			}
 		}
 
 		return *output;
-	}
-
-	template <typename T>
-	Matrix<T>& Linal::operator*(Matrix<T>& out, const Matrix<T>& rhs)
-	{
-		// TODO: insert return statement here
-		return out;
 	}
 
 	template <typename T>
