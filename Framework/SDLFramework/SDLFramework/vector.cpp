@@ -10,14 +10,9 @@ Vector::Vector()
 	startingY = rand() * (Canvas::HEIGHT / Canvas::FIELDHEIGHT);
 }
 
-Vector::Vector(double xAxis, double yAxis) : xAxis(xAxis), yAxis(yAxis)
+Vector::Vector(double xAxis, double yAxis) : xAxis(xAxis), yAxis(yAxis), startingX(0), startingY(0)
 {
 	myColor = Color(rand() * 255, rand() * 255, rand() * 255, 255);
-
-	auto random = rand();
-
-	startingX = rand() % (Canvas::WIDTH / Canvas::FIELDWIDTH);
-	startingY = rand() % (Canvas::HEIGHT / Canvas::FIELDHEIGHT);
 }
 
 Vector::Vector(double xAxis, double yAxis, int xOrigin, int yOrigin) : xAxis(xAxis), yAxis(yAxis), startingX(xOrigin), startingY(yOrigin)
