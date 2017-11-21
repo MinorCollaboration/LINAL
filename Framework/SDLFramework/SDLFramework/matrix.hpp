@@ -3,6 +3,9 @@
 
 #include <vector>
 #include <memory>
+#include <iomanip>
+
+using namespace std;
 
 #include "FWApplication.h"
 
@@ -81,7 +84,8 @@ namespace Linal
 			for (int y = 1; y <= output->Width; y++) {
 				T val = 0;
 				for (int colrows = 1; colrows <= Width; colrows++)
-					val += Get(x, colrows) * rhs.Get(colrows, y);
+					//val += round(Get(x, colrows) * rhs.Get(colrows, y));
+					val += floor((Get(x, colrows) * rhs.Get(colrows, y)) * 5 + 0.5) / 5;
 
 				output->Set(x, y, val);
 			}
@@ -121,6 +125,17 @@ namespace Linal
 	int Matrix<T>::GetHeight()
 	{
 		return Height;
+	}
+
+	static Linal::Matrix<float>* GetTranslateMatrix()
+	{
+		auto matrix = new Linal::Matrix<float>(3,3);
+
+		matrix->Set(1, 1, 1)->Set(1, 2, 0)->Set(1, 3, 0.1);
+		matrix->Set(2, 1, 0)->Set(2, 2, 1)->Set(2, 3, 0.1);
+		matrix->Set(3, 1, 0)->Set(3, 2, 0)->Set(3, 3, 1);
+
+		return matrix;
 	}
 }
 
