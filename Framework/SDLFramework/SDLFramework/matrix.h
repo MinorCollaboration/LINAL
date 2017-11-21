@@ -8,7 +8,10 @@
 
 namespace Linal
 {
-	template <typename T>
+	template <class T> class Matrix;
+	template <typename T> Matrix<T>& operator*(Matrix<T>& out, const Matrix<T>& rhs);
+
+	template <class T>
 	class Matrix
 	{
 	public:
@@ -18,8 +21,12 @@ namespace Linal
 
 		void Matrix::Draw(FWApplication *& application, int offsetX, int offsetY);
 
-		double Get(int x, int y);
+		T Get(int x, int y);
+		T Get(int x, int y) const;
 		Matrix<T>* Set(int x, int y, T v);
+
+		Matrix<T>& operator*(const Matrix<T>& rhs);
+		friend Matrix<T>& operator*(Matrix<T>& out, const Matrix<T>& rhs);
 
 		int GetWidth();
 		int GetHeight();
@@ -48,18 +55,49 @@ namespace Linal
 	}
 
 	template <typename T>
-	double Matrix<T>::Get(int x, int y)
+	T Matrix<T>::Get(int x, int y) const
 	{
-		return matrix[x*Width + y];
+		int index = (x - 1)*Width + (y - 1);
+		return matrix->at(index);
+	}
+
+	template <typename T>
+	T Matrix<T>::Get(int x, int y)
+	{
+		int index = (x - 1)*Width + (y - 1);
+		return matrix->at(index);
 	}
 
 	template <typename T>
 	Matrix<T>* Matrix<T>::Set(int x, int y, T v)
 	{
-		//matrix->insert(x*Width + y, v);
 		int index = (x - 1)*Width + (y - 1);
 		matrix->at(index) = v;
 		return this;
+	}
+
+	template<class T>
+	inline Matrix<T>& Matrix<T>::operator*(const Matrix<T>& rhs)
+	{
+		Matrix<T>* output = new Matrix<T>(rhs.Width, Height);
+
+		for (int x = 1; x <= output->Height; x++)
+		{
+			for (int y = 1; y <= output->Width; y++)
+			{
+				auto test = Get(x, 1) * rhs.Get(1, y) + Get(x, 2) * rhs.Get(2, y);
+				output->Set(x, y, test);
+			}
+		}
+
+		return *output;
+	}
+
+	template <typename T>
+	Matrix<T>& Linal::operator*(Matrix<T>& out, const Matrix<T>& rhs)
+	{
+		// TODO: insert return statement here
+		return out;
 	}
 
 	template <typename T>

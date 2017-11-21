@@ -29,6 +29,17 @@ int main(int args[])
 	//application->AddRenderable(example);
 	auto canvas{ std::unique_ptr<Linal::Canvas>{ new Linal::Canvas() } };
 
+	Linal::Matrix<int>* a = new Linal::Matrix<int>(2, 2);
+	Linal::Matrix<int>* b = new Linal::Matrix<int>(3, 2);
+
+	a->Set(1, 1, 4)->Set(1, 2, 1);
+	a->Set(2, 1, 2)->Set(2, 2, 3);
+
+	b->Set(1, 1, 3)->Set(1, 2, 0)->Set(1, 3, 4);
+	b->Set(2, 1, 2)->Set(2, 2, 5)->Set(2, 3, 1);
+
+	auto c = a->operator*(*b);
+
 	auto matrix = new Linal::Matrix<int>(4, 2);
 	
 	matrix->Set(1, 1, 3)->Set(1, 2, 4)->Set(1, 3, 6)->Set(1, 4, 1);
@@ -84,6 +95,7 @@ int main(int args[])
 		canvas->Draw(application);
 
 		matrix->Draw(application, Linal::Canvas::OFFSETX, Linal::Canvas::OFFSETY);
+		c.Draw(application, Linal::Canvas::OFFSETX + 200, Linal::Canvas::OFFSETY + 200);
 
 		//application->SetColor(Color(0, 0, 0, 255));
 		//application->DrawText("Welcome to KMint", 400, 300);
