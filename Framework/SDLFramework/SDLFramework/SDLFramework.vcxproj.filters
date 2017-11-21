@@ -7,10 +7,10 @@
     <ClCompile Include="vector.cpp">
       <Filter>linal</Filter>
     </ClCompile>
-    <ClCompile Include="matrix.cpp">
+    <ClCompile Include="canvas.cpp">
       <Filter>linal</Filter>
     </ClCompile>
-    <ClCompile Include="canvas.cpp">
+    <ClCompile Include="point.cpp">
       <Filter>linal</Filter>
     </ClCompile>
   </ItemGroup>
@@ -22,10 +22,13 @@
     <ClInclude Include="vector.h">
       <Filter>linal</Filter>
     </ClInclude>
-    <ClInclude Include="matrix.h">
+    <ClInclude Include="canvas.h">
       <Filter>linal</Filter>
     </ClInclude>
-    <ClInclude Include="canvas.h">
+    <ClInclude Include="point.h">
+      <Filter>linal</Filter>
+    </ClInclude>
+    <ClInclude Include="matrix.hpp">
       <Filter>linal</Filter>
     </ClInclude>
   </ItemGroup>

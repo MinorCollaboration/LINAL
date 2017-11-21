@@ -8,7 +8,7 @@
 
 #include "ExampleGameObject.h"
 #include "canvas.h"
-#include "matrix.h"
+#include "matrix.hpp"
 
 
 int main(int args[])

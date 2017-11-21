@@ -3,7 +3,7 @@
 
 #include "FWApplication.h"
 #include "vector.h"
-#include "matrix.h"
+#include "matrix.hpp"
 
 namespace Linal
 {
