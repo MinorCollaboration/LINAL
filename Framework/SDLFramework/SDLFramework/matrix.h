@@ -8,9 +8,6 @@
 
 namespace Linal
 {
-	template <class T> class Matrix;
-	template <typename T> Matrix<T>& operator*(Matrix<T>& out, const Matrix<T>& rhs);
-
 	template <class T>
 	class Matrix
 	{
@@ -80,16 +77,13 @@ namespace Linal
 	{
 		Matrix<T>* output = new Matrix<T>(rhs.Width, Height);
 
-		for (int x = 1; x <= output->Height; x++)
-		{
-			for (int y = 1; y <= output->Width; y++)
-			{
-				T val;
+		for (int x = 1; x <= output->Height; x++) {
+			for (int y = 1; y <= output->Width; y++) {
+				T val = 0;
+				for (int colrows = 1; colrows <= Width; colrows++)
+					val += Get(x, colrows) * rhs.Get(colrows, y);
 
-				//for (int )
-
-				auto test = Get(x, 1) * rhs.Get(1, y) + Get(x, 2) * rhs.Get(2, y);
-				output->Set(x, y, test);
+				output->Set(x, y, val);
 			}
 		}
 
