@@ -1,22 +1,3 @@
-﻿  point.cpp
-  Main.cpp
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\main.cpp(87): warning C4065: switch statement contains 'default' but no 'case' labels
-  Generating Code...
-  Compiling...
-  vector.cpp
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\vector.cpp(34): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\vector.cpp(39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\vector.cpp(44): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\vector.cpp(49): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\vector.cpp(55): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  canvas.cpp
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\canvas.cpp(39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  Generating Code...
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\vector.cpp(34): warning C4172: returning address of local variable or temporary
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\vector.cpp(39): warning C4172: returning address of local variable or temporary
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\vector.cpp(44): warning C4172: returning address of local variable or temporary
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\vector.cpp(50): warning C4172: returning address of local variable or temporary: toReturn
-     Creating library C:\Users\mark_\Documents\Herkansingen\LINAL\Framework\SDLFramework\Debug\SDLFramework.lib and object C:\Users\mark_\Documents\Herkansingen\LINAL\Framework\SDLFramework\Debug\SDLFramework.exp
-SDL2_gfx.lib(SDL2_gfxPrimitives.obj) : warning LNK4099: PDB 'SDL2_gfx.pdb' was not found with 'SDL2_gfx.lib(SDL2_gfxPrimitives.obj)' or at 'C:\Users\mark_\Documents\Herkansingen\LINAL\Framework\SDLFramework\Debug\SDL2_gfx.pdb'; linking object as if no debug info
-SDL2_gfx.lib(SDL2_rotozoom.obj) : warning LNK4099: PDB 'SDL2_gfx.pdb' was not found with 'SDL2_gfx.lib(SDL2_rotozoom.obj)' or at 'C:\Users\mark_\Documents\Herkansingen\LINAL\Framework\SDLFramework\Debug\SDL2_gfx.pdb'; linking object as if no debug info
+﻿  Main.cpp
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\main.cpp(85): warning C4065: switch statement contains 'default' but no 'case' labels
   SDLFramework.vcxproj -> C:\Users\mark_\Documents\Herkansingen\LINAL\Framework\SDLFramework\Debug\SDLFramework.exe

@@ -3,11 +3,13 @@
 
 #include "FWApplication.h"
 #include "vector.h"
+#include "point.h"
 #include "matrix.hpp"
 
 namespace Linal
 {
 	class Vector;
+	class Point;
 
 	class Canvas
 	{
@@ -18,6 +20,7 @@ namespace Linal
 		void Draw(FWApplication*& application);
 
 		std::vector<Vector> vectors;
+		std::vector<Point> points;
 		std::vector<Linal::Matrix<int>> matrixes;
 	
 		static const int	OFFSETX = 100;

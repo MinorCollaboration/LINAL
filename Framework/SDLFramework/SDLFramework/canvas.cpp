@@ -38,6 +38,12 @@ void Canvas::Draw(FWApplication*& application)
 		application->SetColor(vector.GetColor());
 		vector.Draw(application, Canvas::OFFSETX + (vector.startingX * Canvas::FIELDWIDTH), Canvas::OFFSETY + Canvas::HEIGHT - (vector.startingY * Canvas::FIELDHEIGHT));
 	}
+	
+	application->SetColor(Color(0, 0, 255, 255));
+	for (auto point : points)
+	{
+		point.Draw(application, Canvas::OFFSETX + (point.xAxis * Canvas::FIELDWIDTH), Canvas::OFFSETY + Canvas::HEIGHT - (point.yAxis * Canvas::FIELDHEIGHT));
+	}
 
 	for (auto matrix : matrixes)
 	{
