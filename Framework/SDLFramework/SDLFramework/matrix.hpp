@@ -84,8 +84,7 @@ namespace Linal
 			for (int y = 1; y <= output->Width; y++) {
 				T val = 0;
 				for (int colrows = 1; colrows <= Width; colrows++)
-					//val += round(Get(x, colrows) * rhs.Get(colrows, y));
-					val += floor((Get(x, colrows) * rhs.Get(colrows, y)) * 5 + 0.5) / 5;
+					val += Get(x, colrows) * rhs.Get(colrows, y);
 
 				output->Set(x, y, val);
 			}
@@ -109,8 +108,10 @@ namespace Linal
 				int posX = (y * Linal::Canvas::FIELDHEIGHT) + offsetX;
 				int posY = (x * Linal::Canvas::FIELDWIDTH) + offsetY;
 
-				application->SetFontSize(18);
-				application->DrawText(std::to_string(val), posX, posY);
+				application->SetFontSize(12);
+				std::string str = std::to_string(val);
+				str.erase(str.find_last_not_of('0') + 1, std::string::npos);
+				application->DrawText(str, posX, posY);
 			}
 		}
 	}
