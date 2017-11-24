@@ -19,6 +19,13 @@ int main(int args[])
 		LOG("Couldn't create window...");
 		return EXIT_FAILURE;
 	}
+
+	#ifdef _DEBUG
+		#ifdef _WIN32
+			// Initialize memory leak detection.
+			_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+		#endif // _WIN32
+	#endif
 	
 	application->SetTargetFPS(60);
 	application->SetColor(Color(255, 10, 40, 255));
@@ -48,11 +55,11 @@ int main(int args[])
 
 	auto c = a * b;
 
-	auto testpoint = new Linal::Point(1, 1);
+	/*auto testpoint = new Linal::Point(1, 1);
 	auto extratest = new Linal::Point(5, 7);
 
 	canvas->points.push_back(*testpoint);
-	canvas->points.push_back(*extratest);
+	canvas->points.push_back(*extratest);*/
 
 	//canvas->matrixes.push_back(*matrix);
 
@@ -123,6 +130,7 @@ int main(int args[])
 		application->RenderGameObjects();
 		application->EndTick();
 	}
-		
+	
+	delete application;
 	return EXIT_SUCCESS;
 }
