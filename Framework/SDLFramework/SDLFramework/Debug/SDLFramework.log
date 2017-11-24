@@ -1,28 +1,28 @@
 ﻿  Main.cpp
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.hpp(135): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.hpp(136): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.hpp(139): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.hpp(140): warning C4305: 'argument': truncation from 'double' to 'float'
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\main.cpp(94): warning C4065: switch statement contains 'default' but no 'case' labels
   Generating Code...
   Compiling...
   vector.cpp
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.hpp(135): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.hpp(136): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.hpp(139): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.hpp(140): warning C4305: 'argument': truncation from 'double' to 'float'
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\vector.cpp(29): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\vector.cpp(34): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\vector.cpp(39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\vector.cpp(44): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\vector.cpp(50): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   point.cpp
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.hpp(135): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.hpp(136): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.hpp(139): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.hpp(140): warning C4305: 'argument': truncation from 'double' to 'float'
   canvas.cpp
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.hpp(135): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.hpp(136): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.hpp(139): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.hpp(140): warning C4305: 'argument': truncation from 'double' to 'float'
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\canvas.cpp(39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\canvas.cpp(45): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   Generating Code...
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\vector.cpp(29): warning C4172: returning address of local variable or temporary
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\vector.cpp(34): warning C4172: returning address of local variable or temporary
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\vector.cpp(39): warning C4172: returning address of local variable or temporary
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\vector.cpp(34): warning C4172: returning address of local variable or temporary
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\vector.cpp(45): warning C4172: returning address of local variable or temporary: toReturn
   SDLFramework.vcxproj -> C:\Users\mark_\Documents\Herkansingen\LINAL\Framework\SDLFramework\Debug\SDLFramework.exe

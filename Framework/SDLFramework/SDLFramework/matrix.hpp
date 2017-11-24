@@ -33,7 +33,15 @@ namespace Linal
 		std::vector<T>* matrix;
 		int Width;
 		int Height;
+
+		int ConvertToIndex(int x, int y) const;
 	};
+
+	template <typename T>
+	int Matrix<T>::ConvertToIndex(int x, int y) const
+	{
+		return (x - 1)*Width + (y - 1);
+	}
 
 	template <typename T>
 	Matrix<T>::Matrix() : Width(1), Height(1)
@@ -56,22 +64,19 @@ namespace Linal
 	template <typename T>
 	T Matrix<T>::Get(int x, int y) const
 	{
-		int index = (x - 1)*Width + (y - 1);
-		return matrix->at(index);
+		return matrix->at(ConvertToIndex(x, y));
 	}
 
 	template <typename T>
 	T Matrix<T>::Get(int x, int y)
 	{
-		int index = (x - 1)*Width + (y - 1);
-		return matrix->at(index);
+		return matrix->at(ConvertToIndex(x, y));
 	}
 
 	template <typename T>
 	Matrix<T>* Matrix<T>::Set(int x, int y, T v)
 	{
-		int index = (x - 1)*Width + (y - 1);
-		matrix->at(index) = v;
+		matrix->at(ConvertToIndex(x, y)) = v;
 		return this;
 	}
 
@@ -101,8 +106,7 @@ namespace Linal
 		{
 			for (int y = 1; y <= Width; y++)
 			{
-				int index = (x - 1)*Width + (y - 1);
-				auto val = matrix->at(index);
+				auto val = matrix->at(ConvertToIndex(x, y));
 				application->SetColor(Color(255, 0, 0, 255));
 
 				int posX = (y * Linal::Canvas::FIELDHEIGHT) + offsetX;
