@@ -40,13 +40,13 @@ int main(int args[])
 	auto c = a->operator*(*b);*/
 
 	auto a = Linal::GetTranslateMatrix();
-	auto b = new Linal::Matrix<float>(3, 4);
+	Linal::Matrix<float> b = Linal::Matrix<float>{ 3, 4 };
 
-	b->Set(1, 1, 3)->Set(1, 2, 4)->Set(1, 3, 6)->Set(1, 4, 1);
-	b->Set(2, 1, 2)->Set(2, 2, 1)->Set(2, 3, 7)->Set(2, 4, 5);
-	b->Set(3, 1, 1)->Set(3, 2, 1)->Set(3, 3, 1)->Set(3, 4, 1);
+	b.Set(1, 1, 3).Set(1, 2, 4).Set(1, 3, 6).Set(1, 4, 1);
+	b.Set(2, 1, 2).Set(2, 2, 1).Set(2, 3, 7).Set(2, 4, 5);
+	b.Set(3, 1, 1).Set(3, 2, 1).Set(3, 3, 1).Set(3, 4, 1);
 
-	auto c = a->operator*(*b);
+	auto c = a * b;
 
 	auto testpoint = new Linal::Point(1, 1);
 	auto extratest = new Linal::Point(5, 7);
