@@ -15,6 +15,7 @@ using namespace std;
 namespace Linal
 {
 	class Vector;
+	class Point;
 
 	template <class T>
 	class Matrix
@@ -40,62 +41,6 @@ namespace Linal
 		int Height;
 
 		int ConvertToIndex(int x, int y) const;
-	};
-
-	// class specialization
-	template <>
-	class Matrix <Vector> {
-	public:
-		Matrix() : Width(1), Height(1) {
-			matrix = std::vector<Vector>(Width * Height);
-		}
-		Matrix(int x, int y) : Width(x), Height(y) {
-			matrix = std::vector<Vector>(Width * Height);
-		}
-
-		Vector Get(int x, int y) {
-			return matrix.at(ConvertToIndex(x, y));
-		}
-		Vector Get(int x, int y) const {
-			return matrix.at(ConvertToIndex(x, y));
-		}
-		Matrix<Vector>& Set(int x, int y, Vector v) {
-			matrix.at(ConvertToIndex(x, y)) = v;
-			return *this;
-		}
-
-		void Draw(FWApplication *& application, int offsetX, int offsetY) {
-			for (int x = 1; x <= Height; x++)
-			{
-				for (int y = 1; y <= Width; y++)
-				{
-					auto val = matrix.at(ConvertToIndex(x, y));
-
-					int posX = (y * Linal::FIELDHEIGHT) + offsetX;
-					int posY = (x * Linal::FIELDWIDTH) + offsetY;
-
-					val.Draw(application, posX, posY);
-
-				}
-			}
-		}
-
-		Matrix<Vector> operator*(const Matrix<Vector>& rhs);
-
-		int GetWidth() {
-			return Width;
-		}
-		int GetHeight() {
-			return Height;
-		}
-	private:
-		std::vector<Vector> matrix;
-		int Width;
-		int Height;
-
-		int ConvertToIndex(int x, int y) const {
-			return (x - 1)*Width + (y - 1);
-		}
 	};
 
 	template <class T>
@@ -192,6 +137,108 @@ namespace Linal
 	{
 		return (x - 1)*Width + (y - 1);
 	}
+
+	// Vector matrix specialization
+	template <>
+	class Matrix <Vector> {
+	public:
+		Matrix() : Width(1), Height(1) {
+			matrix = std::vector<Vector>(Width * Height);
+		}
+		Matrix(int x, int y) : Width(x), Height(y) {
+			matrix = std::vector<Vector>(Width * Height);
+		}
+
+		Vector Get(int x, int y) {
+			return matrix.at(ConvertToIndex(x, y));
+		}
+		Vector Get(int x, int y) const {
+			return matrix.at(ConvertToIndex(x, y));
+		}
+		Matrix<Vector>& Set(int x, int y, Vector v) {
+			matrix.at(ConvertToIndex(x, y)) = v;
+			return *this;
+		}
+
+		void Draw(FWApplication *& application, int offsetX, int offsetY) {
+			for (int x = 1; x <= Height; x++)
+			{
+				for (int y = 1; y <= Width; y++)
+				{
+					auto val = matrix.at(ConvertToIndex(x, y));
+
+					int posX = (y * Linal::FIELDHEIGHT) + offsetX;
+					int posY = (x * Linal::FIELDWIDTH) + offsetY;
+
+					val.Draw(application, posX, posY);
+
+				}
+			}
+		}
+
+		Matrix<Vector> operator*(const Matrix<Vector>& rhs);
+
+		int GetWidth() {
+			return Width;
+		}
+		int GetHeight() {
+			return Height;
+		}
+	private:
+		std::vector<Vector> matrix;
+		int Width;
+		int Height;
+
+		int ConvertToIndex(int x, int y) const {
+			return (x - 1)*Width + (y - 1);
+		}
+	};
+
+	template <>
+	class Matrix <Point> {
+	public:
+		Matrix() : Width(1), Height(1) {
+			matrix = std::vector<Point>(Width * Height);
+		}
+		Matrix(int x, int y) : Width(x), Height(y) {
+			matrix = std::vector<Point>(Width * Height);
+		}
+
+		Point Get(int x, int y) {
+			return matrix.at(ConvertToIndex(x, y));
+		}
+		Point Get(int x, int y) const {
+			return matrix.at(ConvertToIndex(x, y));
+		}
+
+		Matrix<Point>& Set(int x, int y, Point v)
+		{
+			matrix.at(ConvertToIndex(x, y)) = v;
+			return *this;
+		}
+
+		void Draw(FWApplication *& application, int offsetX, int offsetY) {
+			for (int x = 1; x <= Height; x++)
+			{
+				for (int y = 1; y <= Width; y++)
+				{
+					auto val = matrix.at(ConvertToIndex(x, y));
+
+					val.Draw(application, 400, 400);
+
+				}
+			}
+		}
+
+	private:
+		std::vector<Point> matrix;
+		int Width;
+		int Height;
+
+		int ConvertToIndex(int x, int y) const {
+			return (x - 1)*Width + (y - 1);
+		}
+	};
 
 	static Linal::Matrix<float> GetTranslateMatrix()
 	{

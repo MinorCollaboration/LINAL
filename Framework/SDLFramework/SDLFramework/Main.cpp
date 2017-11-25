@@ -34,13 +34,22 @@ int main(int args[])
 	auto canvas{ std::unique_ptr<Linal::Canvas>{ new Linal::Canvas() } };
 
 	auto topbar		= Linal::Vector(0, 2, 4, 4);
-	auto leftbar	= Linal::Vector(2, 0, 4, 2);
-	auto rightbar	= Linal::Vector(2, 0, 6, 2);
-	auto bottombar	= Linal::Vector(0, 2, 4, 2);
+	//auto leftbar	= Linal::Vector(2, 0, 4, 2);
+	//auto rightbar	= Linal::Vector(2, 0, 6, 2);
+	//auto bottombar	= Linal::Vector(0, 2, 4, 2);
 
-	auto square = Linal::Matrix<Linal::Vector>{ 2, 2 };
-	square.Set(1, 1, topbar).Set(1, 2, leftbar);
-	square.Set(2, 1, bottombar).Set(2, 2, rightbar);
+	//auto square = Linal::Matrix<Linal::Vector>{ 2, 2 };
+	//square.Set(1, 1, topbar); // .Set(1, 2, leftbar);
+	//square.Set(2, 1, bottombar).Set(2, 2, rightbar);
+
+	auto square = Linal::Matrix<Linal::Point>{ 2, 2 };
+	auto topleft = Linal::Point(2, 6);
+	auto topright = Linal::Point(6, 6);
+	auto bottomleft = Linal::Point(2, 2);
+	auto bottomright = Linal::Point(6, 2);
+
+	square.Set(1, 1, topleft).Set(1, 2, topright);
+	square.Set(2, 1, bottomleft).Set(2, 2, bottomright);
 
 	auto a = Linal::GetTranslateMatrix();
 	Linal::Matrix<float> b = Linal::Matrix<float>{ 3, 4 };

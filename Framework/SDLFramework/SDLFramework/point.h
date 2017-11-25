@@ -10,6 +10,7 @@ namespace Linal
 	class Point
 	{
 	public:
+		Point();
 		Point(double xAxis, double yAxis);
 		~Point();
 

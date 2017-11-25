@@ -43,7 +43,7 @@ void Linal::Canvas::Draw(FWApplication*& application)
 	application->SetColor(Color(0, 0, 255, 255));
 	for (auto point : points)
 	{
-		point.Draw(application, Linal::OFFSETX + (point.xAxis * Linal::FIELDWIDTH), Linal::OFFSETY + Linal::HEIGHT - (point.yAxis * Linal::FIELDHEIGHT));
+		point.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
 	}
 
 	application->SetColor(defaultColor);
