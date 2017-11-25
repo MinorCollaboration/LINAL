@@ -8,7 +8,8 @@
 
 #include "ExampleGameObject.h"
 #include "canvas.h"
-#include "matrix.hpp"
+#include "constants.h"
+#include "matrix.h"
 
 int main(int args[])
 {
@@ -30,21 +31,16 @@ int main(int args[])
 	application->SetTargetFPS(60);
 	application->SetColor(Color(255, 10, 40, 255));
 
-	// Dancing cow
-	//ExampleGameObject *example = new ExampleGameObject();
-	//application->AddRenderable(example);
 	auto canvas{ std::unique_ptr<Linal::Canvas>{ new Linal::Canvas() } };
 
-	/*Linal::Matrix<int>* a = new Linal::Matrix<int>(2, 2);
-	Linal::Matrix<int>* b = new Linal::Matrix<int>(3, 2);
+	auto topbar		= Linal::Vector(0, 2, 4, 4);
+	auto leftbar	= Linal::Vector(2, 0, 4, 2);
+	auto rightbar	= Linal::Vector(2, 0, 6, 2);
+	auto bottombar	= Linal::Vector(0, 2, 4, 2);
 
-	a->Set(1, 1, 4)->Set(1, 2, 1);
-	a->Set(2, 1, 2)->Set(2, 2, 3);
-
-	b->Set(1, 1, 3)->Set(1, 2, 0)->Set(1, 3, 4);
-	b->Set(2, 1, 2)->Set(2, 2, 5)->Set(2, 3, 1);
-
-	auto c = a->operator*(*b);*/
+	auto square = Linal::Matrix<Linal::Vector>{ 2, 2 };
+	square.Set(1, 1, topbar).Set(1, 2, leftbar);
+	square.Set(2, 1, bottombar).Set(2, 2, rightbar);
 
 	auto a = Linal::GetTranslateMatrix();
 	Linal::Matrix<float> b = Linal::Matrix<float>{ 3, 4 };
@@ -55,28 +51,24 @@ int main(int args[])
 
 	auto c = a * b;
 
-	/*auto testpoint = new Linal::Point(1, 1);
-	auto extratest = new Linal::Point(5, 7);
+	auto testpoint = Linal::Point(1, 1);
+	auto extratest = Linal::Point(5, 7);
 
-	canvas->points.push_back(*testpoint);
-	canvas->points.push_back(*extratest);*/
+	canvas->points.push_back(testpoint);
+	canvas->points.push_back(extratest);
 
-	//canvas->matrixes.push_back(*matrix);
+	 auto vector1 = Linal::Vector(-3, 0, 18, 18);
+	 auto vector2 = Linal::Vector(-1, -5, 18, 18);
 
-	//canvas->matrixes
+	 auto vectorSum = vector1 + vector2;
 
-	 /*auto vector1 = std::unique_ptr<Linal::Vector>{ new Linal::Vector(-3, 0, 10, 10) };
-	 auto vector2 = std::unique_ptr<Linal::Vector>{ new Linal::Vector(-1, -5, 10, 10) };
-
-	 auto vectorSum = *vector1 + *vector2;
-
-	 canvas->vectors.push_back(*vector1);
-	 canvas->vectors.push_back(*vector2);
+	 canvas->vectors.push_back(vector1);
+	 canvas->vectors.push_back(vector2);
 
 	 //auto decreased = vectorSum / 2;
 	 //auto increased = vectorSum * 2;
 
-	 canvas->vectors.push_back(vectorSum);*/
+	 canvas->vectors.push_back(vectorSum);
 	 //canvas->vectors.push_back(decreased);
 	 //canvas->vectors.push_back(increased);
 
@@ -101,27 +93,11 @@ int main(int args[])
 				}
 			}
 		}
-		
-		// This is example code, replace with your own!
-
-		// Text drawing
 
 		canvas->Draw(application);
-		c.Draw(application, Linal::Canvas::OFFSETX + 200, Linal::Canvas::OFFSETY + 200);
+		c.Draw(application, Linal::OFFSETX + 200, Linal::OFFSETY + 200);
 
-		//application->SetColor(Color(0, 0, 0, 255));
-		//application->DrawText("Welcome to KMint", 400, 300);
-		
-		// Graph drawing
-		/*application->SetColor(Color(0, 0, 0, 255));
-		application->DrawLine(400, 350, 350, 400);
-		application->DrawLine(350, 400, 450, 400);
-		application->DrawLine(450, 400, 400, 350);
-
-		application->SetColor(Color(0, 0, 255, 255));
-		application->DrawCircle(400, 350, 10, true);
-		application->DrawCircle(350, 400, 10, true);
-		application->DrawCircle(450, 400, 10, true);*/
+		square.Draw(application, Linal::OFFSETX + 200, Linal::OFFSETY + 200);
 
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));

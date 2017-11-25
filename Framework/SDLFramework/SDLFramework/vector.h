@@ -1,13 +1,14 @@
-#ifndef SDLFRAMEWORK_MYVECTOR
-#define SDLFRAMEWORK_MYVECTOR
+#ifndef SDLFRAMEWORK_VECTOR
+#define SDLFRAMEWORK_VECTOR
 
 #include "FWApplication.h"
-#include "canvas.h"
 
 struct Color;
 
 namespace Linal
 {
+	class Canvas;
+
 	class Vector
 	{
 	public:
@@ -16,11 +17,11 @@ namespace Linal
 		Vector(double xAxis, double yAxis, int xOrigin, int yOrigin);
 		~Vector();
 
-		Vector& operator+(const Vector&);
-		Vector& operator-(const Vector&);
+		Vector operator+(const Vector&);
+		Vector operator-(const Vector&);
 
-		Vector& operator*(const int&);
-		Vector& operator/(const int&);
+		Vector operator*(const int&);
+		Vector operator/(const int&);
 
 		double xAxis;
 		double yAxis;

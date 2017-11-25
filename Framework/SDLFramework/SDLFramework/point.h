@@ -2,7 +2,6 @@
 #define SDLFRAMEWORK_POINT
 
 #include "FWApplication.h"
-#include "canvas.h"
 
 struct Color;
 

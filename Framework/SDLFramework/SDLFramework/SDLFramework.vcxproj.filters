@@ -28,13 +28,22 @@
     <ClInclude Include="point.h">
       <Filter>linal</Filter>
     </ClInclude>
-    <ClInclude Include="matrix.hpp">
+    <ClInclude Include="drawable.h">
+      <Filter>linal\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="constants.h">
+      <Filter>linal</Filter>
+    </ClInclude>
+    <ClInclude Include="matrix.h">
       <Filter>linal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="linal">
       <UniqueIdentifier>{abf55b0b-1c6a-430a-9b78-a95e9226fb23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="linal\interfaces">
+      <UniqueIdentifier>{66112414-c4a8-4389-84d8-55690a24101c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

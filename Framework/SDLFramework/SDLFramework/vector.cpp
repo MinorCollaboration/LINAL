@@ -1,4 +1,5 @@
 #include "vector.h"
+#include "constants.h"
 
 using namespace Linal;
 
@@ -6,8 +7,8 @@ Vector::Vector()
 {
 	myColor = Color(rand() * 255, rand() * 255, rand() * 255, 255);
 
-	startingX = rand() * (Canvas::WIDTH / Canvas::FIELDWIDTH);
-	startingY = rand() * (Canvas::HEIGHT / Canvas::FIELDHEIGHT);
+	startingX = rand() * (Linal::WIDTH / Linal::FIELDWIDTH);
+	startingY = rand() * (Linal::HEIGHT / Linal::FIELDHEIGHT);
 }
 
 Vector::Vector(double xAxis, double yAxis) : xAxis(xAxis), yAxis(yAxis), startingX(0), startingY(0)
@@ -24,22 +25,22 @@ Vector::~Vector()
 {
 }
 
-Vector& Vector::operator+(const Vector & rhs)
+Vector Vector::operator+(const Vector & rhs)
 {
 	return Vector(xAxis + rhs.xAxis, yAxis + rhs.yAxis, startingX, startingY);
 }
 
-Vector& Vector::operator-(const Vector & rhs)
+Vector Vector::operator-(const Vector & rhs)
 {
 	return Vector(xAxis - rhs.xAxis, yAxis - rhs.yAxis, startingX, startingY);
 }
 
-Vector& Vector::operator*(const int & rhs)
+Vector Vector::operator*(const int & rhs)
 {
 	return Vector(xAxis * rhs, yAxis * rhs, startingX, startingY);
 }
 
-Vector& Vector::operator/(const int & rhs)
+Vector Vector::operator/(const int & rhs)
 {
 	auto toReturn = Vector(xAxis / rhs, yAxis / rhs, startingX, startingY);
 	return toReturn;
@@ -47,7 +48,7 @@ Vector& Vector::operator/(const int & rhs)
 
 void Vector::Draw(FWApplication *& application, int offsetX, int offsetY)
 {
-	application->DrawLine(offsetX, offsetY, offsetX + (xAxis * Canvas::FIELDWIDTH), offsetY - (yAxis * Canvas::FIELDHEIGHT));
+	application->DrawLine(offsetX, offsetY, offsetX + (xAxis * Linal::FIELDWIDTH), offsetY - (yAxis * Linal::FIELDHEIGHT));
 }
 
 Color Vector::GetColor()

@@ -1,4 +1,5 @@
 #include "canvas.h"
+#include "constants.h"
 
 using namespace Linal;
 
@@ -10,44 +11,39 @@ Canvas::~Canvas()
 {
 }
 
-void Canvas::Draw(FWApplication*& application)
+void Linal::Canvas::Draw(FWApplication*& application)
 {
 	auto defaultColor = Color(127, 127, 127, 255);
 
 	application->SetColor(Color(0, 0, 0, 255));
-	application->DrawLine(Canvas::OFFSETX, Canvas::OFFSETY, Canvas::OFFSETX, Canvas::HEIGHT + Canvas::OFFSETY, 5);
-	application->DrawLine(Canvas::OFFSETX, Canvas::HEIGHT + Canvas::OFFSETY, Canvas::WIDTH + Canvas::OFFSETX, Canvas::HEIGHT + Canvas::OFFSETY, 5);
+	application->DrawLine(Linal::OFFSETX, Linal::OFFSETY, Linal::OFFSETX, Linal::HEIGHT + Linal::OFFSETY, 5);
+	application->DrawLine(Linal::OFFSETX, Linal::HEIGHT + Linal::OFFSETY, Linal::WIDTH + Linal::OFFSETX, Linal::HEIGHT + Linal::OFFSETY, 5);
 
 	// Draw the vertical lines
 	application->SetColor(defaultColor);
-	for (int x = Canvas::OFFSETX + Canvas::FIELDWIDTH; x <= Canvas::WIDTH + Canvas::OFFSETX; x += Canvas::FIELDWIDTH)
+	for (int x = Linal::OFFSETX + Linal::FIELDWIDTH; x <= Linal::WIDTH + Linal::OFFSETX; x += Linal::FIELDWIDTH)
 	{
-		application->DrawLine(x, Canvas::HEIGHT + Canvas::OFFSETY, x, Canvas::OFFSETY, 2);
+		application->DrawLine(x, Linal::HEIGHT + Linal::OFFSETY, x, Linal::OFFSETY, 2);
 	}
 
 	// Draw the horizontal lines
 	application->SetColor(defaultColor);
-	for (int y = Canvas::OFFSETY + Canvas::HEIGHT - Canvas::FIELDHEIGHT; y >= Canvas::OFFSETY; y -= Canvas::FIELDHEIGHT)
+	for (int y = Linal::OFFSETY + Linal::HEIGHT - Linal::FIELDHEIGHT; y >= Linal::OFFSETY; y -= Linal::FIELDHEIGHT)
 	{
-		application->DrawLine(Canvas::WIDTH + Canvas::OFFSETX, y, Canvas::OFFSETX, y, 2);
+		application->DrawLine(Linal::WIDTH + Linal::OFFSETX, y, Linal::OFFSETX, y, 2);
 	}
 
 	// Draw vectors
 	for (auto vector : vectors)
 	{
 		application->SetColor(vector.GetColor());
-		vector.Draw(application, Canvas::OFFSETX + (vector.startingX * Canvas::FIELDWIDTH), Canvas::OFFSETY + Canvas::HEIGHT - (vector.startingY * Canvas::FIELDHEIGHT));
+		vector.Draw(application, Linal::OFFSETX + (vector.startingX * Linal::FIELDWIDTH), Linal::OFFSETY + Linal::HEIGHT - (vector.startingY * Linal::FIELDHEIGHT));
 	}
 	
 	application->SetColor(Color(0, 0, 255, 255));
 	for (auto point : points)
 	{
-		point.Draw(application, Canvas::OFFSETX + (point.xAxis * Canvas::FIELDWIDTH), Canvas::OFFSETY + Canvas::HEIGHT - (point.yAxis * Canvas::FIELDHEIGHT));
-	}
-
-	for (auto matrix : matrixes)
-	{
-		application->SetColor(defaultColor);
+		point.Draw(application, Linal::OFFSETX + (point.xAxis * Linal::FIELDWIDTH), Linal::OFFSETY + Linal::HEIGHT - (point.yAxis * Linal::FIELDHEIGHT));
 	}
 
 	application->SetColor(defaultColor);

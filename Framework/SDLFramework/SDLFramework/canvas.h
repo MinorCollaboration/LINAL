@@ -1,10 +1,9 @@
-#ifndef SDLFRAMEWORK_MYCANVAS
-#define SDLFRAMEWORK_MYCANVAS
+#ifndef SDLFRAMEWORK_CANVAS
+#define SDLFRAMEWORK_CANVAS
 
 #include "FWApplication.h"
-#include "vector.h"
 #include "point.h"
-#include "matrix.hpp"
+#include "vector.h"
 
 namespace Linal
 {
@@ -21,14 +20,6 @@ namespace Linal
 
 		std::vector<Vector> vectors;
 		std::vector<Point> points;
-		std::vector<Linal::Matrix<int>> matrixes;
-	
-		static const int	OFFSETX = 100;
-		static const int	OFFSETY = 50;
-		static const int	WIDTH = 500;
-		static const int	HEIGHT = 500;
-		static const int	FIELDWIDTH = 25;
-		static const int	FIELDHEIGHT = 25;
 	private:
 	};
 }
