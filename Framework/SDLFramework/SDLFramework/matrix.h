@@ -32,6 +32,8 @@ namespace Linal
 		void Draw(FWApplication *& application, int offsetX, int offsetY);
 
 		Matrix<T> operator*(const Matrix<T>& rhs);
+		Matrix<Point> operator*(const Matrix<Point>& rhs);
+		Matrix<Vector> operator*(const Matrix<Vector>& rhs);
 
 		int GetWidth();
 		int GetHeight();
@@ -89,6 +91,24 @@ namespace Linal
 				T val = 0;
 				for (int colrows = 1; colrows <= Width; colrows++)
 					val += Get(x, colrows) * rhs.Get(colrows, y);
+
+				output.Set(x, y, val);
+			}
+		}
+
+		return output;
+	}
+
+	template<class T>
+	inline Matrix<Point> Matrix<T>::operator*(const Matrix<Point>& rhs)
+	{
+		Matrix<Point> output = Matrix<Point>(rhs.GetWidth(), Height);
+
+		for (int x = 1; x <= output.GetHeight(); x++) {
+			for (int y = 1; y <= output.GetWidth(); y++) {
+				Point val = rhs.Get(x, y);
+				for (int colrows = 1; colrows <= Width; colrows++)
+					/* */continue; /**/ //val += Get(x, colrows) * rhs.Get(colrows, y);
 
 				output.Set(x, y, val);
 			}
@@ -167,10 +187,10 @@ namespace Linal
 				{
 					auto val = matrix.at(ConvertToIndex(x, y));
 
-					int posX = (y * Linal::FIELDHEIGHT) + offsetX;
-					int posY = (x * Linal::FIELDWIDTH) + offsetY;
+					//int posX = (y * Linal::FIELDHEIGHT) + offsetX;
+					//int posY = (x * Linal::FIELDWIDTH) + offsetY;
 
-					val.Draw(application, posX, posY);
+					val.Draw(application, offsetX, offsetY);
 
 				}
 			}
@@ -224,10 +244,29 @@ namespace Linal
 				{
 					auto val = matrix.at(ConvertToIndex(x, y));
 
-					val.Draw(application, 400, 400);
+					//int posX = (y * Linal::FIELDHEIGHT) + offsetX;
+					//int posY = (x * Linal::FIELDWIDTH) + offsetY;
+
+					val.Draw(application, offsetX, offsetY);
 
 				}
 			}
+		}
+
+		int GetWidth() {
+			return Width;
+		}
+
+		int GetWidth() const {
+			return Width;
+		}
+
+		int GetHeight() {
+			return Height;
+		}
+
+		int GetHeight() const {
+			return Height;
 		}
 
 	private:
@@ -240,21 +279,46 @@ namespace Linal
 		}
 	};
 
-	static Linal::Matrix<float> GetTranslateMatrix()
+	static Linal::Matrix<float> GetTranslateMatrix(double t, double s)
 	{
 		auto matrix = Linal::Matrix<float>(3, 3);
 
-		matrix.Set(1, 1, 1).Set(1, 2, 0).Set(1, 3, 0.1);
-		matrix.Set(2, 1, 0).Set(2, 2, 1).Set(2, 3, 0.1);
+		matrix.Set(1, 1, 1).Set(1, 2, 0).Set(1, 3, t);
+		matrix.Set(2, 1, 0).Set(2, 2, 1).Set(2, 3, s);
 		matrix.Set(3, 1, 0).Set(3, 2, 0).Set(3, 3, 1);
 
 		return matrix;
 	}
 
-	/*static Linal::Matrix<float>* GetScaleMatrix(int... scale)
+	static Linal::Matrix<float> GetScaleMatrix(double xScale, double yScale)
 	{
+		auto matrix = Linal::Matrix<float>(2, 2);
 
-	}*/
+		matrix.Set(1, 1, xScale).Set(1, 2, 0);
+		matrix.Set(2, 1, 0).Set(2, 2, yScale);
+
+		return matrix;
+	}
+
+	static Linal::Matrix<int> GetZeroMatrix()
+	{
+		auto matrix = Linal::Matrix<int>(0, 0);
+
+		matrix.Set(1, 1, 0).Set(1, 2, 0);
+		matrix.Set(2, 1, 0).Set(2, 2, 0);
+
+		return matrix;
+	}
+
+	static Linal::Matrix<int> GetIdentityMatrix()
+	{
+		auto matrix = Linal::Matrix<int>(2, 2);
+
+		matrix.Set(1, 1, 1).Set(1, 2, 0);
+		matrix.Set(2, 1, 0).Set(2, 2, 1);
+
+		return matrix;
+	}
 }
 
 

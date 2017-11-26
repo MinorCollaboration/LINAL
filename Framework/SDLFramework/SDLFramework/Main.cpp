@@ -51,7 +51,11 @@ int main(int args[])
 	square.Set(1, 1, topleft).Set(1, 2, topright);
 	square.Set(2, 1, bottomleft).Set(2, 2, bottomright);
 
-	auto a = Linal::GetTranslateMatrix();
+	auto scale = Linal::GetScaleMatrix(1.1, 1.1);
+	
+	auto scaled = scale * square;
+
+	auto a = Linal::GetTranslateMatrix(0.1, 0.1);
 	Linal::Matrix<float> b = Linal::Matrix<float>{ 3, 4 };
 
 	b.Set(1, 1, 3).Set(1, 2, 4).Set(1, 3, 6).Set(1, 4, 1);
@@ -60,9 +64,10 @@ int main(int args[])
 
 	auto c = a * b;
 
-	auto testpoint = Linal::Point(1, 1);
-	auto extratest = Linal::Point(5, 7);
+	//auto testpoint = Linal::Point(1, 1);
+	//auto extratest = Linal::Point(5, 7);
 
+	/*
 	canvas->points.push_back(testpoint);
 	canvas->points.push_back(extratest);
 
@@ -78,6 +83,7 @@ int main(int args[])
 	 //auto increased = vectorSum * 2;
 
 	 canvas->vectors.push_back(vectorSum);
+	 */
 	 //canvas->vectors.push_back(decreased);
 	 //canvas->vectors.push_back(increased);
 
@@ -106,7 +112,7 @@ int main(int args[])
 		canvas->Draw(application);
 		c.Draw(application, Linal::OFFSETX + 200, Linal::OFFSETY + 200);
 
-		square.Draw(application, Linal::OFFSETX + 200, Linal::OFFSETY + 200);
+		square.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
 
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));
