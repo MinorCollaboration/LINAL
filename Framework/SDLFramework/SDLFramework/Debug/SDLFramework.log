@@ -1,7 +1,9 @@
 ﻿  Main.cpp
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(286): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(287): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(252): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(257): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(296): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(297): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(298): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(307): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(308): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\main.cpp(108): warning C4065: switch statement contains 'default' but no 'case' labels
   SDLFramework.vcxproj -> C:\Users\mark_\Documents\Herkansingen\LINAL\Framework\SDLFramework\Debug\SDLFramework.exe

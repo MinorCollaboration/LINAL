@@ -48,6 +48,8 @@ Vector Vector::operator/(const int & rhs)
 
 void Vector::Draw(FWApplication *& application, int offsetX, int offsetY)
 {
+	offsetX += (startingX * Linal::FIELDWIDTH);
+	offsetY -= (startingY * Linal::FIELDHEIGHT);
 	application->DrawLine(offsetX, offsetY, offsetX + (xAxis * Linal::FIELDWIDTH), offsetY - (yAxis * Linal::FIELDHEIGHT));
 }
 

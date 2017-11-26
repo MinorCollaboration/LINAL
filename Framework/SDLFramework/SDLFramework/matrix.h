@@ -247,8 +247,18 @@ namespace Linal
 					//int posX = (y * Linal::FIELDHEIGHT) + offsetX;
 					//int posY = (x * Linal::FIELDWIDTH) + offsetY;
 
-					val.Draw(application, offsetX, offsetY);
+					if (x > 1) {
+						auto ap = matrix.at(ConvertToIndex(x - 1, y));
+						Vector vec = Linal::Vector(val.xAxis - ap.xAxis, ap.yAxis - val.yAxis, val.xAxis, val.yAxis);
+						vec.Draw(application, offsetX, offsetY);
+					}
+					if (y > 1) {
+						auto ap = matrix.at(ConvertToIndex(x, y - 1));
+						Vector vec = Linal::Vector(ap.xAxis - val.xAxis, ap.yAxis - val.yAxis, val.xAxis, val.yAxis);
+						vec.Draw(application, offsetX, offsetY);
+					}
 
+					val.Draw(application, offsetX, offsetY);
 				}
 			}
 		}
