@@ -3,10 +3,14 @@
 
 #include "FWApplication.h"
 
+#include "vector.h"
+
 struct Color;
 
 namespace Linal
 {
+	class Vector;
+
 	class Point
 	{
 	public:
@@ -17,11 +21,14 @@ namespace Linal
 		double xAxis;
 		double yAxis;
 
+		Vector ToVector();
+
 		void Draw(FWApplication*& application, int offsetX, int offsetY);
 
 		static const int	SIZE = 7;
-	private:
 	};
 }
+
+Linal::Vector operator*(const int&, const Linal::Point&);
 
 #endif

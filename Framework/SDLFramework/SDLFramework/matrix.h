@@ -106,11 +106,14 @@ namespace Linal
 
 		for (int x = 1; x <= output.GetHeight(); x++) {
 			for (int y = 1; y <= output.GetWidth(); y++) {
-				Point val = rhs.Get(x, y);
-				for (int colrows = 1; colrows <= Width; colrows++)
-					/* */continue; /**/ //val += Get(x, colrows) * rhs.Get(colrows, y);
+				Vector val = Vector(0, 0);
+				for (int colrows = 1; colrows <= Width; colrows++) {
+					auto GetVal = Get(x, colrows);
+					auto test = Get(x, colrows) * rhs.Get(colrows, y).ToVector();
+					val += test;
+				}
 
-				output.Set(x, y, val);
+				output.Set(x, y, val.ToPoint());
 			}
 		}
 
@@ -134,8 +137,7 @@ namespace Linal
 
 				std::string str = std::to_string(val);
 				str.erase(str.find_last_not_of('0') + 1, std::string::npos);
-				application->DrawText(str, posX, posY);
-
+				application->DrawText(str, posX + 10, posY -7);
 			}
 		}
 	}
@@ -186,9 +188,6 @@ namespace Linal
 				for (int y = 1; y <= Width; y++)
 				{
 					auto val = matrix.at(ConvertToIndex(x, y));
-
-					//int posX = (y * Linal::FIELDHEIGHT) + offsetX;
-					//int posY = (x * Linal::FIELDWIDTH) + offsetY;
 
 					val.Draw(application, offsetX, offsetY);
 
@@ -244,10 +243,8 @@ namespace Linal
 				{
 					auto val = matrix.at(ConvertToIndex(x, y));
 
-					//int posX = (y * Linal::FIELDHEIGHT) + offsetX;
-					//int posY = (x * Linal::FIELDWIDTH) + offsetY;
-
-					if (x > 1) {
+					// TESTCASE: CAN WE CONNECT THE DOTS //
+					/*if (x > 1) {
 						auto ap = matrix.at(ConvertToIndex(x - 1, y));
 						Vector vec = Linal::Vector(val.xAxis - ap.xAxis, ap.yAxis - val.yAxis, val.xAxis, val.yAxis);
 						vec.Draw(application, offsetX, offsetY);
@@ -256,7 +253,8 @@ namespace Linal
 						auto ap = matrix.at(ConvertToIndex(x, y - 1));
 						Vector vec = Linal::Vector(ap.xAxis - val.xAxis, ap.yAxis - val.yAxis, val.xAxis, val.yAxis);
 						vec.Draw(application, offsetX, offsetY);
-					}
+					}*/
+					// END OF TESTCASE: CAN WE CONNECT THE DOTS //
 
 					val.Draw(application, offsetX, offsetY);
 				}
