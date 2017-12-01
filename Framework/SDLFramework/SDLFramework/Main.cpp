@@ -9,7 +9,7 @@
 #include "ExampleGameObject.h"
 #include "canvas.h"
 #include "constants.h"
-#include "matrix.h"
+#include "matrix.hpp"
 
 int main(int args[])
 {
@@ -61,8 +61,11 @@ int main(int args[])
 	square.Set(1, 1, topleft).Set(1, 2, topcenter).Set(1, 3, topright);
 	square.Set(2, 1, bottomleft).Set(2, 2, bottomcenter).Set(2, 3, bottomright);
 
+
+	auto translate = Linal::GetTranslateMatrix(-2, -2);
 	auto scale = Linal::GetScaleMatrix(2, 1.5);
-	
+
+	auto translated = translate * square;
 	auto scaled = scale * square;
 	/* */
 
@@ -85,6 +88,22 @@ int main(int args[])
 	/******************************************
 	*        End of translate Matrix          *
 	******************************************/
+
+	/******************************************
+	*            Transcale Matrix             *
+	******************************************/
+
+	/* *
+	auto scale = Linal::Matrix<double>{3, 3};
+	scale.Set(1, 1, 1.2).Set(1, 2, 0).Set(1, 3, 0);
+	scale.Set(2, 1, 0).Set(2, 2, 1.1).Set(2, 3, 0);
+	scale.Set(3, 1, 0).Set(3, 2, 0).Set(3, 3, 1);
+
+	auto translate = Linal::Matrix<double>{ 3, 3 };
+	translate.Set(1, 1, 1).Set(1, 2, 0).Set(1, 3, 0.1);
+	translate.Set(2, 1, 0).Set(2, 2, 1).Set(2, 3, 0.1);
+	translate.Set(3, 1, 0).Set(3, 2, 0).Set(3, 3, 1);
+	/* */
 
 	while (application->IsRunning())
 	{
@@ -110,7 +129,7 @@ int main(int args[])
 		canvas->Draw(application);
 		//c.Draw(application, Linal::OFFSETX + 200, Linal::OFFSETY + 100);
 
-		scaled.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
+		translated.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
 
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));

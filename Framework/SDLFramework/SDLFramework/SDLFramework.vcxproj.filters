@@ -34,7 +34,7 @@
     <ClInclude Include="constants.h">
       <Filter>linal</Filter>
     </ClInclude>
-    <ClInclude Include="matrix.h">
+    <ClInclude Include="matrix.hpp">
       <Filter>linal</Filter>
     </ClInclude>
   </ItemGroup>
