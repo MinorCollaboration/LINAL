@@ -51,10 +51,19 @@ Vector Vector::operator*(const double & rhs)
 	return Vector(xAxis * rhs, yAxis * rhs, startingX, startingY);
 }
 
+Vector Vector::operator*(const Vector & rhs)
+{
+	return Vector(xAxis * rhs.xAxis, yAxis * rhs.yAxis, startingX, startingY);
+}
+
 Vector Vector::operator/(const double & rhs)
 {
-	auto toReturn = Vector(xAxis / rhs, yAxis / rhs, startingX, startingY);
-	return toReturn;
+	return Vector(xAxis / rhs, yAxis / rhs, startingX, startingY);
+}
+
+Vector Vector::operator/(const Vector & rhs)
+{
+	return Vector(xAxis / rhs.xAxis, yAxis / rhs.yAxis, startingX, startingY);
 }
 
 Linal::Point Linal::Vector::ToPoint()

@@ -1,3 +1,7 @@
-﻿  point.cpp
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\point.cpp(23): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+﻿  Main.cpp
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(312): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(313): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(323): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(324): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\main.cpp(106): warning C4065: switch statement contains 'default' but no 'case' labels
   SDLFramework.vcxproj -> C:\Users\mark_\Documents\Herkansingen\LINAL\Framework\SDLFramework\Debug\SDLFramework.exe

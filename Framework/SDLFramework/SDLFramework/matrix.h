@@ -31,9 +31,13 @@ namespace Linal
 
 		void Draw(FWApplication *& application, int offsetX, int offsetY);
 
+		Vector operator*(const Vector& rhs);
+
 		Matrix<T> operator*(const Matrix<T>& rhs);
 		Matrix<Point> operator*(const Matrix<Point>& rhs);
 		Matrix<Vector> operator*(const Matrix<Vector>& rhs);
+
+		Vector ToVector();
 
 		int GetWidth();
 		int GetHeight();
@@ -44,6 +48,9 @@ namespace Linal
 
 		int ConvertToIndex(int x, int y) const;
 	};
+
+	template <class T>
+	Vector operator*(const Matrix<T> lhs, const Vector& rhs);
 
 	template <class T>
 	Matrix<T>::Matrix() : Width(1), Height(1)
@@ -106,18 +113,25 @@ namespace Linal
 
 		for (int x = 1; x <= output.GetHeight(); x++) {
 			for (int y = 1; y <= output.GetWidth(); y++) {
-				Vector val = Vector(0, 0);
-				for (int colrows = 1; colrows <= Width; colrows++) {
-					auto GetVal = Get(x, colrows);
-					auto test = Get(x, colrows) * rhs.Get(colrows, y).ToVector();
-					val += test;
-				}
+				Vector val = *this * rhs.Get(x, y).ToVector();
+				/*for (int colrows = 1; colrows <= Width; colrows++) {
+					auto LeftVal = ToVector();
+					auto RightVal = rhs.Get(colrows, y).ToVector();
+					auto test = *this * RightVal;
+					val += LeftVal * RightVal;
+				}*/
 
 				output.Set(x, y, val.ToPoint());
 			}
 		}
 
 		return output;
+	}
+
+	template<class T>
+	inline Vector Matrix<T>::ToVector()
+	{
+		return Vector(Get(1, 1), Get(2,2));
 	}
 
 	template <typename T>
@@ -140,6 +154,15 @@ namespace Linal
 				application->DrawText(str, posX + 10, posY -7);
 			}
 		}
+	}
+
+	template<class T>
+	inline Vector Matrix<T>::operator*(const Vector & rhs)
+	{
+		double xAxis = Get(1, 1) * rhs.xAxis;
+		double yAxis = Get(2, 2) * rhs.yAxis;
+
+		return Vector(xAxis, yAxis);
 	}
 
 	template <typename T>
@@ -229,7 +252,6 @@ namespace Linal
 		Point Get(int x, int y) const {
 			return matrix.at(ConvertToIndex(x, y));
 		}
-
 		Matrix<Point>& Set(int x, int y, Point v)
 		{
 			matrix.at(ConvertToIndex(x, y)) = v;
@@ -264,19 +286,15 @@ namespace Linal
 		int GetWidth() {
 			return Width;
 		}
-
 		int GetWidth() const {
 			return Width;
 		}
-
 		int GetHeight() {
 			return Height;
 		}
-
 		int GetHeight() const {
 			return Height;
 		}
-
 	private:
 		std::vector<Point> matrix;
 		int Width;
@@ -327,7 +345,12 @@ namespace Linal
 
 		return matrix;
 	}
-}
 
+	template<class T>
+	Vector operator*(const Matrix<T> lhs, const Vector & rhs)
+	{
+		return Vector(lhs.Get(1, 1) * rhs.xAxis, lhs.Get(2, 2) * rhs.yAxis);
+	}
+}
 
 #endif

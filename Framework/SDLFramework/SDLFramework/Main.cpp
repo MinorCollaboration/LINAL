@@ -33,15 +33,23 @@ int main(int args[])
 
 	auto canvas{ std::unique_ptr<Linal::Canvas>{ new Linal::Canvas() } };
 
-	auto topbar		= Linal::Vector(0, 2, 4, 4);
-	//auto leftbar	= Linal::Vector(2, 0, 4, 2);
-	//auto rightbar	= Linal::Vector(2, 0, 6, 2);
-	//auto bottombar	= Linal::Vector(0, 2, 4, 2);
+	/******************************************
+	 *             Scaling Matrix             *
+	 ******************************************/
 
-	//auto square = Linal::Matrix<Linal::Vector>{ 2, 2 };
-	//square.Set(1, 1, topbar); // .Set(1, 2, leftbar);
-	//square.Set(2, 1, bottombar).Set(2, 2, rightbar);
+	// With Ints/floats
+	/* *
+	auto a = Linal::GetScaleMatrix(1.2, 1.1);
+	auto b = Linal::Matrix<float>{ 4, 2 };
 
+	b.Set(1, 1, 3).Set(1, 2, 4).Set(1, 3, 6).Set(1, 4, 1);
+	b.Set(2, 1, 2).Set(2, 2, 1).Set(2, 3, 7).Set(2, 4, 5);
+
+	auto scaled = a * b;
+	/* */
+
+	// With Points
+	/* */
 	auto square = Linal::Matrix<Linal::Point>{ 3, 2 };
 	auto topleft = Linal::Point(2, 6);
 	auto topcenter = Linal::Point(4, 6);
@@ -53,43 +61,31 @@ int main(int args[])
 	square.Set(1, 1, topleft).Set(1, 2, topcenter).Set(1, 3, topright);
 	square.Set(2, 1, bottomleft).Set(2, 2, bottomcenter).Set(2, 3, bottomright);
 
-	auto scale = Linal::GetScaleMatrix(1.5, 2.0);
+	auto scale = Linal::GetScaleMatrix(2, 1.5);
 	
 	auto scaled = scale * square;
+	/* */
 
-	auto a = Linal::GetTranslateMatrix(0.1, 0.1);
+	/******************************************
+	*          End of scaling matrix          *
+	******************************************/
+
+	/******************************************
+	*            Translate Matrix             *
+	******************************************/
+	/*auto a = Linal::GetTranslateMatrix(0.1, 0.1);
 	Linal::Matrix<float> b = Linal::Matrix<float>{ 3, 4 };
 
 	b.Set(1, 1, 3).Set(1, 2, 4).Set(1, 3, 6).Set(1, 4, 1);
 	b.Set(2, 1, 2).Set(2, 2, 1).Set(2, 3, 7).Set(2, 4, 5);
 	b.Set(3, 1, 1).Set(3, 2, 1).Set(3, 3, 1).Set(3, 4, 1);
 
-	auto c = a * b;
+	auto c = a * b;*/
 
-	//auto testpoint = Linal::Point(1, 1);
-	//auto extratest = Linal::Point(5, 7);
+	/******************************************
+	*        End of translate Matrix          *
+	******************************************/
 
-	/*
-	canvas->points.push_back(testpoint);
-	canvas->points.push_back(extratest);
-
-	 auto vector1 = Linal::Vector(-3, 0, 18, 18);
-	 auto vector2 = Linal::Vector(-1, -5, 18, 18);
-
-	 auto vectorSum = vector1 + vector2;
-
-	 canvas->vectors.push_back(vector1);
-	 canvas->vectors.push_back(vector2);
-
-	 //auto decreased = vectorSum / 2;
-	 //auto increased = vectorSum * 2;
-
-	 canvas->vectors.push_back(vectorSum);
-	 */
-	 //canvas->vectors.push_back(decreased);
-	 //canvas->vectors.push_back(increased);
-
-	//while (true){}
 	while (application->IsRunning())
 	{
 		application->StartTick();
@@ -112,7 +108,7 @@ int main(int args[])
 		}
 
 		canvas->Draw(application);
-		c.Draw(application, Linal::OFFSETX + 200, Linal::OFFSETY + 100);
+		//c.Draw(application, Linal::OFFSETX + 200, Linal::OFFSETY + 100);
 
 		scaled.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
 
