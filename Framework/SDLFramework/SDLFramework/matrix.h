@@ -72,19 +72,13 @@ namespace Linal
 	template <typename T>
 	T Matrix<T>::Get(int x, int y) const
 	{
-		auto index = ConvertToIndex(x, y);
-		if (index > Width - 1 * Height - 1)
-			return 1;
-		return matrix.at(index);
+		return matrix.at(ConvertToIndex(x, y));
 	}
 
 	template <typename T>
 	T Matrix<T>::Get(int x, int y)
 	{
-		auto index = ConvertToIndex(x, y);
-		if (index > Width - 1 * Height - 1)
-			return 1;
-		return matrix.at(index);
+		return matrix.at(ConvertToIndex(x, y));
 	}
 
 	template <typename T>
@@ -201,16 +195,10 @@ namespace Linal
 		}
 
 		Vector Get(int x, int y) {
-			auto index = ConvertToIndex(x, y);
-			if (index > Width - 1 * Height - 1)
-				return Vector(0, 0);
-			return matrix.at(index);
+			return matrix.at(ConvertToIndex(x, y));
 		}
 		Vector Get(int x, int y) const {
-			auto index = ConvertToIndex(x, y);
-			if (index > Width - 1 * Height - 1)
-				return Vector(0, 0);
-			return matrix.at(index);
+			return matrix.at(ConvertToIndex(x, y));
 		}
 		Matrix<Vector>& Set(int x, int y, Vector v) {
 			matrix.at(ConvertToIndex(x, y)) = v;
@@ -259,16 +247,10 @@ namespace Linal
 		}
 
 		Point Get(int x, int y) {
-			auto index = ConvertToIndex(x, y);
-			if (index > Width - 1 * Height - 1)
-				return Point(0, 0);
-			return matrix.at(index);
+			return matrix.at(ConvertToIndex(x, y));
 		}
 		Point Get(int x, int y) const {
-			auto index = ConvertToIndex(x, y);
-			if (index > Width - 1 * Height - 1)
-				return Point(0, 0);
-			return matrix.at(index);
+			return matrix.at(ConvertToIndex(x, y));
 		}
 		Matrix<Point>& Set(int x, int y, Point v)
 		{

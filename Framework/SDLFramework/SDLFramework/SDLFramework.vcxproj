@@ -98,7 +98,7 @@
     <ClInclude Include="FWApplication.h" />
     <ClInclude Include="ExampleGameObject.h" />
     <ClInclude Include="IGameObject.h" />
-    <ClInclude Include="matrix.hpp" />
+    <ClInclude Include="matrix.h" />
     <ClInclude Include="canvas.h" />
     <ClInclude Include="point.h" />
     <ClInclude Include="vector.h" />
