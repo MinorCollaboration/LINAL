@@ -239,68 +239,53 @@ namespace Linal
 	template <>
 	class Matrix <Point> {
 	public:
-		Matrix() : Width(1), Height(1) {
-			matrix = std::vector<Point>(Width * Height);
+		Matrix() : Width(1), Height(2) {
+			matrix = std::vector<double>(Width * Height);
 		}
-		Matrix(int x, int y) : Width(x), Height(y) {
-			matrix = std::vector<Point>(Width * Height);
+		Matrix(int x) : Width(x), Height(2) { 
+			matrix = std::vector<double>(Width * Height);
 		}
 
-		Point Get(int x, int y) {
-			return matrix.at(ConvertToIndex(x, y));
+		Point Get(int index) { 
+			return Point(matrix.at(ConvertToIndex(1, index)), matrix.at(ConvertToIndex(2, index)));
 		}
-		Point Get(int x, int y) const {
-			return matrix.at(ConvertToIndex(x, y));
+		Point Get(int index) const {
+			return Point(matrix.at(ConvertToIndex(1, index)), matrix.at(ConvertToIndex(2, index)));
 		}
-		Matrix<Point>& Set(int x, int y, Point v)
-		{
-			matrix.at(ConvertToIndex(x, y)) = v;
+		Matrix<Point>& Set(int index, Point p) { 
+			int indexX = ConvertToIndex(1, index);
+			int indexY = ConvertToIndex(2, index);
+
+			matrix.at(indexX) = p.xAxis;
+			matrix.at(indexY) = p.yAxis;
+
+			return *this;
+		}
+		Matrix<Point>& Set(int index, int xCoord, int yCoord) {
+			matrix.at(ConvertToIndex(index, 1)) = xCoord;
+			matrix.at(ConvertToIndex(index, 2)) = yCoord;
+
 			return *this;
 		}
 
 		void Draw(FWApplication *& application, int offsetX, int offsetY) {
-			for (int x = 1; x <= Height; x++)
+			for (int i = 1; i <= Width; i++)
 			{
-				for (int y = 1; y <= Width; y++)
-				{
-					auto val = matrix.at(ConvertToIndex(x, y));
-
-					// TESTCASE: CAN WE CONNECT THE DOTS //
-					/*if (x > 1) {
-						auto ap = matrix.at(ConvertToIndex(x - 1, y));
-						Vector vec = Linal::Vector(val.xAxis - ap.xAxis, ap.yAxis - val.yAxis, val.xAxis, val.yAxis);
-						vec.Draw(application, offsetX, offsetY);
-					}
-					if (y > 1) {
-						auto ap = matrix.at(ConvertToIndex(x, y - 1));
-						Vector vec = Linal::Vector(ap.xAxis - val.xAxis, ap.yAxis - val.yAxis, val.xAxis, val.yAxis);
-						vec.Draw(application, offsetX, offsetY);
-					}*/
-					// END OF TESTCASE: CAN WE CONNECT THE DOTS //
-
-					val.Draw(application, offsetX, offsetY);
-				}
+				auto point = Get(i);
+				point.Draw(application, offsetX, offsetY);
 			}
 		}
 
-		int GetWidth() {
-			return Width;
-		}
-		int GetWidth() const {
-			return Width;
-		}
-		int GetHeight() {
-			return Height;
-		}
-		int GetHeight() const {
-			return Height;
-		}
+		int GetWidth() { }
+		int GetWidth() const { }
+		int GetHeight() { }
+		int GetHeight() const { }
 	private:
-		std::vector<Point> matrix;
+		std::vector<double> matrix;
 		int Width;
 		int Height;
 
-		int ConvertToIndex(int x, int y) const {
+		int ConvertToIndex(int x, int y) const { 
 			return (x - 1)*Width + (y - 1);
 		}
 	};

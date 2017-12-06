@@ -50,7 +50,7 @@ int main(int args[])
 
 	// With Points
 	/* */
-	auto square = Linal::Matrix<Linal::Point>{ 3, 2 };
+	auto square = Linal::Matrix<Linal::Point>{ 6 };
 	auto topleft = Linal::Point(2, 6);
 	auto topcenter = Linal::Point(4, 6);
 	auto topright = Linal::Point(6, 6);
@@ -58,12 +58,16 @@ int main(int args[])
 	auto bottomcenter = Linal::Point(4, 2);
 	auto bottomright = Linal::Point(6, 2);
 
-	square.Set(1, 1, topleft).Set(1, 2, topcenter).Set(1, 3, topright);
-	square.Set(2, 1, bottomleft).Set(2, 2, bottomcenter).Set(2, 3, bottomright);
+	square.Set(1, topleft);
+	square.Set(2, topcenter);
+	square.Set(3, topright);
+	square.Set(4, bottomright);
+	square.Set(5, bottomcenter);
+	square.Set(6, bottomleft);
 
 	auto scale = Linal::GetScaleMatrix(2, 1.5);
 	
-	auto scaled = scale * square;
+	// auto scaled = scale * square;
 	/* */
 
 	/******************************************
@@ -110,7 +114,7 @@ int main(int args[])
 		canvas->Draw(application);
 		//c.Draw(application, Linal::OFFSETX + 200, Linal::OFFSETY + 100);
 
-		scaled.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
+		square.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
 
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));
