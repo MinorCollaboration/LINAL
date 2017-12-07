@@ -70,13 +70,13 @@ namespace Linal
 	}
 
 	template <typename T>
-	T Matrix<T>::Get(int x, int y) const
+	T Matrix<T>::Get(int x, int y)
 	{
 		return matrix.at(ConvertToIndex(x, y));
 	}
 
 	template <typename T>
-	T Matrix<T>::Get(int x, int y)
+	T Matrix<T>::Get(int x, int y) const
 	{
 		return matrix.at(ConvertToIndex(x, y));
 	}
@@ -94,7 +94,7 @@ namespace Linal
 		Matrix<T> output = Matrix<T>(rhs.Width, Height);
 
 		for (int x = 1; x <= output.Height; x++) {
-			for (int y = 1; y <= output.Width; y++) {
+			for (int y = Width; y >= 1; y--) {
 				T val = 0;
 				for (int colrows = 1; colrows <= Width; colrows++)
 					val += Get(x, colrows) * rhs.Get(colrows, y);
@@ -109,19 +109,31 @@ namespace Linal
 	template<class T>
 	inline Matrix<Point> Matrix<T>::operator*(const Matrix<Point>& rhs)
 	{
-		Matrix<Point> output = Matrix<Point>(rhs.GetWidth(), Height);
+		Matrix<Point> output = Matrix<Point>(rhs.GetWidth());
+
+		int width = output.GetWidth();
+		int height = output.GetHeight();
 
 		for (int x = 1; x <= output.GetHeight(); x++) {
 			for (int y = 1; y <= output.GetWidth(); y++) {
-				Vector val = *this * rhs.Get(x, y).ToVector();
+				T val = 0;
+				for (int colrows = 1; colrows <= Width; colrows++) {
+					double leftVal = Get(x, colrows);
+					double rightVal = rhs.matrix.at(ConvertToIndex(colrows, y));
+					auto test = leftVal * rightVal;
+					val += test;
+				}
+
+				output.Set(x, y, val);
+				//Vector val = Vector(Get(x, y), rhs.Get(x, y));
 				/*for (int colrows = 1; colrows <= Width; colrows++) {
 					auto LeftVal = ToVector();
 					auto RightVal = rhs.Get(colrows, y).ToVector();
 					auto test = *this * RightVal;
 					val += LeftVal * RightVal;
-				}*/
+				}
 
-				output.Set(x, y, val.ToPoint());
+				output.Set(x, y, val.ToPoint());*/
 			}
 		}
 
@@ -139,19 +151,19 @@ namespace Linal
 	{
 		application->SetFontSize(12);
 
-		for (int x = 1; x <= Height; x++)
+		application->SetColor(Color(255, 0, 0, 255));
+		for (int y = Height; y >= 1; y--)
 		{
-			for (int y = 1; y <= Width; y++)
+			for (int x = 1; x <= Width; x++)
 			{
 				auto val = matrix.at(ConvertToIndex(x, y));
-				application->SetColor(Color(255, 0, 0, 255));
 
-				int posX = (y * Linal::FIELDHEIGHT) + offsetX;
-				int posY = (x * Linal::FIELDWIDTH) + offsetY;
+				int posX = (x * Linal::FIELDWIDTH) + offsetX;
+				int posY = offsetY - (y * Linal::FIELDHEIGHT);
 
 				std::string str = std::to_string(val);
 				str.erase(str.find_last_not_of('0') + 1, std::string::npos);
-				application->DrawText(str, posX + 10, posY -7);
+				application->DrawText(str, posX + 10, posY - 7);
 			}
 		}
 	}
@@ -180,7 +192,7 @@ namespace Linal
 	template <typename T>
 	int Matrix<T>::ConvertToIndex(int x, int y) const
 	{
-		return (x - 1)*Width + (y - 1);
+		return (x - 1)*Height + (y - 1);
 	}
 
 	// Vector matrix specialization
@@ -247,23 +259,22 @@ namespace Linal
 		}
 
 		Point Get(int index) { 
-			return Point(matrix.at(ConvertToIndex(1, index)), matrix.at(ConvertToIndex(2, index)));
+			return Point(matrix.at(ConvertToIndex(index, 2)), matrix.at(ConvertToIndex(index, 1)));
 		}
 		Point Get(int index) const {
-			return Point(matrix.at(ConvertToIndex(1, index)), matrix.at(ConvertToIndex(2, index)));
+			return Point(matrix.at(ConvertToIndex(index, 2)), matrix.at(ConvertToIndex(index, 1)));
 		}
 		Matrix<Point>& Set(int index, Point p) { 
-			int indexX = ConvertToIndex(1, index);
-			int indexY = ConvertToIndex(2, index);
+			int indexX = ConvertToIndex(index, 2);
+			int indexY = ConvertToIndex(index, 1);
 
 			matrix.at(indexX) = p.xAxis;
 			matrix.at(indexY) = p.yAxis;
 
 			return *this;
 		}
-		Matrix<Point>& Set(int index, int xCoord, int yCoord) {
-			matrix.at(ConvertToIndex(index, 1)) = xCoord;
-			matrix.at(ConvertToIndex(index, 2)) = yCoord;
+		Matrix<Point>& Set(int x, int y, int val) {
+			matrix.at(ConvertToIndex(x, y)) = val;
 
 			return *this;
 		}
@@ -276,17 +287,17 @@ namespace Linal
 			}
 		}
 
-		int GetWidth() { }
-		int GetWidth() const { }
-		int GetHeight() { }
-		int GetHeight() const { }
-	private:
+		int GetWidth() { return Width; }
+		int GetWidth() const { return Width; }
+		int GetHeight() { return Height; }
+		int GetHeight() const { return Height; }
 		std::vector<double> matrix;
+	private:
 		int Width;
 		int Height;
 
 		int ConvertToIndex(int x, int y) const { 
-			return (x - 1)*Width + (y - 1);
+			return (x - 1)*Height + (y - 1);
 		}
 	};
 
@@ -294,9 +305,9 @@ namespace Linal
 	{
 		auto matrix = Linal::Matrix<float>(3, 3);
 
-		matrix.Set(1, 1, 1).Set(1, 2, 0).Set(1, 3, t);
-		matrix.Set(2, 1, 0).Set(2, 2, 1).Set(2, 3, s);
-		matrix.Set(3, 1, 0).Set(3, 2, 0).Set(3, 3, 1);
+		matrix.Set(1, 3, 1).Set(2, 3, 0).Set(3, 3, t);
+		matrix.Set(1, 2, 0).Set(2, 2, 1).Set(3, 2, s);
+		matrix.Set(1, 1, 0).Set(2, 1, 0).Set(3, 1, 1);
 
 		return matrix;
 	}
@@ -305,8 +316,8 @@ namespace Linal
 	{
 		auto matrix = Linal::Matrix<float>(2, 2);
 
-		matrix.Set(1, 1, xScale).Set(1, 2, 0);
-		matrix.Set(2, 1, 0).Set(2, 2, yScale);
+		matrix.Set(1, 2, xScale).Set(2, 2, 0);
+		matrix.Set(1, 1, 0).Set(2, 1, yScale);
 
 		return matrix;
 	}

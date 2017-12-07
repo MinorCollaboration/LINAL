@@ -38,14 +38,15 @@ int main(int args[])
 	 ******************************************/
 
 	// With Ints/floats
-	/* *
+	/* */
 	auto a = Linal::GetScaleMatrix(1.2, 1.1);
 	auto b = Linal::Matrix<float>{ 4, 2 };
 
-	b.Set(1, 1, 3).Set(1, 2, 4).Set(1, 3, 6).Set(1, 4, 1);
-	b.Set(2, 1, 2).Set(2, 2, 1).Set(2, 3, 7).Set(2, 4, 5);
+	b.Set(1, 2, 3).Set(2, 2, 4).Set(3, 2, 6).Set(4, 2, 1);
+	b.Set(1, 1, 2).Set(2, 1, 1).Set(3, 1, 7).Set(4, 1, 5);
 
-	auto scaled = a * b;
+	/* */
+	auto c = a * b;
 	/* */
 
 	// With Points
@@ -67,7 +68,7 @@ int main(int args[])
 
 	auto scale = Linal::GetScaleMatrix(2, 1.5);
 	
-	// auto scaled = scale * square;
+	auto scaled = scale * square;
 	/* */
 
 	/******************************************
@@ -112,9 +113,10 @@ int main(int args[])
 		}
 
 		canvas->Draw(application);
-		//c.Draw(application, Linal::OFFSETX + 200, Linal::OFFSETY + 100);
+		//a.Draw(application, Linal::OFFSETX + 200, Linal::OFFSETY + 100);
+		b.Draw(application, Linal::OFFSETX + 200, Linal::OFFSETY + Linal::HEIGHT);
 
-		square.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
+		//square.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
 
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));
