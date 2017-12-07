@@ -75,7 +75,7 @@ int main(int args[])
 	auto translate = Linal::GetTranslateMatrix(-2, -2);
 	
 	auto scaled = scale * square;
-	//auto translated = translate * square;
+	auto translated = translate * square;
 	/* */
 
 	/******************************************
@@ -149,7 +149,7 @@ int main(int args[])
 		c.Draw(application, Linal::OFFSETX + 200, Linal::OFFSETY + Linal::HEIGHT - 55);
 		/* End of numeric matrix */
 
-		scaled.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
+		translated.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
 
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));

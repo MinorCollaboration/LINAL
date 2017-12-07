@@ -1,7 +1,4 @@
 ﻿  Main.cpp
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(302): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(303): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(313): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(314): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\main.cpp(141): warning C4065: switch statement contains 'default' but no 'case' labels
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(342): warning C4172: returning address of local variable or temporary: copiedMatrix
   SDLFramework.vcxproj -> C:\Users\mark_\Documents\Herkansingen\LINAL\Framework\SDLFramework\Debug\SDLFramework.exe
