@@ -1,12 +1,7 @@
 ﻿  Main.cpp
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(307): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(308): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(309): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(318): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(319): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(320): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\main.cpp(111): warning C4065: switch statement contains 'default' but no 'case' labels
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(124): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-  c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(111): note: while compiling class template member function 'Linal::Matrix<Linal::Point> Linal::Matrix<float>::operator *(const Linal::Matrix<Linal::Point> &)'
-  c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\main.cpp(71): note: see reference to function template instantiation 'Linal::Matrix<Linal::Point> Linal::Matrix<float>::operator *(const Linal::Matrix<Linal::Point> &)' being compiled
-  c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(305): note: see reference to class template instantiation 'Linal::Matrix<float>' being compiled
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\matrix.h(127): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\main.cpp(134): warning C4065: switch statement contains 'default' but no 'case' labels
   SDLFramework.vcxproj -> C:\Users\mark_\Documents\Herkansingen\LINAL\Framework\SDLFramework\Debug\SDLFramework.exe
