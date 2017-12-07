@@ -37,20 +37,20 @@ int main(int args[])
 	 *             Scaling Matrix             *
 	 ******************************************/
 
-	// With Ints/floats
+	// With Ints/doubles
 	/* *
 	auto a = Linal::GetScaleMatrix(1.2, 1.1);
-	auto b = Linal::Matrix<float>{ 4, 2 };
+	auto b = Linal::Matrix<double>{ 2, 4 };
 
 	b.Set(1, 1, 3).Set(1, 2, 4).Set(1, 3, 6).Set(1, 4, 1);
 	b.Set(2, 1, 2).Set(2, 2, 1).Set(2, 3, 7).Set(2, 4, 5);
 
 	/* *
 	auto c = a * b;
-	/* *
+	/* */
 
 	// With Points
-	/* *
+	/* */
 	auto square = Linal::Matrix<Linal::Point>{ 6 };
 	auto topleft = Linal::Point(2, 6);
 	auto topcenter = Linal::Point(4, 6);
@@ -66,9 +66,16 @@ int main(int args[])
 	square.Set(5, bottomcenter);
 	square.Set(6, bottomleft);
 
-	auto scale = Linal::GetScaleMatrix(2, 1.5);
+	/* *
+	auto square = Linal::Matrix<double>{ 2,6 };
+	square.Set(1, 1, 2).Set(1, 2, 4).Set(1, 3, 6).Set(1, 4, 2).Set(1, 5, 4).Set(1, 6, 6);
+	square.Set(2, 1, 6).Set(2, 2, 6).Set(2, 3, 6).Set(2, 4, 2).Set(2, 5, 2).Set(2, 6, 2);
+	/* */
+	auto scale = Linal::GetScaleMatrix(1.759238, 1.236284);
+	auto translate = Linal::GetTranslateMatrix(-2, -2);
 	
 	auto scaled = scale * square;
+	//auto translated = translate * square;
 	/* */
 
 	/******************************************
@@ -80,7 +87,7 @@ int main(int args[])
 	 ******************************************/
 	/* *
 	auto a = Linal::GetTranslateMatrix(0.1, 0.1);
-	Linal::Matrix<float> b = Linal::Matrix<float>{ 3, 4 };
+	Linal::Matrix<double> b = Linal::Matrix<float>{ 3, 4 };
 
 	b.Set(1, 1, 3).Set(1, 2, 4).Set(1, 3, 6).Set(1, 4, 1);
 	b.Set(2, 1, 2).Set(2, 2, 1).Set(2, 3, 7).Set(2, 4, 5);
@@ -97,7 +104,7 @@ int main(int args[])
 	 *             Multiple Matrix            *
 	 ******************************************/
 	
-	/* */
+	/* *
 	auto a = Linal::Matrix<int>{ 2, 2 };
 	auto b = Linal::Matrix<int>{ 2, 3 };
 
@@ -136,11 +143,13 @@ int main(int args[])
 		}
 
 		canvas->Draw(application);
+		/*     numeric matrix    *
 		a.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT - 55);
 		b.Draw(application, Linal::OFFSETX + 75, Linal::OFFSETY + Linal::HEIGHT - 55);
 		c.Draw(application, Linal::OFFSETX + 200, Linal::OFFSETY + Linal::HEIGHT - 55);
+		/* End of numeric matrix */
 
-		//square.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
+		scaled.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
 
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));

@@ -113,37 +113,28 @@ namespace Linal
 	{
 		Matrix<Point> output = Matrix<Point>(rhs.GetWidth());
 
-		for (int col = 1; col <= Width; col++) {
-			for (int row = 1; row <= Height; row++) {
+		for (int row = 1; row <= output.GetHeight(); row++)
+		{
+			for (int col = 1; col <= output.GetWidth(); col++)
+			{
 				T val = 0;
-				for (int colrows = 1; colrows <= Width; colrows++) {
-					double leftVal = Get(col, colrows);
-					double rightVal = rhs.matrix.at(ConvertToIndex(colrows, row));
-					auto test = leftVal * rightVal;
-					val += test;
-				}
+				for (int colrows = 1; colrows <= Width; colrows++)
+					val += Get(row, colrows) * rhs.matrix.at(rhs.ConvertToIndex(colrows, col));
 
-				output.Set(col, row, val);
-				//Vector val = Vector(Get(x, y), rhs.Get(x, y));
-				/*for (int colrows = 1; colrows <= Width; colrows++) {
-					auto LeftVal = ToVector();
-					auto RightVal = rhs.Get(colrows, y).ToVector();
-					auto test = *this * RightVal;
-					val += LeftVal * RightVal;
-				}
-
-				output.Set(x, y, val.ToPoint());*/
+				output.Set(row, col, val);
 			}
 		}
 
 		return output;
 	}
 
+	/* */
 	template<class T>
 	inline Vector Matrix<T>::ToVector()
 	{
 		return Vector(Get(1, 1), Get(2,2));
 	}
+	/* */
 
 	template <typename T>
 	void Matrix<T>::Draw(FWApplication *& application, int offsetX, int offsetY)
@@ -160,7 +151,7 @@ namespace Linal
 				int posX = (col * Linal::FIELDWIDTH) + offsetX;
 				int posY = (row * Linal::FIELDHEIGHT) + offsetY;
 
-				std::string str = std::to_string(std::ceil( val));
+				std::string str = std::to_string(val);
 				str.erase(str.find_last_not_of('0') + 1, std::string::npos);
 				application->DrawText(str, posX + 10, posY - 7);
 			}
@@ -253,35 +244,35 @@ namespace Linal
 		Matrix() : Width(1), Height(2) {
 			matrix = std::vector<double>(Width * Height);
 		}
-		Matrix(int x) : Width(x), Height(2) { 
+		Matrix(int cols) : Width(cols), Height(2) { 
 			matrix = std::vector<double>(Width * Height);
 		}
 
 		Point Get(int index) { 
-			return Point(matrix.at(ConvertToIndex(index, 2)), matrix.at(ConvertToIndex(index, 1)));
+			return Point(matrix.at(ConvertToIndex(2, index)), matrix.at(ConvertToIndex(1, index)));
 		}
 		Point Get(int index) const {
-			return Point(matrix.at(ConvertToIndex(index, 2)), matrix.at(ConvertToIndex(index, 1)));
+			return Point(matrix.at(ConvertToIndex(2, index)), matrix.at(ConvertToIndex(1, index)));
 		}
 		Matrix<Point>& Set(int index, Point p) { 
-			int indexX = ConvertToIndex(index, 2);
-			int indexY = ConvertToIndex(index, 1);
+			int indexX = ConvertToIndex(2, index);
+			int indexY = ConvertToIndex(1, index);
 
 			matrix.at(indexX) = p.xAxis;
 			matrix.at(indexY) = p.yAxis;
 
 			return *this;
 		}
-		Matrix<Point>& Set(int x, int y, int val) {
-			matrix.at(ConvertToIndex(x, y)) = val;
+		Matrix<Point>& Set(int row, int col, double val) {
+			matrix.at(ConvertToIndex(row, col)) = val;
 
 			return *this;
 		}
 
 		void Draw(FWApplication *& application, int offsetX, int offsetY) {
-			for (int i = 1; i <= Width; i++)
+			for (int index = 1; index <= Width; index++)
 			{
-				auto point = Get(i);
+				auto point = Get(index);
 				point.Draw(application, offsetX, offsetY);
 			}
 		}
@@ -290,19 +281,23 @@ namespace Linal
 		int GetWidth() const { return Width; }
 		int GetHeight() { return Height; }
 		int GetHeight() const { return Height; }
+
+	// protected: 
 		std::vector<double> matrix;
+
+		int ConvertToIndex(int x, int y) const { 
+			return (x - 1)*Width + (y - 1);
+		}
+		
 	private:
 		int Width;
 		int Height;
 
-		int ConvertToIndex(int x, int y) const { 
-			return (x - 1)*Height + (y - 1);
-		}
 	};
 
-	static Linal::Matrix<float> GetTranslateMatrix(double t, double s)
+	static Linal::Matrix<double> GetTranslateMatrix(double t, double s)
 	{
-		auto matrix = Linal::Matrix<float>(3, 3);
+		auto matrix = Linal::Matrix<double>(3, 3);
 
 		matrix.Set(1, 1, 1).Set(1, 2, 0).Set(1, 3, t);
 		matrix.Set(2, 1, 0).Set(2, 2, 1).Set(2, 3, s);
@@ -311,9 +306,9 @@ namespace Linal
 		return matrix;
 	}
 
-	static Linal::Matrix<float> GetScaleMatrix(double xScale, double yScale)
+	static Linal::Matrix<double> GetScaleMatrix(double xScale, double yScale)
 	{
-		auto matrix = Linal::Matrix<float>(2, 2);
+		auto matrix = Linal::Matrix<double>(2, 2);
 
 		matrix.Set(1, 1, xScale).Set(1, 2, 0);
 		matrix.Set(2, 1, 0).Set(2, 2, yScale);
