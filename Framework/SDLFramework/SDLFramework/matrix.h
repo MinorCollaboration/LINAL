@@ -5,6 +5,8 @@
 
 #include <memory>
 #include <iomanip>
+#include <math.h>
+#include <typeinfo>
 
 using namespace std;
 
@@ -35,12 +37,21 @@ namespace Linal
 
 		Matrix<T> operator*(const Matrix<T>& rhs);
 		Matrix<Point> operator*(const Matrix<Point>& rhs);
-		Matrix<Vector> operator*(const Matrix<Vector>& rhs);
 
 		Vector ToVector();
 
+		Matrix<T>& AddHelpLine();
+
+		static Matrix<T> AddHelpLine(const Linal::Matrix<T>& toCopy);
+
+		Matrix<T>& RemoveHelpLine();
+
+		static Matrix<T>& RemoveHelpLine(const Linal::Matrix<T>& toCopy);
+
 		int GetWidth();
+		int GetWidth() const;
 		int GetHeight();
+		int GetHeight() const;
 	private:
 		std::vector<T> matrix;
 		int Width;
@@ -48,6 +59,62 @@ namespace Linal
 
 		int ConvertToIndex(int col, int row) const;
 	};
+
+	template <class T>
+	Matrix<T>& Matrix<T>::AddHelpLine() {
+		auto replacement = std::vector<double>(Width * (Height + 1));
+
+		for (int row = 1; row <= GetHeight(); row++)
+			for (int col = 1; col <= GetWidth(); col++)
+				replacement.at(ConvertToIndex(row, col)) = matrix.at(ConvertToIndex(row, col));
+
+		for (int col = 1; col <= GetWidth(); col++)
+			replacement.at(ConvertToIndex(GetHeight() + 1, col)) = 1;
+
+		matrix = replacement;
+		return *this;
+	}
+
+	template <class T>
+	Matrix<T> Matrix<T>::AddHelpLine(const Linal::Matrix<T>& toCopy) {
+		auto copiedMatrix = Matrix<T>(toCopy.GetHeight() + 1, toCopy.GetWidth());
+		auto replacement = std::vector<double>(toCopy.Width * (toCopy.Height + 1));
+
+		for (int row = 1; row <= toCopy.GetHeight(); row++)
+			for (int col = 1; col <= toCopy.GetWidth(); col++)
+				replacement.at(toCopy.ConvertToIndex(row, col)) = toCopy.matrix.at(toCopy.ConvertToIndex(row, col));
+
+		for (int col = 1; col <= toCopy.GetWidth(); col++)
+			replacement.at(toCopy.ConvertToIndex(toCopy.GetHeight() + 1, col)) = 1;
+
+		copiedMatrix.matrix = replacement;
+		return copiedMatrix;
+	}
+
+	template <class T>
+	Matrix<T>& Matrix<T>::RemoveHelpLine() {
+		auto replacement = std::vector<double>(Width, Height - 1);
+
+		for (int row = 1; row <= GetHeight() - 1; row++)
+			for (int col = 1; col <= GetWidth(); col++)
+				replacement.at(ConvertToIndex(row, col)) = matrix.at(ConvertToIndex(row, col));
+
+		matrix = replacement;
+		return *this;
+	}
+
+	template <class T>
+	Matrix<T>& Matrix<T>::RemoveHelpLine(const Linal::Matrix<T>& toCopy) {
+		auto copiedMatrix = Matrix<T>(toCopy.Width, toCopy.Height -1);
+		auto replacement = std::vector<double>(toCopy.Width * (toCopy.Height - 1));
+
+		for (int row = 1; row <= toCopy.GetHeight() - 1; row++)
+			for (int col = 1; col <= toCopy.GetWidth(); col++)
+				replacement.at(toCopy.ConvertToIndex(row, col)) = toCopy.matrix.at(toCopy.ConvertToIndex(row, col));
+
+		copiedMatrix.matrix = replacement;
+		return copiedMatrix;
+	}
 
 	template <class T>
 	Vector operator*(const Matrix<T> lhs, const Vector& rhs);
@@ -88,10 +155,55 @@ namespace Linal
 		return *this;
 	}
 
-	template<class T>
-	inline Matrix<T> Matrix<T>::operator*(const Matrix<T>& rhs)
+	template <class T>
+	static Matrix<T> AddHelpLine(const Matrix<T>& input)
 	{
-		Matrix<T> output = Matrix<T>(Height, rhs.Width);
+		Matrix<T> output = Matrix<T>{ input.GetHeight() + 1, input.GetWidth() };
+
+		for (int row = 1; row <= input.GetHeight(); row++)
+			for (int col = 1; col <= input.GetWidth(); col++)
+				output.Set(row, col, input.Get(row, col));
+
+		for (int col = 1; col <= input.GetWidth(); col++)
+			output.Set(input.GetHeight() + 1, col, 1);
+
+		return output;
+	}
+
+	template <class T>
+	static Matrix<T> RemoveHelpLine(const Matrix<T>& input)
+	{
+		Matrix<T> output = Matrix<T>{ input.GetHeight() - 1, input.GetWidth() };
+
+		for (int row = 1; row <= output.GetHeight(); row++)
+			for (int col = 1; col <= input.GetWidth(); col++)
+				output.Set(row, col, input.Get(row, col));
+
+		return output;
+	}
+
+	template<class T>
+	inline Matrix<T> Matrix<T>::operator*(const Matrix<T>& initialRhs)
+	{
+		auto lhs = *this;
+		auto rhs = initialRhs;
+
+		int lhsHelpLines = 0;
+		int rhsHelpLines = 0;
+
+		Matrix<T> output = Matrix<T>(rhs.GetHeight(), lhs.GetWidth());
+
+		if (lhs.GetWidth() < rhs.GetHeight())
+		{
+			AddHelpLine(lhs);
+			lhsHelpLines++;
+		}
+		else if (lhs.GetWidth() > rhs.GetHeight())
+		{
+			output = AddHelpLine(output);
+			rhs = AddHelpLine(rhs);
+			rhsHelpLines++;
+		}
 
 		for (int row = 1; row <= output.GetHeight(); row++)
 		{
@@ -105,19 +217,41 @@ namespace Linal
 			}
 		}
 
+		if (lhsHelpLines) {
+			for (int i = 0; i < lhsHelpLines; i++)
+				lhs = RemoveHelpLine(lhs);
+		}
+		else if (rhsHelpLines) {
+			for (int i = 0; i < rhsHelpLines; i++) {
+				output = output.RemoveHelpLine();
+				rhs = rhs.RemoveHelpLine();
+			}
+		}
+
 		return output;
 	}
 
 	template<class T>
-	inline Matrix<Point> Matrix<T>::operator*(const Matrix<Point>& rhs)
+	inline Matrix<Point> Matrix<T>::operator*(const Matrix<Point>& initialRhs)
 	{
-		Matrix<Point> output = Matrix<Point>(rhs.GetWidth());
-		auto newrhs = rhs;
+		auto lhs = *this;
+		auto rhs = initialRhs;
 
-		bool addedHelpLine = false;
-		if (output.GetHeight() < GetWidth()) {
-			output.AddHelpLine();
-			newrhs = newrhs.AddHelpLine(rhs);
+		int lhsHelpLines = 0;
+		int rhsHelpLines = 0;
+
+		Matrix<Point> output = Matrix<Point>(rhs.GetWidth());
+
+		if (lhs.GetWidth() < rhs.GetHeight())
+		{
+			AddHelpLine(lhs);
+			lhsHelpLines++;
+		}
+		else if (lhs.GetWidth() > rhs.GetHeight())
+		{
+			output = output.AddHelpLine();
+			rhs = rhs.AddHelpLine();
+			rhsHelpLines++;
 		}
 
 		for (int row = 1; row <= output.GetHeight(); row++)
@@ -126,17 +260,22 @@ namespace Linal
 			{
 				T val = 0;
 				for (int colrows = 1; colrows <= Width; colrows++)
-					val += Get(row, colrows) * newrhs.matrix.at(newrhs.ConvertToIndex(colrows, col));
+					val += lhs.Get(row, colrows) * rhs.matrix.at(rhs.ConvertToIndex(colrows, col));
 
 				output.Set(row, col, val);
 			}
 		}
 
-		if (addedHelpLine) {
-			output.RemoveHelpLine();
-			newrhs = newrhs.RemoveHelpLine(newrhs);
+		if (lhsHelpLines) {
+			for (int i = 0; i < lhsHelpLines; i++)
+				lhs = RemoveHelpLine(lhs);
 		}
-			
+		else if (rhsHelpLines) {
+			for (int i = 0; i < rhsHelpLines; i++) {
+				output = output.RemoveHelpLine();
+				rhs = rhs.RemoveHelpLine();
+			}
+		}
 
 		return output;
 	}
@@ -187,7 +326,19 @@ namespace Linal
 	}
 
 	template <typename T>
+	int Matrix<T>::GetWidth() const
+	{
+		return Width;
+	}
+
+	template <typename T>
 	int Matrix<T>::GetHeight()
+	{
+		return Height;
+	}
+
+	template <typename T>
+	int Matrix<T>::GetHeight() const
 	{
 		return Height;
 	}
@@ -197,59 +348,6 @@ namespace Linal
 	{
 		return (row - 1)*Width + (col - 1);
 	}
-
-	// Vector matrix specialization
-	template <>
-	class Matrix <Vector> {
-	public:
-		Matrix() : Width(1), Height(1) {
-			matrix = std::vector<Vector>(Width * Height);
-		}
-		Matrix(int x, int y) : Width(x), Height(y) {
-			matrix = std::vector<Vector>(Width * Height);
-		}
-
-		Vector Get(int x, int y) {
-			return matrix.at(ConvertToIndex(x, y));
-		}
-		Vector Get(int x, int y) const {
-			return matrix.at(ConvertToIndex(x, y));
-		}
-		Matrix<Vector>& Set(int x, int y, Vector v) {
-			matrix.at(ConvertToIndex(x, y)) = v;
-			return *this;
-		}
-
-		void Draw(FWApplication *& application, int offsetX, int offsetY) {
-			for (int x = 1; x <= Height; x++)
-			{
-				for (int y = 1; y <= Width; y++)
-				{
-					auto val = matrix.at(ConvertToIndex(x, y));
-
-					val.Draw(application, offsetX, offsetY);
-
-				}
-			}
-		}
-
-		Matrix<Vector> operator*(const Matrix<Vector>& rhs);
-
-		int GetWidth() {
-			return Width;
-		}
-		int GetHeight() {
-			return Height;
-		}
-	private:
-		std::vector<Vector> matrix;
-		int Width;
-		int Height;
-
-		int ConvertToIndex(int x, int y) const {
-			return (x - 1)*Width + (y - 1);
-		}
-	};
 
 	template <>
 	class Matrix <Point> {
@@ -281,7 +379,6 @@ namespace Linal
 
 			return *this;
 		}
-
 		void Draw(FWApplication *& application, int offsetX, int offsetY) {
 			for (int index = 1; index <= Width; index++)
 			{
@@ -289,57 +386,75 @@ namespace Linal
 				point.Draw(application, offsetX, offsetY);
 			}
 		}
+		Matrix<Point> AddHelpLine() {
+			Matrix<Point> output = Matrix<Point>{ GetWidth() };
+			output.matrix = std::vector<double>(GetWidth() * (GetHeight() + 1));
+			output.Height++;
 
-		Matrix<Point>& AddHelpLine() {
-			auto replacement = std::vector<double>( Width * (Height + 1 ));
+			for (int col = 1; col <= GetWidth(); col++) {
+				output.Set(col, Get(col));
+				output.matrix.at(ConvertToIndex(GetHeight() + 1, col)) = 1;
+			}
 
-			for (int row = 1; row <= GetHeight(); row++)
-				for (int col = 1; col <= GetWidth(); col++)
-					replacement.at(ConvertToIndex(row, col)) = matrix.at(ConvertToIndex(row, col));
+			return output;
+		}
+
+		Matrix<Point> operator*(const Matrix<Point>& initialRhs) {
+			auto lhs = *this;
+			auto rhs = initialRhs;
+
+			int lhsHelpLines = 0;
+			int rhsHelpLines = 0;
+
+			Matrix<Point> output = Matrix<Point>(rhs.GetWidth());
+
+			/*if (lhs.GetWidth() < rhs.GetHeight())
+			{
+				lhs = lhs.AddHelpLine();
+				lhsHelpLines++;
+			}
+			else if (lhs.GetWidth() > rhs.GetHeight())
+			{
+				output = output.AddHelpLine();
+				rhs = rhs.AddHelpLine();
+				rhsHelpLines++;
+			}*/
+
+			for (int row = 1; row <= output.GetHeight(); row++)
+			{
+				for (int col = 1; col <= output.GetWidth(); col++)
+				{
+					double val = 0;
+					for (int colrows = 1; colrows <= Width; colrows++)
+						val += lhs.matrix.at(lhs.ConvertToIndex(row, colrows)) * rhs.matrix.at(rhs.ConvertToIndex(colrows, col));
+
+					output.Set(row, col, val);
+				}
+			}
+
+			/*if (lhsHelpLines) {
+				for (int i = 0; i < lhsHelpLines; i++)
+					lhs = lhs.RemoveHelpLine();
+			}
+			else if (rhsHelpLines) {
+				for (int i = 0; i < rhsHelpLines; i++) {
+					output = output.RemoveHelpLine();
+					rhs = rhs.RemoveHelpLine();
+				}
+			}*/
+
+			return output;
+		}
+
+		Matrix<Point> RemoveHelpLine() {
+			Matrix<Point> output = Matrix<Point>{ GetWidth() };
+			output.matrix = std::vector<double>(GetWidth() * 2);
+			output.Height = 2;
 
 			for (int col = 1; col <= GetWidth(); col++)
-				replacement.at(ConvertToIndex(GetHeight() + 1, col)) = 1;
+				output.Set(col, Get(col));
 
-			matrix = replacement;
-			return *this;
-		}
-
-		static Matrix<Point> AddHelpLine(const Linal::Matrix<Point>& toCopy) {
-			auto copiedMatrix = Matrix<Point>(toCopy.Width);
-			auto replacement = std::vector<double>(toCopy.Width * (toCopy.Height + 1));
-
-			for (int row = 1; row <= toCopy.GetHeight(); row++)
-				for (int col = 1; col <= toCopy.GetWidth(); col++)
-					replacement.at(toCopy.ConvertToIndex(row, col)) = toCopy.matrix.at(toCopy.ConvertToIndex(row, col));
-
-			for (int col = 1; col <= toCopy.GetWidth(); col++)
-				replacement.at(toCopy.ConvertToIndex(toCopy.GetHeight() + 1, col)) = 1;
- 
-			copiedMatrix.matrix = replacement;
-			return copiedMatrix;
-		}
-
-		Matrix<Point>& RemoveHelpLine() {
-			auto replacement = std::vector<double>(Width, Height - 1);
-
-			for (int row = 1; row <= GetHeight() - 1; row++)
-				for (int col = 1; col <= GetWidth(); col++)
-					replacement.at(ConvertToIndex(row, col)) = matrix.at(ConvertToIndex(row, col));
-
-			matrix = replacement;
-			return *this;
-		}
-
-		static Matrix<Point>& RemoveHelpLine(const Linal::Matrix<Point>& toCopy) {
-			auto copiedMatrix = Matrix<Point>(toCopy.Width);
-			auto replacement = std::vector<double>(toCopy.Width * (toCopy.Height - 1));
-
-			for (int row = 1; row <= toCopy.GetHeight() - 1; row++)
-				for (int col = 1; col <= toCopy.GetWidth(); col++)
-					replacement.at(toCopy.ConvertToIndex(row, col)) = toCopy.matrix.at(toCopy.ConvertToIndex(row, col));
-
-			copiedMatrix.matrix = replacement;
-			return copiedMatrix;
+			return output;
 		}
 
 		int GetWidth() { return Width; }
@@ -381,9 +496,9 @@ namespace Linal
 		return matrix;
 	}
 
-	static Linal::Matrix<int> GetZeroMatrix()
+	static Linal::Matrix<double> GetZeroMatrix()
 	{
-		auto matrix = Linal::Matrix<int>(0, 0);
+		auto matrix = Linal::Matrix<double>(0, 0);
 
 		matrix.Set(1, 1, 0).Set(1, 2, 0);
 		matrix.Set(2, 1, 0).Set(2, 2, 0);
@@ -391,9 +506,9 @@ namespace Linal
 		return matrix;
 	}
 
-	static Linal::Matrix<int> GetIdentityMatrix()
+	static Linal::Matrix<double> GetIdentityMatrix()
 	{
-		auto matrix = Linal::Matrix<int>(2, 2);
+		auto matrix = Linal::Matrix<double>(2, 2);
 
 		matrix.Set(1, 1, 1).Set(1, 2, 0);
 		matrix.Set(2, 1, 0).Set(2, 2, 1);
@@ -401,10 +516,17 @@ namespace Linal
 		return matrix;
 	}
 
-	template<class T>
-	Vector operator*(const Matrix<T> lhs, const Vector & rhs)
+	static Linal::Matrix<double> GetRotateMatrix(double degree)
 	{
-		return Vector(lhs.Get(1, 1) * rhs.xAxis, lhs.Get(2, 2) * rhs.yAxis);
+		double piRad = (degree * M_PI) / 180; //1 * degree;
+
+		auto matrix = Linal::Matrix<double>(3, 3);
+		
+		matrix.Set(1, 1, cos(piRad)).Set(1, 2, -sin(piRad)).Set(1, 3, 0);
+		matrix.Set(2, 1, sin(piRad)).Set(2, 2, cos(piRad)).Set(2, 3, 0);
+		matrix.Set(3, 1, 0).Set(3, 2, 0).Set(3, 3, 1);
+
+		return matrix;
 	}
 }
 
