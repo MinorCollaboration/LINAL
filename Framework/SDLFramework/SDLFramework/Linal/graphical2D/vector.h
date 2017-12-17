@@ -1,5 +1,5 @@
-#ifndef SDLFRAMEWORK_VECTOR
-#define SDLFRAMEWORK_VECTOR
+#ifndef SDLFRAMEWORK_LINAL_GRAPHICAL2D_VECTOR
+#define SDLFRAMEWORK_LINAL_GRAPHICAL2D_VECTOR
 
 #include "../../FWApplication.h"
 #include "point.h"

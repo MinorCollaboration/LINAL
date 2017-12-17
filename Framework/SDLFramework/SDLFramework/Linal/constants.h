@@ -9,6 +9,8 @@ namespace Linal
 	static const int	HEIGHT = 300;
 	static const int	FIELDWIDTH = 25;
 	static const int	FIELDHEIGHT = 25;
+
+	static const int	POINTSIZE = 7;
 }
 
 #endif // !LINAL_CONSTANTS

@@ -1,5 +1,5 @@
-#ifndef SDLFRAMEWORK_POINT
-#define SDLFRAMEWORK_POINT
+#ifndef SDLFRAMEWORK_LINAL_GRAPHICAL2D_POINT
+#define SDLFRAMEWORK_LINAL_GRAPHICAL2D_POINT
 
 #include "../../FWApplication.h"
 
@@ -26,8 +26,6 @@ namespace Linal
 			Vector ToVector();
 
 			void Draw(FWApplication*& application, int offsetX, int offsetY);
-
-			static const int	SIZE = 7;
 		};
 	}
 	

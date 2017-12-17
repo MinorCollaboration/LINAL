@@ -12,6 +12,7 @@ using namespace std;
 
 #include "FWApplication.h"
 #include "Linal/constants.h"
+#include "Linal/graphical2D/point.h"
 #include "drawable.h"
 
 namespace Linal
@@ -22,7 +23,6 @@ namespace Linal
 		class Point;
 	}
 	
-
 	template <class T>
 	class Matrix
 	{
@@ -37,19 +37,13 @@ namespace Linal
 
 		void Draw(FWApplication *& application, int offsetX, int offsetY);
 
-		G2D::Vector operator*(const G2D::Vector& rhs);
-
 		Matrix<T> operator*(const Matrix<T>& rhs);
 		Matrix<G2D::Point> operator*(const Matrix<G2D::Point>& rhs);
 
-		G2D::Vector ToVector();
-
 		Matrix<T>& AddHelpLine();
-
-		static Matrix<T> AddHelpLine(const Linal::Matrix<T>& toCopy);
-
 		Matrix<T>& RemoveHelpLine();
 
+		static Matrix<T> AddHelpLine(const Linal::Matrix<T>& toCopy);
 		static Matrix<T>& RemoveHelpLine(const Linal::Matrix<T>& toCopy);
 
 		int GetWidth();
@@ -119,9 +113,6 @@ namespace Linal
 		copiedMatrix.matrix = replacement;
 		return copiedMatrix;
 	}
-
-	template <class T>
-	G2D::Vector operator*(const Matrix<T> lhs, const G2D::Vector& rhs);
 
 	template <class T>
 	Matrix<T>::Matrix() : Width(1), Height(1)
@@ -284,14 +275,6 @@ namespace Linal
 		return output;
 	}
 
-	/* */
-	template<class T>
-	inline G2D::Vector Matrix<T>::ToVector()
-	{
-		return G2D::Vector(Get(1, 1), Get(2,2));
-	}
-	/* */
-
 	template <typename T>
 	void Matrix<T>::Draw(FWApplication *& application, int offsetX, int offsetY)
 	{
@@ -312,15 +295,6 @@ namespace Linal
 				application->DrawText(str, posX + 10, posY - 7);
 			}
 		}
-	}
-
-	template<class T>
-	inline G2D::Vector Matrix<T>::operator*(const G2D::Vector & rhs)
-	{
-		double xAxis = Get(1, 1) * rhs.xAxis;
-		double yAxis = Get(2, 2) * rhs.yAxis;
-
-		return G2D::Vector(xAxis, yAxis);
 	}
 
 	template <typename T>

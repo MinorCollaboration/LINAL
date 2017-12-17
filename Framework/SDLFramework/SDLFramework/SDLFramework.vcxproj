@@ -85,6 +85,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FWApplication.cpp" />
+    <ClCompile Include="Linal\graphical3D\point.cpp" />
+    <ClCompile Include="Linal\graphical3D\vector.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ExampleGameObject.cpp" />
     <ClCompile Include="Linal\graphical2D\canvas.cpp" />
@@ -98,10 +100,10 @@
     <ClInclude Include="FWApplication.h" />
     <ClInclude Include="ExampleGameObject.h" />
     <ClInclude Include="IGameObject.h" />
-    <ClInclude Include="Linal\numeric\matrix.hpp" />
+    <ClInclude Include="Linal\graphical3D\point.h" />
+    <ClInclude Include="Linal\graphical3D\vector.h" />
     <ClInclude Include="matrix.h" />
     <ClInclude Include="Linal\graphical2D\canvas.h" />
-    <ClInclude Include="matrix.hpp" />
     <ClInclude Include="Linal\graphical2D\point.h" />
     <ClInclude Include="Linal\graphical2D\vector.h" />
   </ItemGroup>

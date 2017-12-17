@@ -22,7 +22,7 @@ Vector Point::ToVector()
 
 void Point::Draw(FWApplication *& application, int offsetX, int offsetY)
 {
-	application->DrawCircle(offsetX + (xAxis * Linal::FIELDWIDTH), offsetY - (yAxis * Linal::FIELDHEIGHT), Point::SIZE, true);
+	application->DrawCircle(offsetX + (xAxis * Linal::FIELDWIDTH), offsetY - (yAxis * Linal::FIELDHEIGHT), Linal::POINTSIZE, true);
 }
 
 Vector operator*(const int & lhs, const Point & rhs)

@@ -1,5 +1,5 @@
-#ifndef SDLFRAMEWORK_CANVAS
-#define SDLFRAMEWORK_CANVAS
+#ifndef SDLFRAMEWORK_LINAL_GRAPHICAL2D_CANVAS
+#define SDLFRAMEWORK_LINAL_GRAPHICAL2D_CANVAS
 
 #include "../../FWApplication.h"
 #include "point.h"
@@ -26,7 +26,5 @@ namespace Linal
 		};
 	}
 }
-
-
 
 #endif

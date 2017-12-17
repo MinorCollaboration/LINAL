@@ -8,8 +8,8 @@
 
 #include "ExampleGameObject.h"
 #include "./Linal/constants.h"
+#include "./matrix.h"
 #include "./Linal/graphical2D/canvas.h"
-#include "matrix.h"
 
 void ScaleObject(Linal::Matrix<Linal::G2D::Point>& matrix, double scaleX, double scaleY)
 {
