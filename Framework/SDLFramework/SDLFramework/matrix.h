@@ -417,7 +417,7 @@ namespace Linal
 
 	};
 
-	static Linal::Matrix<double> GetTranslateMatrix(double t, double s)
+	static Linal::Matrix<double> Get2DTranslateMatrix(double t, double s)
 	{
 		auto matrix = Linal::Matrix<double>(3, 3);
 
@@ -428,7 +428,7 @@ namespace Linal
 		return matrix;
 	}
 
-	static Linal::Matrix<double> GetScaleMatrix(double xScale, double yScale)
+	static Linal::Matrix<double> Get2DScaleMatrix(double xScale, double yScale)
 	{
 		auto matrix = Linal::Matrix<double>(2, 2);
 
@@ -438,7 +438,7 @@ namespace Linal
 		return matrix;
 	}
 
-	static Linal::Matrix<double> GetZeroMatrix()
+	static Linal::Matrix<double> Get2DZeroMatrix()
 	{
 		auto matrix = Linal::Matrix<double>(0, 0);
 
@@ -448,7 +448,7 @@ namespace Linal
 		return matrix;
 	}
 
-	static Linal::Matrix<double> GetIdentityMatrix()
+	static Linal::Matrix<double> Get2DIdentityMatrix()
 	{
 		auto matrix = Linal::Matrix<double>(2, 2);
 
@@ -458,7 +458,7 @@ namespace Linal
 		return matrix;
 	}
 
-	static Linal::Matrix<double> GetRotateMatrix(double degree)
+	static Linal::Matrix<double> Get2DRotateMatrix(double degree)
 	{
 		double piRad = (degree * M_PI) / 180; //1 * degree;
 
@@ -470,6 +470,44 @@ namespace Linal
 
 		return matrix;
 	}
+
+	static Linal::Matrix<double> Get3DRotateXAxisMatrix(double degree)
+	{
+		double piRad = (degree * M_PI) / 180;
+
+		auto matrix = Linal::Matrix<double>(3, 3);
+
+		matrix.Set(1, 1, 1).Set(1, 2, 0).Set(1, 3, 0);
+		matrix.Set(2, 1, 0).Set(2, 2, cos(piRad)).Set(2, 3, -sin(piRad));
+		matrix.Set(3, 1, 0).Set(3, 2, sin(piRad)).Set(3, 3, cos(piRad));
+
+		return matrix;
+	}
+	static Linal::Matrix<double> Get3DRotateYAxisMatrix(double degree)
+	{
+		double piRad = (degree * M_PI) / 180;
+
+		auto matrix = Linal::Matrix<double>(3, 3);
+
+		matrix.Set(1, 1, cos(piRad)).Set(1, 2, 0).Set(1, 3, -sin(piRad));
+		matrix.Set(2, 1, 0).Set(2, 2, 1).Set(2, 3, 0);
+		matrix.Set(3, 1, sin(piRad)).Set(3, 2, 0).Set(3, 3, cos(piRad));
+
+		return matrix;
+	}
+	static Linal::Matrix<double> Get3DRotateZAxisMatrix(double degree)
+	{
+		double piRad = (degree * M_PI) / 180;
+
+		auto matrix = Linal::Matrix<double>(3, 3);
+
+		matrix.Set(1, 1, cos(piRad)).Set(1, 2, -sin(piRad)).Set(1, 3, 0);
+		matrix.Set(2, 1, sin(piRad)).Set(2, 2, cos(piRad)).Set(2, 3, 0);
+		matrix.Set(3, 1, 0).Set(3, 2, 0).Set(3, 3, 1);
+
+		return matrix;
+	}
+
 }
 
 #endif

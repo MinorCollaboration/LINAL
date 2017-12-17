@@ -13,21 +13,21 @@
 
 void ScaleObject(Linal::Matrix<Linal::G2D::Point>& matrix, double scaleX, double scaleY)
 {
-	auto scale = Linal::GetScaleMatrix(scaleX, scaleY);
+	auto scale = Linal::Get2DScaleMatrix(scaleX, scaleY);
 	matrix = scale * matrix;
 }
 
 void RotateObject(Linal::Matrix<Linal::G2D::Point>& matrix, double degree)
 {
-	auto rotate = Linal::GetRotateMatrix(degree);
+	auto rotate = Linal::Get2DRotateMatrix(degree);
 	matrix = rotate * matrix;
 }
 
 void RotateObject(Linal::Matrix<Linal::G2D::Point>& matrix, double degree, double originX, double originY)
 {
-	auto translate = Linal::GetTranslateMatrix(-originX, -originY);
-	auto revertTranslate = Linal::GetTranslateMatrix(originX, originY);
-	auto rotate = Linal::GetRotateMatrix(degree);
+	auto translate = Linal::Get2DTranslateMatrix(-originX, -originY);
+	auto revertTranslate = Linal::Get2DTranslateMatrix(originX, originY);
+	auto rotate = Linal::Get2DRotateMatrix(degree);
 
 	auto rotated = (rotate * translate) * matrix;
 	matrix = revertTranslate * rotated;
@@ -61,7 +61,7 @@ int main(int args[])
 
 	// With Ints/doubles
 	/* */
-	auto a = Linal::GetScaleMatrix(1.2, 1.1);
+	auto a = Linal::Get2DScaleMatrix(1.2, 1.1);
 	auto b = Linal::Matrix<double>{ 2, 4 };
 
 	b.Set(1, 1, 3).Set(1, 2, 4).Set(1, 3, 6).Set(1, 4, 1);
