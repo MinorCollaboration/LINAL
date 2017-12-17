@@ -7,21 +7,24 @@
 
 namespace Linal
 {
-	class Vector;
-	class Point;
-
-	class Canvas
+	namespace G2D
 	{
-	public:
-		Canvas();
-		~Canvas();
+		class Vector;
+		class Point;
 
-		void Draw(FWApplication*& application);
+		class Canvas
+		{
+		public:
+			Canvas();
+			~Canvas();
 
-		std::vector<Vector> vectors;
-		std::vector<Point> points;
-	private:
-	};
+			void Draw(FWApplication*& application);
+
+			std::vector<Vector> vectors;
+			std::vector<Point> points;
+		private:
+		};
+	}
 }
 
 

@@ -9,26 +9,30 @@ struct Color;
 
 namespace Linal
 {
-	class Vector;
-
-	class Point
+	namespace G2D
 	{
-	public:
-		Point();
-		Point(double xAxis, double yAxis);
-		~Point();
+		class Vector;
 
-		double xAxis;
-		double yAxis;
+		class Point
+		{
+		public:
+			Point();
+			Point(double xAxis, double yAxis);
+			~Point();
 
-		Vector ToVector();
+			double xAxis;
+			double yAxis;
 
-		void Draw(FWApplication*& application, int offsetX, int offsetY);
+			Vector ToVector();
 
-		static const int	SIZE = 7;
-	};
+			void Draw(FWApplication*& application, int offsetX, int offsetY);
+
+			static const int	SIZE = 7;
+		};
+	}
+	
 }
 
-Linal::Vector operator*(const int&, const Linal::Point&);
+Linal::G2D::Vector operator*(const int&, const Linal::G2D::Point&);
 
 #endif

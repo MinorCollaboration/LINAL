@@ -5,13 +5,13 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ExampleGameObject.cpp" />
     <ClCompile Include="vector.cpp">
-      <Filter>linal</Filter>
-    </ClCompile>
-    <ClCompile Include="canvas.cpp">
-      <Filter>linal</Filter>
+      <Filter>linal\graphical2D</Filter>
     </ClCompile>
     <ClCompile Include="point.cpp">
-      <Filter>linal</Filter>
+      <Filter>linal\graphical2D</Filter>
+    </ClCompile>
+    <ClCompile Include="canvas.cpp">
+      <Filter>linal\graphical2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -19,15 +19,6 @@
     <ClInclude Include="FWApplication.h" />
     <ClInclude Include="ExampleGameObject.h" />
     <ClInclude Include="IGameObject.h" />
-    <ClInclude Include="vector.h">
-      <Filter>linal</Filter>
-    </ClInclude>
-    <ClInclude Include="canvas.h">
-      <Filter>linal</Filter>
-    </ClInclude>
-    <ClInclude Include="point.h">
-      <Filter>linal</Filter>
-    </ClInclude>
     <ClInclude Include="drawable.h">
       <Filter>linal\interfaces</Filter>
     </ClInclude>
@@ -37,6 +28,15 @@
     <ClInclude Include="matrix.h">
       <Filter>linal</Filter>
     </ClInclude>
+    <ClInclude Include="vector.h">
+      <Filter>linal\graphical2D</Filter>
+    </ClInclude>
+    <ClInclude Include="point.h">
+      <Filter>linal\graphical2D</Filter>
+    </ClInclude>
+    <ClInclude Include="canvas.h">
+      <Filter>linal\graphical2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="linal">
@@ -44,6 +44,15 @@
     </Filter>
     <Filter Include="linal\interfaces">
       <UniqueIdentifier>{66112414-c4a8-4389-84d8-55690a24101c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="linal\numeric">
+      <UniqueIdentifier>{e2fa840d-ebcf-4733-9378-a10687d0c41c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="linal\graphical3D">
+      <UniqueIdentifier>{01cbb3c1-d8da-4760-8178-daa4fdc665c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="linal\graphical2D">
+      <UniqueIdentifier>{126179ed-b3fe-4bb2-b623-f27655b32959}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

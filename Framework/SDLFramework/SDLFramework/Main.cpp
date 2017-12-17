@@ -11,6 +11,28 @@
 #include "constants.h"
 #include "matrix.h"
 
+void ScaleObject(Linal::Matrix<Linal::G2D::Point>& matrix, double scaleX, double scaleY)
+{
+	auto scale = Linal::GetScaleMatrix(scaleX, scaleY);
+	matrix = scale * matrix;
+}
+
+void RotateObject(Linal::Matrix<Linal::G2D::Point>& matrix, double degree)
+{
+	auto rotate = Linal::GetRotateMatrix(degree);
+	matrix = rotate * matrix;
+}
+
+void RotateObject(Linal::Matrix<Linal::G2D::Point>& matrix, double degree, double originX, double originY)
+{
+	auto translate = Linal::GetTranslateMatrix(-originX, -originY);
+	auto revertTranslate = Linal::GetTranslateMatrix(originX, originY);
+	auto rotate = Linal::GetRotateMatrix(degree);
+
+	auto rotated = (rotate * translate) * matrix;
+	matrix = revertTranslate * rotated;
+}
+
 int main(int args[])
 {
 	//auto window = Window::CreateSDLWindow();
@@ -31,7 +53,7 @@ int main(int args[])
 	application->SetTargetFPS(60);
 	application->SetColor(Color(255, 10, 40, 255));
 
-	auto canvas{ std::unique_ptr<Linal::Canvas>{ new Linal::Canvas() } };
+	auto canvas{ std::unique_ptr<Linal::G2D::Canvas>{ new Linal::G2D::Canvas() } };
 
 	/******************************************
 	 *             Scaling Matrix             *
@@ -51,13 +73,13 @@ int main(int args[])
 
 	// With Points
 	/* */
-	auto square = Linal::Matrix<Linal::Point>{ 6 };
-	auto topleft = Linal::Point(2, 5);
-	auto topcenter = Linal::Point(4, 5);
-	auto topright = Linal::Point(6, 5);
-	auto bottomleft = Linal::Point(2, 2);
-	auto bottomcenter = Linal::Point(4, 2);
-	auto bottomright = Linal::Point(6, 2);
+	auto square = Linal::Matrix<Linal::G2D::Point>{ 6 };
+	auto topleft = Linal::G2D::Point(2, 5);
+	auto topcenter = Linal::G2D::Point(4, 5);
+	auto topright = Linal::G2D::Point(6, 5);
+	auto bottomleft = Linal::G2D::Point(2, 2);
+	auto bottomcenter = Linal::G2D::Point(4, 2);
+	auto bottomright = Linal::G2D::Point(6, 2);
 
 	square.Set(1, topleft);
 	square.Set(2, topcenter);
@@ -65,24 +87,6 @@ int main(int args[])
 	square.Set(4, bottomright);
 	square.Set(5, bottomcenter);
 	square.Set(6, bottomleft);
-
-	/* *
-	auto square = Linal::Matrix<double>{ 2,6 };
-	square.Set(1, 1, 2).Set(1, 2, 4).Set(1, 3, 6).Set(1, 4, 2).Set(1, 5, 4).Set(1, 6, 6);
-	square.Set(2, 1, 6).Set(2, 2, 6).Set(2, 3, 6).Set(2, 4, 2).Set(2, 5, 2).Set(2, 6, 2);
-	/* */
-	auto scale = Linal::GetScaleMatrix(1.759238, 1.236284);
-	auto translate = Linal::GetTranslateMatrix(-3.5, -4);
-	auto revertTranslate = Linal::GetTranslateMatrix(3.5, 4);
-	auto rotate = Linal::GetRotateMatrix(90);
-
-	//auto scaled = scale * square;
-	auto translated = translate * square;
-	auto rotrans = translate * rotate;
-	auto rotated = (rotate) * translated;
-	//auto rotated = (translate * rotate) * square;
-	auto reverted = revertTranslate * rotated;
-	/* */
 
 	bool debug = true;
 
@@ -157,8 +161,11 @@ int main(int args[])
 		c.Draw(application, Linal::OFFSETX + 200, Linal::OFFSETY + Linal::HEIGHT - 55);
 		/* End of numeric matrix */
 
+		RotateObject(square, 1, 3.5, 4);
+		//RotateObject(square, -90);
+
 		//square.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
-		reverted.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
+		square.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
 
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));

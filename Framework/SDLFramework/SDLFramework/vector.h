@@ -8,43 +8,47 @@ struct Color;
 
 namespace Linal
 {
-	class Canvas;
-	class Point;
-
-	class Vector
+	namespace G2D
 	{
-	public:
-		Vector();
-		Vector(double xAxis, double yAxis);
-		Vector(double xAxis, double yAxis, int xOrigin, int yOrigin);
-		~Vector();
+		class Canvas;
+		class Point;
 
-		Vector operator+(const Vector&);
-		Vector& operator+=(const Vector&);
-		Vector operator-(const Vector&);
-		Vector& operator-=(const Vector&);
+		class Vector
+		{
+		public:
+			Vector();
+			Vector(double xAxis, double yAxis);
+			Vector(double xAxis, double yAxis, double xOrigin, double yOrigin);
+			~Vector();
 
-		Vector operator*(const double&);
-		Vector operator*(const Vector&);
-		Vector operator/(const double&);
-		Vector operator/(const Vector&);
+			Vector operator+(const Vector&);
+			Vector& operator+=(const Vector&);
+			Vector operator-(const Vector&);
+			Vector& operator-=(const Vector&);
 
-		double xAxis;
-		double yAxis;
+			Vector operator*(const double&);
+			Vector operator*(const Vector&);
+			Vector operator/(const double&);
+			Vector operator/(const Vector&);
 
-		double startingY;
-		double startingX;
+			double xAxis;
+			double yAxis;
 
-		Point ToPoint();
+			double startingY;
+			double startingX;
 
-		void Draw(FWApplication*& application, int offsetX, int offsetY);
-		Color GetColor();
-	private:
-		Color myColor;
-	};
+			Point ToPoint();
+
+			void Draw(FWApplication*& application, int offsetX, int offsetY);
+			Color GetColor();
+		private:
+			Color myColor;
+		};
+	}
+	
 
 }
 
-Linal::Vector operator*(const double&, const Linal::Vector&);
+Linal::G2D::Vector operator*(const double&, const Linal::G2D::Vector&);
 
 #endif

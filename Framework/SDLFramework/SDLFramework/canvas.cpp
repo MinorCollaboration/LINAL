@@ -1,7 +1,7 @@
 #include "canvas.h"
 #include "constants.h"
 
-using namespace Linal;
+using namespace Linal::G2D;
 
 Canvas::Canvas()
 {
@@ -11,7 +11,7 @@ Canvas::~Canvas()
 {
 }
 
-void Linal::Canvas::Draw(FWApplication*& application)
+void Linal::G2D::Canvas::Draw(FWApplication*& application)
 {
 	auto defaultColor = Color(127, 127, 127, 255);
 

@@ -16,8 +16,12 @@ using namespace std;
 
 namespace Linal
 {
-	class Vector;
-	class Point;
+	namespace G2D
+	{
+		class Vector;
+		class Point;
+	}
+	
 
 	template <class T>
 	class Matrix
@@ -33,12 +37,12 @@ namespace Linal
 
 		void Draw(FWApplication *& application, int offsetX, int offsetY);
 
-		Vector operator*(const Vector& rhs);
+		G2D::Vector operator*(const G2D::Vector& rhs);
 
 		Matrix<T> operator*(const Matrix<T>& rhs);
-		Matrix<Point> operator*(const Matrix<Point>& rhs);
+		Matrix<G2D::Point> operator*(const Matrix<G2D::Point>& rhs);
 
-		Vector ToVector();
+		G2D::Vector ToVector();
 
 		Matrix<T>& AddHelpLine();
 
@@ -117,7 +121,7 @@ namespace Linal
 	}
 
 	template <class T>
-	Vector operator*(const Matrix<T> lhs, const Vector& rhs);
+	G2D::Vector operator*(const Matrix<T> lhs, const G2D::Vector& rhs);
 
 	template <class T>
 	Matrix<T>::Matrix() : Width(1), Height(1)
@@ -232,7 +236,7 @@ namespace Linal
 	}
 
 	template<class T>
-	inline Matrix<Point> Matrix<T>::operator*(const Matrix<Point>& initialRhs)
+	inline Matrix<G2D::Point> Matrix<T>::operator*(const Matrix<G2D::Point>& initialRhs)
 	{
 		auto lhs = *this;
 		auto rhs = initialRhs;
@@ -240,7 +244,7 @@ namespace Linal
 		int lhsHelpLines = 0;
 		int rhsHelpLines = 0;
 
-		Matrix<Point> output = Matrix<Point>(rhs.GetWidth());
+		Matrix<G2D::Point> output = Matrix<G2D::Point>(rhs.GetWidth());
 
 		if (lhs.GetWidth() < rhs.GetHeight())
 		{
@@ -282,9 +286,9 @@ namespace Linal
 
 	/* */
 	template<class T>
-	inline Vector Matrix<T>::ToVector()
+	inline G2D::Vector Matrix<T>::ToVector()
 	{
-		return Vector(Get(1, 1), Get(2,2));
+		return G2D::Vector(Get(1, 1), Get(2,2));
 	}
 	/* */
 
@@ -311,12 +315,12 @@ namespace Linal
 	}
 
 	template<class T>
-	inline Vector Matrix<T>::operator*(const Vector & rhs)
+	inline G2D::Vector Matrix<T>::operator*(const G2D::Vector & rhs)
 	{
 		double xAxis = Get(1, 1) * rhs.xAxis;
 		double yAxis = Get(2, 2) * rhs.yAxis;
 
-		return Vector(xAxis, yAxis);
+		return G2D::Vector(xAxis, yAxis);
 	}
 
 	template <typename T>
@@ -350,7 +354,7 @@ namespace Linal
 	}
 
 	template <>
-	class Matrix <Point> {
+	class Matrix <G2D::Point> {
 	public:
 		Matrix() : Width(1), Height(2) {
 			matrix = std::vector<double>(Width * Height);
@@ -359,13 +363,13 @@ namespace Linal
 			matrix = std::vector<double>(Width * Height);
 		}
 
-		Point Get(int index) { 
-			return Point(matrix.at(ConvertToIndex(2, index)), matrix.at(ConvertToIndex(1, index)));
+		G2D::Point Get(int index) { 
+			return G2D::Point(matrix.at(ConvertToIndex(2, index)), matrix.at(ConvertToIndex(1, index)));
 		}
-		Point Get(int index) const {
-			return Point(matrix.at(ConvertToIndex(2, index)), matrix.at(ConvertToIndex(1, index)));
+		G2D::Point Get(int index) const {
+			return G2D::Point(matrix.at(ConvertToIndex(2, index)), matrix.at(ConvertToIndex(1, index)));
 		}
-		Matrix<Point>& Set(int index, Point p) { 
+		Matrix<G2D::Point>& Set(int index, G2D::Point p) {
 			int indexX = ConvertToIndex(2, index);
 			int indexY = ConvertToIndex(1, index);
 
@@ -374,7 +378,7 @@ namespace Linal
 
 			return *this;
 		}
-		Matrix<Point>& Set(int row, int col, double val) {
+		Matrix<G2D::Point>& Set(int row, int col, double val) {
 			matrix.at(ConvertToIndex(row, col)) = val;
 
 			return *this;
@@ -385,9 +389,19 @@ namespace Linal
 				auto point = Get(index);
 				point.Draw(application, offsetX, offsetY);
 			}
+
+			for (int leftIndex = 1; leftIndex <= Width; leftIndex++)
+			{
+				int rightIndex = (leftIndex == Width) ? 1 : leftIndex + 1;
+				auto leftPoint = Get(leftIndex);
+				auto rightPoint = Get(rightIndex);
+
+				G2D::Vector v = G2D::Vector(rightPoint.xAxis - leftPoint.xAxis, rightPoint.yAxis - leftPoint.yAxis, leftPoint.xAxis, leftPoint.yAxis);
+				v.Draw(application, offsetX, offsetY);
+			}
 		}
-		Matrix<Point> AddHelpLine() {
-			Matrix<Point> output = Matrix<Point>{ GetWidth() };
+		Matrix<G2D::Point> AddHelpLine() {
+			Matrix<G2D::Point> output = Matrix<G2D::Point>{ GetWidth() };
 			output.matrix = std::vector<double>(GetWidth() * (GetHeight() + 1));
 			output.Height++;
 
@@ -399,55 +413,9 @@ namespace Linal
 			return output;
 		}
 
-		Matrix<Point> operator*(const Matrix<Point>& initialRhs) {
-			auto lhs = *this;
-			auto rhs = initialRhs;
 
-			int lhsHelpLines = 0;
-			int rhsHelpLines = 0;
-
-			Matrix<Point> output = Matrix<Point>(rhs.GetWidth());
-
-			/*if (lhs.GetWidth() < rhs.GetHeight())
-			{
-				lhs = lhs.AddHelpLine();
-				lhsHelpLines++;
-			}
-			else if (lhs.GetWidth() > rhs.GetHeight())
-			{
-				output = output.AddHelpLine();
-				rhs = rhs.AddHelpLine();
-				rhsHelpLines++;
-			}*/
-
-			for (int row = 1; row <= output.GetHeight(); row++)
-			{
-				for (int col = 1; col <= output.GetWidth(); col++)
-				{
-					double val = 0;
-					for (int colrows = 1; colrows <= Width; colrows++)
-						val += lhs.matrix.at(lhs.ConvertToIndex(row, colrows)) * rhs.matrix.at(rhs.ConvertToIndex(colrows, col));
-
-					output.Set(row, col, val);
-				}
-			}
-
-			/*if (lhsHelpLines) {
-				for (int i = 0; i < lhsHelpLines; i++)
-					lhs = lhs.RemoveHelpLine();
-			}
-			else if (rhsHelpLines) {
-				for (int i = 0; i < rhsHelpLines; i++) {
-					output = output.RemoveHelpLine();
-					rhs = rhs.RemoveHelpLine();
-				}
-			}*/
-
-			return output;
-		}
-
-		Matrix<Point> RemoveHelpLine() {
-			Matrix<Point> output = Matrix<Point>{ GetWidth() };
+		Matrix<G2D::Point> RemoveHelpLine() {
+			Matrix<G2D::Point> output = Matrix<G2D::Point>{ GetWidth() };
 			output.matrix = std::vector<double>(GetWidth() * 2);
 			output.Height = 2;
 
