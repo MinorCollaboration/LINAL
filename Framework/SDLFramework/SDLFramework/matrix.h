@@ -11,7 +11,7 @@
 using namespace std;
 
 #include "FWApplication.h"
-#include "constants.h"
+#include "Linal/constants.h"
 #include "drawable.h"
 
 namespace Linal

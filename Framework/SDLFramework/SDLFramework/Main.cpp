@@ -7,8 +7,8 @@
 #include <time.h>
 
 #include "ExampleGameObject.h"
-#include "canvas.h"
-#include "constants.h"
+#include "./Linal/constants.h"
+#include "./Linal/graphical2D/canvas.h"
 #include "matrix.h"
 
 void ScaleObject(Linal::Matrix<Linal::G2D::Point>& matrix, double scaleX, double scaleY)
@@ -161,7 +161,7 @@ int main(int args[])
 		c.Draw(application, Linal::OFFSETX + 200, Linal::OFFSETY + Linal::HEIGHT - 55);
 		/* End of numeric matrix */
 
-		RotateObject(square, 1, 3.5, 4);
+		RotateObject(square, 90/30, 3.5, 4);
 		//RotateObject(square, -90);
 
 		//square.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);

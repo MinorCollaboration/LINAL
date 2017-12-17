@@ -4,13 +4,13 @@
     <ClCompile Include="FWApplication.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ExampleGameObject.cpp" />
-    <ClCompile Include="vector.cpp">
+    <ClCompile Include="Linal\graphical2D\canvas.cpp">
       <Filter>linal\graphical2D</Filter>
     </ClCompile>
-    <ClCompile Include="point.cpp">
+    <ClCompile Include="Linal\graphical2D\vector.cpp">
       <Filter>linal\graphical2D</Filter>
     </ClCompile>
-    <ClCompile Include="canvas.cpp">
+    <ClCompile Include="Linal\graphical2D\point.cpp">
       <Filter>linal\graphical2D</Filter>
     </ClCompile>
   </ItemGroup>
@@ -22,20 +22,26 @@
     <ClInclude Include="drawable.h">
       <Filter>linal\interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="constants.h">
-      <Filter>linal</Filter>
-    </ClInclude>
     <ClInclude Include="matrix.h">
       <Filter>linal</Filter>
     </ClInclude>
-    <ClInclude Include="vector.h">
+    <ClInclude Include="matrix.hpp">
       <Filter>linal\graphical2D</Filter>
     </ClInclude>
-    <ClInclude Include="point.h">
+    <ClInclude Include="Linal\graphical2D\canvas.h">
       <Filter>linal\graphical2D</Filter>
     </ClInclude>
-    <ClInclude Include="canvas.h">
+    <ClInclude Include="Linal\constants.h">
+      <Filter>linal</Filter>
+    </ClInclude>
+    <ClInclude Include="Linal\graphical2D\vector.h">
       <Filter>linal\graphical2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Linal\graphical2D\point.h">
+      <Filter>linal\graphical2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Linal\numeric\matrix.hpp">
+      <Filter>linal\numeric</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

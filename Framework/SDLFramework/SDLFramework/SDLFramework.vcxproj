@@ -87,21 +87,23 @@
     <ClCompile Include="FWApplication.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ExampleGameObject.cpp" />
-    <ClCompile Include="canvas.cpp" />
-    <ClCompile Include="point.cpp" />
-    <ClCompile Include="vector.cpp" />
+    <ClCompile Include="Linal\graphical2D\canvas.cpp" />
+    <ClCompile Include="Linal\graphical2D\point.cpp" />
+    <ClCompile Include="Linal\graphical2D\vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Config.h" />
-    <ClInclude Include="constants.h" />
+    <ClInclude Include="Linal\constants.h" />
     <ClInclude Include="drawable.h" />
     <ClInclude Include="FWApplication.h" />
     <ClInclude Include="ExampleGameObject.h" />
     <ClInclude Include="IGameObject.h" />
+    <ClInclude Include="Linal\numeric\matrix.hpp" />
     <ClInclude Include="matrix.h" />
-    <ClInclude Include="canvas.h" />
-    <ClInclude Include="point.h" />
-    <ClInclude Include="vector.h" />
+    <ClInclude Include="Linal\graphical2D\canvas.h" />
+    <ClInclude Include="matrix.hpp" />
+    <ClInclude Include="Linal\graphical2D\point.h" />
+    <ClInclude Include="Linal\graphical2D\vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
