@@ -2,8 +2,9 @@
 #define SDLFRAMEWORK_LINAL_GRAPHICAL2D_CANVAS
 
 #include "../../FWApplication.h"
-#include "point.h"
-#include "vector.h"
+#include "./../graphical3D/point.h"
+#include "./point.h"
+#include "./vector.h"
 
 namespace Linal
 {
@@ -20,8 +21,8 @@ namespace Linal
 
 			void Draw(FWApplication*& application);
 
-			std::vector<Vector> vectors;
-			std::vector<Point> points;
+			std::vector<Linal::G2D::Vector> vectors;
+			std::vector<Linal::G2D::Point> points;
 		private:
 		};
 	}

@@ -1,9 +1,9 @@
-#ifndef SDLFRAMEWORK_LINAL_GRAPHICAL3D_POINT
-#define SDLFRAMEWORK_LINAL_GRAPHICAL3D_POINT
+#ifndef SDLFRAMEWORK_LINAL_GRAPHICALTHREED_POINT
+#define SDLFRAMEWORK_LINAL_GRAPHICALTHREED_POINT
 
 #include "../../FWApplication.h"
 
-#include "vector.h"
+#include "./vector.h"
 
 struct Color;
 

@@ -6,7 +6,11 @@
 #include "SDL_timer.h"
 #include <time.h>
 
-#include "ExampleGameObject.h"
+//#include "ExampleGameObject.h"
+#include "./Linal/graphical3D/point.h"
+#include "./Linal/graphical3D/point.cpp"
+#include "./Linal/graphical3D/vector.h"
+#include "./Linal/graphical3D/vector.cpp"
 #include "./Linal/constants.h"
 #include "./matrix.h"
 #include "./Linal/graphical2D/canvas.h"
@@ -21,6 +25,11 @@ void RotateObject(Linal::Matrix<Linal::G2D::Point>& matrix, double degree)
 {
 	auto rotate = Linal::Get2DRotateMatrix(degree);
 	matrix = rotate * matrix;
+}
+
+void RotateObject(Linal::Matrix<Linal::G3D::Point>& matrix, double degree)
+{
+
 }
 
 void RotateObject(Linal::Matrix<Linal::G2D::Point>& matrix, double degree, double originX, double originY)
@@ -60,7 +69,7 @@ int main(int args[])
 	 ******************************************/
 
 	// With Ints/doubles
-	/* */
+	/* *
 	auto a = Linal::Get2DScaleMatrix(1.2, 1.1);
 	auto b = Linal::Matrix<double>{ 2, 4 };
 
@@ -87,6 +96,26 @@ int main(int args[])
 	square.Set(4, bottomright);
 	square.Set(5, bottomcenter);
 	square.Set(6, bottomleft);
+	/* */
+
+	auto cube = Linal::Matrix<Linal::G3D::Point>{ 8 };
+	auto topleftfront = Linal::G3D::Point(4, 8, 2);
+	auto toprightfront = Linal::G3D::Point(8, 8, 2);
+	auto bottomleftfront = Linal::G3D::Point(4, 4, 2);
+	auto bottomrightfront = Linal::G3D::Point(8, 4, 2);
+	auto topleftback = Linal::G3D::Point(4, 8, 4);
+	auto toprightback = Linal::G3D::Point(8, 8, 4);
+	auto bottomleftback = Linal::G3D::Point(4, 4, 4);
+	auto bottomrightback = Linal::G3D::Point(8, 4, 4);
+
+	cube.Set(1, topleftfront);
+	cube.Set(2, toprightfront);
+	cube.Set(3, bottomleftfront);
+	cube.Set(4, bottomrightfront);
+	cube.Set(5, topleftback);
+	cube.Set(6, toprightback);
+	cube.Set(7, bottomleftback);
+	cube.Set(8, bottomrightback);
 
 	bool debug = true;
 
@@ -161,11 +190,12 @@ int main(int args[])
 		c.Draw(application, Linal::OFFSETX + 200, Linal::OFFSETY + Linal::HEIGHT - 55);
 		/* End of numeric matrix */
 
-		RotateObject(square, 90/30, 3.5, 4);
+		//RotateObject(square, 90/30, 3.5, 4);
 		//RotateObject(square, -90);
 
 		//square.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
-		square.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
+		//square.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
+		cube.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
 
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));

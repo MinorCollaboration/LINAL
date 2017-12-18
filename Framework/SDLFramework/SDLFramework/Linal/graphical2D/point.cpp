@@ -1,31 +1,29 @@
-#include "point.h"
+#include "./point.h"
 #include "../constants.h"
 
-using namespace Linal::G2D;
-
-Point::Point() : xAxis(1), yAxis(1)
+Linal::G2D::Point::Point() : xAxis(1), yAxis(1)
 {
 }
 
-Point::Point(double xAxis, double yAxis) : xAxis(xAxis), yAxis(yAxis)
+Linal::G2D::Point::Point(double xAxis, double yAxis) : xAxis(xAxis), yAxis(yAxis)
 {
 }
 
-Point::~Point()
+Linal::G2D::Point::~Point()
 {
 }
 
-Vector Point::ToVector()
+Linal::G2D::Vector Linal::G2D::Point::ToVector()
 {
-	return Vector(xAxis, yAxis);
+	return Linal::G2D::Vector(xAxis, yAxis);
 }
 
-void Point::Draw(FWApplication *& application, int offsetX, int offsetY)
+void Linal::G2D::Point::Draw(FWApplication *& application, int offsetX, int offsetY)
 {
 	application->DrawCircle(offsetX + (xAxis * Linal::FIELDWIDTH), offsetY - (yAxis * Linal::FIELDHEIGHT), Linal::POINTSIZE, true);
 }
 
-Vector operator*(const int & lhs, const Point & rhs)
+Linal::G2D::Vector operator*(const int & lhs, const Linal::G2D::Point & rhs)
 {
-	return Vector(lhs * rhs.xAxis, lhs * rhs.yAxis);
+	return Linal::G2D::Vector(lhs * rhs.xAxis, lhs * rhs.yAxis);
 }

@@ -1,31 +1,31 @@
-#include "point.h"
+#include "./point.h"
 #include "../constants.h"
 
-using namespace Linal::G3D;
-
-Point::Point() : xAxis(1), yAxis(1), zAxis(1)
+Linal::G3D::Point::Point() : xAxis(1), yAxis(1), zAxis(1)
 {
 }
 
-Point::Point(double xAxis, double yAxis, double zAxis) : xAxis(xAxis), yAxis(yAxis), zAxis(zAxis)
+Linal::G3D::Point::Point(double xAxis, double yAxis, double zAxis) : xAxis(xAxis), yAxis(yAxis), zAxis(zAxis)
 {
 }
 
-Point::~Point()
+Linal::G3D::Point::~Point()
 {
 }
 
-Vector Point::ToVector()
+Linal::G3D::Vector Linal::G3D::Point::ToVector()
 {
-	return Vector(xAxis, yAxis, zAxis);
+	return Linal::G3D::Vector(xAxis, yAxis, zAxis);
 }
 
-void Point::Draw(FWApplication *& application, int offsetX, int offsetY)
+void Linal::G3D::Point::Draw(FWApplication *& application, int offsetX, int offsetY)
 {
-	application->DrawCircle(offsetX + (xAxis * Linal::FIELDWIDTH), offsetY - (yAxis * Linal::FIELDHEIGHT), Linal::POINTSIZE, true);
+	double persX = xAxis + (sqrt(zAxis) - zAxis);
+	double persY = yAxis + (sqrt(zAxis) - zAxis);
+	application->DrawCircle(offsetX + (persX * Linal::FIELDWIDTH), offsetY - (persY * Linal::FIELDHEIGHT), Linal::POINTSIZE, true);
 }
 
-Vector operator*(const int & lhs, const Point & rhs)
+Linal::G3D::Vector operator*(const int & lhs, const Linal::G3D::Point & rhs)
 {
-	return Vector(lhs * rhs.xAxis, lhs * rhs.yAxis, lhs * rhs.zAxis);
+	return Linal::G3D::Vector(lhs * rhs.xAxis, lhs * rhs.yAxis, lhs * rhs.zAxis);
 }
