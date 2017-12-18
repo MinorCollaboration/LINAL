@@ -12,7 +12,7 @@ using namespace std;
 
 #include "FWApplication.h"
 #include "Linal/constants.h"
-#include "Linal/graphical3D/point.h"
+#include "Linal/graphical3D/3dpoint.h"
 #include "Linal/graphical2D/point.h"
 #include "drawable.h"
 

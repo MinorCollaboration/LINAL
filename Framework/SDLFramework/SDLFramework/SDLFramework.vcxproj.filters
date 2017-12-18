@@ -13,10 +13,10 @@
     <ClCompile Include="Linal\graphical2D\point.cpp">
       <Filter>linal\graphical2D</Filter>
     </ClCompile>
-    <ClCompile Include="Linal\graphical3D\point.cpp">
+    <ClCompile Include="Linal\graphical3D\3dpoint.cpp">
       <Filter>linal\graphical3D</Filter>
     </ClCompile>
-    <ClCompile Include="Linal\graphical3D\vector.cpp">
+    <ClCompile Include="Linal\graphical3D\3dvector.cpp">
       <Filter>linal\graphical3D</Filter>
     </ClCompile>
   </ItemGroup>
@@ -43,10 +43,10 @@
     <ClInclude Include="Linal\graphical2D\point.h">
       <Filter>linal\graphical2D</Filter>
     </ClInclude>
-    <ClInclude Include="Linal\graphical3D\point.h">
+    <ClInclude Include="Linal\graphical3D\3dpoint.h">
       <Filter>linal\graphical3D</Filter>
     </ClInclude>
-    <ClInclude Include="Linal\graphical3D\vector.h">
+    <ClInclude Include="Linal\graphical3D\3dvector.h">
       <Filter>linal\graphical3D</Filter>
     </ClInclude>
   </ItemGroup>

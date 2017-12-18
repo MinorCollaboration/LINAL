@@ -1,4 +1,4 @@
-#include "./vector.h"
+#include "./3dvector.h"
 #include "../constants.h"
 
 Linal::G3D::Vector::Vector() : xAxis(0), yAxis(0), startingX(0), startingY(0)
@@ -74,8 +74,17 @@ void Linal::G3D::Vector::Draw(FWApplication *& application, int offsetX, int off
 {
 	offsetX += ((startingX + (sqrt(startingZ) - startingZ)) * Linal::FIELDWIDTH);
 	offsetY -= ((startingY + (sqrt(startingZ) - startingZ)) * Linal::FIELDHEIGHT);
+
+	if (zAxis < 0) zAxis = +zAxis;
+
+	double xPerspective = (xAxis + (sqrt(zAxis) - zAxis));
+	double yPerspective = (yAxis + (sqrt(zAxis) - zAxis));
+
+	if (isnan(xPerspective)) xPerspective = 0;
+	if (isnan(yPerspective)) yPerspective = 0;
+
 	application->SetColor(Color(255, 0, 0, 255));
-	application->DrawLine(offsetX, offsetY, offsetX + ((xAxis + (sqrt(zAxis) - zAxis)) * Linal::FIELDWIDTH), offsetY - ((yAxis + (sqrt(zAxis) - zAxis)) * Linal::FIELDHEIGHT));
+	application->DrawLine(offsetX, offsetY, offsetX + (xPerspective * Linal::FIELDWIDTH), offsetY - (yPerspective * Linal::FIELDHEIGHT));
 }
 
 Color Linal::G3D::Vector::GetColor()

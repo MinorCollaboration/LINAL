@@ -2,7 +2,7 @@
 #define SDLFRAMEWORK_LINAL_GRAPHICAL2D_CANVAS
 
 #include "../../FWApplication.h"
-#include "./../graphical3D/point.h"
+#include "./../graphical3D/3dpoint.h"
 #include "./point.h"
 #include "./vector.h"
 

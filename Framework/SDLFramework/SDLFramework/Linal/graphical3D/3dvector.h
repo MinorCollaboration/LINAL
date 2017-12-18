@@ -3,7 +3,7 @@
 
 #include "../../FWApplication.h"
 
-#include "point.h"
+#include "3dpoint.h"
 
 struct Color;
 

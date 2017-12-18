@@ -1,4 +1,4 @@
-#include "./point.h"
+#include "./3dpoint.h"
 #include "../constants.h"
 
 Linal::G3D::Point::Point() : xAxis(1), yAxis(1), zAxis(1)

@@ -7,10 +7,8 @@
 #include <time.h>
 
 //#include "ExampleGameObject.h"
-#include "./Linal/graphical3D/point.h"
-#include "./Linal/graphical3D/point.cpp"
-#include "./Linal/graphical3D/vector.h"
-#include "./Linal/graphical3D/vector.cpp"
+#include "./Linal/graphical3D/3dpoint.h"
+
 #include "./Linal/constants.h"
 #include "./matrix.h"
 #include "./Linal/graphical2D/canvas.h"
@@ -89,6 +87,7 @@ int main(int args[])
 	auto bottomleft = Linal::G2D::Point(2, 2);
 	auto bottomcenter = Linal::G2D::Point(4, 2);
 	auto bottomright = Linal::G2D::Point(6, 2);
+
 
 	square.Set(1, topleft);
 	square.Set(2, topcenter);
