@@ -10,17 +10,17 @@ c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\graphical2d\canvas.cpp(40): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   ExampleGameObject.cpp
   Main.cpp
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\graphical3d\point.cpp(25): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\graphical3d\point.cpp(23): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\graphical3d\vector.cpp(75): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\graphical3d\vector.cpp(76): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\graphical3d\vector.cpp(77): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\graphical3d\vector.cpp(78): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\main.cpp(182): warning C4065: switch statement contains 'default' but no 'case' labels
   vector.cpp
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\graphical3d\vector.cpp(75): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\graphical3d\vector.cpp(76): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\graphical3d\vector.cpp(77): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\graphical3d\vector.cpp(78): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   point.cpp
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\graphical3d\point.cpp(25): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\graphical3d\point.cpp(23): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   FWApplication.cpp
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\fwapplication.cpp(257): warning C4838: conversion from 'uint32_t' to 'Uint8' requires a narrowing conversion
   Generating Code...

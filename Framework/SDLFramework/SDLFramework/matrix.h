@@ -508,15 +508,15 @@ namespace Linal
 				point.Draw(application, offsetX, offsetY);
 			}
 
-			/*for (int leftIndex = 1; leftIndex <= Width; leftIndex++)
+			for (int leftIndex = 1; leftIndex <= Width; leftIndex++)
 			{
 				int rightIndex = (leftIndex == Width) ? 1 : leftIndex + 1;
 				auto leftPoint = Get(leftIndex);
 				auto rightPoint = Get(rightIndex);
 
-				G2D::Vector v = G2D::Vector(rightPoint.xAxis - leftPoint.xAxis, rightPoint.yAxis - leftPoint.yAxis, leftPoint.xAxis, leftPoint.yAxis);
+				G3D::Vector v = G3D::Vector(rightPoint.xAxis - leftPoint.xAxis, rightPoint.yAxis - leftPoint.yAxis, rightPoint.zAxis - leftPoint.zAxis, leftPoint.xAxis, leftPoint.yAxis, leftPoint.zAxis);
 				v.Draw(application, offsetX, offsetY);
-			}*/
+			}
 		}
 		Matrix<Linal::G3D::Point> AddHelpLine() {}
 		Matrix<Linal::G3D::Point> RemoveHelpLine() {}

@@ -11,7 +11,7 @@ Linal::G3D::Vector::Vector(double xAxis, double yAxis, double zAxis) : xAxis(xAx
 	myColor = Color(rand() * 255, rand() * 255, rand() * 255, 255);
 }
 
-Linal::G3D::Vector::Vector(double xAxis, double yAxis, double zAxis, double xOrigin, double yOrigin, double zOrigin) : xAxis(xAxis), yAxis(yAxis), startingX(xOrigin), startingY(yOrigin), startingZ(zOrigin)
+Linal::G3D::Vector::Vector(double xAxis, double yAxis, double zAxis, double xOrigin, double yOrigin, double zOrigin) : xAxis(xAxis), yAxis(yAxis), zAxis(zAxis), startingX(xOrigin), startingY(yOrigin), startingZ(zOrigin)
 {
 	myColor = Color(rand() * 255, rand() * 255, rand() * 255, 255);
 }
@@ -72,9 +72,10 @@ Linal::G3D::Point Linal::G3D::Vector::ToPoint()
 
 void Linal::G3D::Vector::Draw(FWApplication *& application, int offsetX, int offsetY)
 {
-	offsetX += (startingX * Linal::FIELDWIDTH);
-	offsetY -= (startingY * Linal::FIELDHEIGHT);
-	application->DrawLine(offsetX, offsetY, offsetX + (xAxis * Linal::FIELDWIDTH), offsetY - (yAxis * Linal::FIELDHEIGHT));
+	offsetX += ((startingX + (sqrt(startingZ) - startingZ)) * Linal::FIELDWIDTH);
+	offsetY -= ((startingY + (sqrt(startingZ) - startingZ)) * Linal::FIELDHEIGHT);
+	application->SetColor(Color(255, 0, 0, 255));
+	application->DrawLine(offsetX, offsetY, offsetX + ((xAxis + (sqrt(zAxis) - zAxis)) * Linal::FIELDWIDTH), offsetY - ((yAxis + (sqrt(zAxis) - zAxis)) * Linal::FIELDHEIGHT));
 }
 
 Color Linal::G3D::Vector::GetColor()

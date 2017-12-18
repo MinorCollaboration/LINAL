@@ -110,12 +110,12 @@ int main(int args[])
 
 	cube.Set(1, topleftfront);
 	cube.Set(2, toprightfront);
-	cube.Set(3, bottomleftfront);
-	cube.Set(4, bottomrightfront);
-	cube.Set(5, topleftback);
-	cube.Set(6, toprightback);
-	cube.Set(7, bottomleftback);
-	cube.Set(8, bottomrightback);
+	cube.Set(3, bottomrightfront);
+	cube.Set(4, bottomleftfront);
+	cube.Set(5, bottomleftback);
+	cube.Set(6, bottomrightback);
+	cube.Set(7, toprightback);
+	cube.Set(8, topleftback);
 
 	bool debug = true;
 
