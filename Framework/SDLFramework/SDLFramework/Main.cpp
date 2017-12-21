@@ -25,9 +25,43 @@ void RotateObject(Linal::Matrix<Linal::G2D::Point>& matrix, double degree)
 	matrix = rotate * matrix;
 }
 
-void RotateObject(Linal::Matrix<Linal::G3D::Point>& matrix, double degree)
-{
+/*
 
+*/
+void RotateObjectOnXAxis(Linal::Matrix<Linal::G3D::Point>& matrix, double degree, double originX, double originY, double originZ)
+{
+	auto translate = Linal::Get3DTranslateMatrix(-originX, -originY, -originZ);
+	auto revertTranslate = Linal::Get3DTranslateMatrix(originX, originY, originZ);
+	auto rotate = Linal::Get3DRotateXAxisMatrix(degree);
+
+	auto rotrans = rotate * translate;
+	auto rotated = rotrans * matrix;
+	matrix = revertTranslate * rotated;
+}
+
+/*
+*/
+void RotateObjectOnYAxis(Linal::Matrix<Linal::G3D::Point>& matrix, double degree, double originX, double originY, double originZ)
+{
+	auto translate = Linal::Get3DTranslateMatrix(-originX, -originY, -originZ);
+	auto revertTranslate = Linal::Get3DTranslateMatrix(originX, originY, originZ);
+	auto rotate = Linal::Get3DRotateYAxisMatrix(degree);
+
+	auto rotated = (rotate * translate) * matrix;
+	matrix = revertTranslate * rotated;
+}
+
+/*
+
+*/
+void RotateObjectOnZAxis(Linal::Matrix<Linal::G3D::Point>& matrix, double degree, double originX, double originY, double originZ)
+{
+	auto translate = Linal::Get3DTranslateMatrix(-originX, -originY, -originZ);
+	auto revertTranslate = Linal::Get3DTranslateMatrix(originX, originY, originZ);
+	auto rotate = Linal::Get3DRotateXAxisMatrix(degree);
+
+	auto rotated = (rotate * translate) * matrix;
+	matrix = revertTranslate * rotated;
 }
 
 void RotateObject(Linal::Matrix<Linal::G2D::Point>& matrix, double degree, double originX, double originY)
@@ -39,6 +73,7 @@ void RotateObject(Linal::Matrix<Linal::G2D::Point>& matrix, double degree, doubl
 	auto rotated = (rotate * translate) * matrix;
 	matrix = revertTranslate * rotated;
 }
+
 
 int main(int args[])
 {
@@ -60,7 +95,7 @@ int main(int args[])
 	application->SetTargetFPS(60);
 	application->SetColor(Color(255, 10, 40, 255));
 
-	auto canvas{ std::unique_ptr<Linal::G2D::Canvas>{ new Linal::G2D::Canvas() } };
+	auto canvasFront{ std::unique_ptr<Linal::G2D::Canvas>{ new Linal::G2D::Canvas() } };
 
 	/******************************************
 	 *             Scaling Matrix             *
@@ -161,6 +196,8 @@ int main(int args[])
 	 *         End of tultiple Matrix         *
 	 ******************************************/
 
+	//RotateObjectOnZAxis(cube, 90, 4, 4, 2);
+
 	while (application->IsRunning())
 	{
 		application->StartTick();
@@ -182,7 +219,7 @@ int main(int args[])
 			}
 		}
 
-		canvas->Draw(application);
+		canvasFront->Draw(application);
 		/*     numeric matrix    *
 		a.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT - 55);
 		b.Draw(application, Linal::OFFSETX + 75, Linal::OFFSETY + Linal::HEIGHT - 55);
@@ -194,6 +231,8 @@ int main(int args[])
 
 		//square.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
 		//square.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
+
+		RotateObjectOnYAxis(cube, 90 / 60, 6, 6, 3);
 		cube.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
 
 		// For the background

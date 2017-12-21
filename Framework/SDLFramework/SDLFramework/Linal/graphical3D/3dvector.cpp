@@ -70,21 +70,15 @@ Linal::G3D::Point Linal::G3D::Vector::ToPoint()
 	return Point(xAxis, yAxis, zAxis);
 }
 
-void Linal::G3D::Vector::Draw(FWApplication *& application, int offsetX, int offsetY)
+void Linal::G3D::Vector::Draw(FWApplication *& application, double offsetX, double offsetY)
 {
-	offsetX += ((startingX + (sqrt(startingZ) - startingZ)) * Linal::FIELDWIDTH);
-	offsetY -= ((startingY + (sqrt(startingZ) - startingZ)) * Linal::FIELDHEIGHT);
+	offsetX += startingX * Linal::FIELDWIDTH;
+	offsetY -= startingX * Linal::FIELDHEIGHT;
 
-	if (zAxis < 0) zAxis = +zAxis;
+	double finalX = xAxis * Linal::FIELDWIDTH;
+	double finalY = yAxis * Linal::FIELDWIDTH;
 
-	double xPerspective = (xAxis + (sqrt(zAxis) - zAxis));
-	double yPerspective = (yAxis + (sqrt(zAxis) - zAxis));
-
-	if (isnan(xPerspective)) xPerspective = 0;
-	if (isnan(yPerspective)) yPerspective = 0;
-
-	application->SetColor(Color(255, 0, 0, 255));
-	application->DrawLine(offsetX, offsetY, offsetX + (xPerspective * Linal::FIELDWIDTH), offsetY - (yPerspective * Linal::FIELDHEIGHT));
+	application->DrawLine(offsetX, offsetY, offsetX + finalX, offsetY - finalY);
 }
 
 Color Linal::G3D::Vector::GetColor()

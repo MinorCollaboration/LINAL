@@ -198,7 +198,7 @@ namespace Linal
 
 		if (lhs.GetWidth() < rhs.GetHeight())
 		{
-			AddHelpLine(lhs);
+			lhs = AddHelpLine(lhs);
 			lhsHelpLines++;
 		}
 		else if (lhs.GetWidth() > rhs.GetHeight())
@@ -389,6 +389,12 @@ namespace Linal
 		Matrix(int cols) : Width(cols), Height(2) { 
 			matrix = std::vector<double>(Width * Height);
 		}
+		Matrix(const Matrix& toCopy)
+		{
+			Width = toCopy.Width;
+			Height = toCopy.Height;
+			matrix = toCopy.matrix;
+		}
 
 		Linal::G2D::Point Get(int index) {
 			return Linal::G2D::Point(matrix.at(ConvertToIndex(2, index)), matrix.at(ConvertToIndex(1, index)));
@@ -477,6 +483,12 @@ namespace Linal
 		Matrix(int cols) : Width(cols), Height(3) {
 			matrix = std::vector<double>(Width * Height);
 		}
+		Matrix(const Matrix& toCopy)
+		{
+			Width = toCopy.Width;
+			Height = toCopy.Height;
+			matrix = toCopy.matrix;
+		}
 
 		Linal::G3D::Point Get(int index) {
 			return Linal::G3D::Point(matrix.at(ConvertToIndex(1, index)), matrix.at(ConvertToIndex(2, index)), matrix.at(ConvertToIndex(3, index)));
@@ -505,21 +517,50 @@ namespace Linal
 			for (int index = 1; index <= Width; index++)
 			{
 				auto point = Get(index);
+
 				point.Draw(application, offsetX, offsetY);
 			}
 
-			for (int leftIndex = 1; leftIndex <= Width; leftIndex++)
+			/*for (int leftIndex = 1; leftIndex <= Width; leftIndex++)
 			{
 				int rightIndex = (leftIndex == Width) ? 1 : leftIndex + 1;
 				auto leftPoint = Get(leftIndex);
 				auto rightPoint = Get(rightIndex);
 
-				G3D::Vector v = G3D::Vector(rightPoint.xAxis - leftPoint.xAxis, rightPoint.yAxis - leftPoint.yAxis, rightPoint.zAxis - leftPoint.zAxis, leftPoint.xAxis, leftPoint.yAxis, leftPoint.zAxis);
+				G3D::Vector v = G3D::Vector(
+					rightPoint.xAxis - leftPoint.xAxis,
+					rightPoint.yAxis - leftPoint.yAxis,
+					rightPoint.zAxis - leftPoint.zAxis,
+					leftPoint.xAxis,
+					leftPoint.yAxis,
+					leftPoint.zAxis
+				);
+
 				v.Draw(application, offsetX, offsetY);
-			}
+			}*/
 		}
-		Matrix<Linal::G3D::Point> AddHelpLine() {}
-		Matrix<Linal::G3D::Point> RemoveHelpLine() {}
+		Matrix<Linal::G3D::Point> AddHelpLine() {
+			Matrix<G3D::Point> output = Matrix<G3D::Point>{ GetWidth() };
+			output.matrix = std::vector<double>(GetWidth() * (GetHeight() + 1));
+			output.Height++;
+
+			for (int col = 1; col <= GetWidth(); col++) {
+				output.Set(col, Get(col));
+				output.matrix.at(ConvertToIndex(GetHeight() + 1, col)) = 1;
+			}
+
+			return output;
+		}
+		Matrix<Linal::G3D::Point> RemoveHelpLine() {
+			Matrix<G3D::Point> output = Matrix<G3D::Point>{ GetWidth() };
+			output.matrix = std::vector<double>(GetWidth() * 3);
+			output.Height = 3;
+
+			for (int col = 1; col <= GetWidth(); col++)
+				output.Set(col, Get(col));
+
+			return output;
+		}
 
 		int GetWidth() { return Width; }
 		int GetWidth() const { return Width; }
@@ -590,15 +631,28 @@ namespace Linal
 		return matrix;
 	}
 
+	static Linal::Matrix<double> Get3DTranslateMatrix(double x, double y, double z)
+	{
+		auto matrix = Linal::Matrix<double>(4, 4);
+
+		matrix.Set(1, 1, 1).Set(1, 2, 0).Set(1, 3, 0).Set(1, 4, x);
+		matrix.Set(2, 1, 0).Set(2, 2, 1).Set(2, 3, 0).Set(2, 4, y);
+		matrix.Set(3, 1, 0).Set(3, 2, 0).Set(3, 3, 1).Set(3, 4, z);
+		matrix.Set(4, 1, 0).Set(4, 2, 0).Set(4, 3, 0).Set(4, 4, 1);
+
+		return matrix;
+	}
+
 	static Linal::Matrix<double> Get3DRotateXAxisMatrix(double degree)
 	{
 		double piRad = (degree * M_PI) / 180;
 
-		auto matrix = Linal::Matrix<double>(3, 3);
+		auto matrix = Linal::Matrix<double>(4, 4);
 
-		matrix.Set(1, 1, 1).Set(1, 2, 0).Set(1, 3, 0);
-		matrix.Set(2, 1, 0).Set(2, 2, cos(piRad)).Set(2, 3, -sin(piRad));
-		matrix.Set(3, 1, 0).Set(3, 2, sin(piRad)).Set(3, 3, cos(piRad));
+		matrix.Set(1, 1, 1).Set(1, 2, 0).Set(1, 3, 0).Set(1, 4, 0);
+		matrix.Set(2, 1, 0).Set(2, 2, cos(piRad)).Set(2, 3, -sin(piRad)).Set(2, 4, 0);
+		matrix.Set(3, 1, 0).Set(3, 2, sin(piRad)).Set(3, 3, cos(piRad)).Set(3, 4, 0);
+		matrix.Set(4, 1, 0).Set(4, 2, 0).Set(4, 3, 0).Set(4, 4, 1);
 
 		return matrix;
 	}
@@ -606,11 +660,12 @@ namespace Linal
 	{
 		double piRad = (degree * M_PI) / 180;
 
-		auto matrix = Linal::Matrix<double>(3, 3);
+		auto matrix = Linal::Matrix<double>(4, 4);
 
-		matrix.Set(1, 1, cos(piRad)).Set(1, 2, 0).Set(1, 3, -sin(piRad));
-		matrix.Set(2, 1, 0).Set(2, 2, 1).Set(2, 3, 0);
-		matrix.Set(3, 1, sin(piRad)).Set(3, 2, 0).Set(3, 3, cos(piRad));
+		matrix.Set(1, 1, cos(piRad)).Set(1, 2, 0).Set(1, 3, -sin(piRad)).Set(1, 4, 0);
+		matrix.Set(2, 1, 0).Set(2, 2, 1).Set(2, 3, 0).Set(2, 4, 0);
+		matrix.Set(3, 1, sin(piRad)).Set(3, 2, 0).Set(3, 3, cos(piRad)).Set(3, 4, 0);
+		matrix.Set(4, 1, 0).Set(4, 2, 0).Set(4, 3, 0).Set(4, 4, 1);
 
 		return matrix;
 	}
@@ -618,11 +673,12 @@ namespace Linal
 	{
 		double piRad = (degree * M_PI) / 180;
 
-		auto matrix = Linal::Matrix<double>(3, 3);
+		auto matrix = Linal::Matrix<double>(4, 4);
 
-		matrix.Set(1, 1, cos(piRad)).Set(1, 2, -sin(piRad)).Set(1, 3, 0);
-		matrix.Set(2, 1, sin(piRad)).Set(2, 2, cos(piRad)).Set(2, 3, 0);
-		matrix.Set(3, 1, 0).Set(3, 2, 0).Set(3, 3, 1);
+		matrix.Set(1, 1, cos(piRad)).Set(1, 2, -sin(piRad)).Set(1, 3, 0).Set(1, 4, 0);
+		matrix.Set(2, 1, sin(piRad)).Set(2, 2, cos(piRad)).Set(2, 3, 0).Set(2, 4, 0);
+		matrix.Set(3, 1, 0).Set(3, 2, 0).Set(3, 3, 1).Set(3, 4, 0);
+		matrix.Set(4, 1, 0).Set(4, 2, 0).Set(4, 3, 0).Set(4, 4, 1);
 
 		return matrix;
 	}

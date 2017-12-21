@@ -1,8 +1,3 @@
-﻿  canvas.cpp
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\graphical2d\canvas.cpp(40): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  Main.cpp
-  3dvector.cpp
-  3dpoint.cpp
+﻿  3dpoint.cpp
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\graphical3d\3dpoint.cpp(28): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   SDLFramework.vcxproj -> C:\Users\mark_\Documents\Herkansingen\LINAL\Framework\SDLFramework\Debug\SDLFramework.exe

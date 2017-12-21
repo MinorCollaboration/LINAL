@@ -20,7 +20,12 @@ Linal::G3D::Vector Linal::G3D::Point::ToVector()
 
 void Linal::G3D::Point::Draw(FWApplication *& application, int offsetX, int offsetY)
 {
-	application->DrawCircle(offsetX + ((xAxis + (sqrt(zAxis) - zAxis)) * Linal::FIELDWIDTH), offsetY - ((yAxis + (sqrt(zAxis) - zAxis)) * Linal::FIELDHEIGHT), Linal::POINTSIZE, true);
+	double sqrtZ = (zAxis < 0) ? -sqrt(+zAxis) * 2 : sqrt(zAxis) * 2;
+
+	double finalXAxis = xAxis + (sqrtZ - zAxis);
+	double finalYAxis = yAxis + (sqrtZ - zAxis);
+
+	application->DrawCircle(offsetX + (finalXAxis * Linal::FIELDWIDTH), offsetY - (finalYAxis * Linal::FIELDHEIGHT), Linal::POINTSIZE, true);
 }
 
 Linal::G3D::Vector operator*(const int & lhs, const Linal::G3D::Point & rhs)

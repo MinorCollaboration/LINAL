@@ -42,7 +42,7 @@ namespace Linal
 
 			Point ToPoint();
 
-			void Draw(FWApplication*& application, int offsetX, int offsetY);
+			void Draw(FWApplication*& application, double offsetX, double offsetY);
 			Color GetColor();
 		private:
 			Color myColor;
