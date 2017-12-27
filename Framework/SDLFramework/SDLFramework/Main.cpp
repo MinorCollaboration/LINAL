@@ -152,15 +152,15 @@ int main(int args[])
 	cube.Set(7, toprightback);
 	cube.Set(8, topleftback);
 
-	auto camera1 = Linal::Camera(0,		0,	 500, 290);
-	auto camera2 = Linal::Camera(500,	0,	 500, 290, Linal::Get3DRotateXAxisMatrix(-180));
-	auto camera3 = Linal::Camera(1000,	0,	 500, 290);
+	auto camera1 = Linal::Camera(0,		0,	 500, 290, Linal::Get3DRotateYAxisMatrix(135));
+	auto camera2 = Linal::Camera(500,	0,	 500, 290, Linal::Get3DRotateYAxisMatrix(-180));
+	auto camera3 = Linal::Camera(1000,	0,	 500, 290, Linal::Get3DRotateYAxisMatrix(-135));
 	auto camera4 = Linal::Camera(0,		290, 500, 290, Linal::Get3DRotateYAxisMatrix(-90));
 	auto camera5 = Linal::Camera(500,	290, 500, 290, Linal::Get3DRotateXAxisMatrix(-90));
 	auto camera6 = Linal::Camera(1000,	290, 500, 290, Linal::Get3DRotateYAxisMatrix(90));
-	auto camera7 = Linal::Camera(0,		580, 500, 290);
+	auto camera7 = Linal::Camera(0,		580, 500, 290, Linal::Get3DRotateYAxisMatrix(-45));
 	auto camera8 = Linal::Camera(500,	580, 500, 290);
-	auto camera9 = Linal::Camera(1000,	580, 500, 290);
+	auto camera9 = Linal::Camera(1000,	580, 500, 290, Linal::Get3DRotateYAxisMatrix(-45));
 
 	bool debug = true;
 
@@ -244,15 +244,15 @@ int main(int args[])
 
 		RotateObjectOnYAxis(cube, 90 / 30, 6, 6, 4);
 
-		//camera1.Draw(application, cube);
+		camera1.Draw(application, cube);
 		camera2.Draw(application, cube);
-		//camera3.Draw(application, cube);
+		camera3.Draw(application, cube);
 		camera4.Draw(application, cube);
 		camera5.Draw(application, cube);
 		camera6.Draw(application, cube);
-		//camera7.Draw(application, cube);
+		camera7.Draw(application, cube);
 		camera8.Draw(application, cube);
-		//camera9.Draw(application, cube);
+		camera9.Draw(application, cube);
 
 		/*     numeric matrix    *
 		a.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT - 55);

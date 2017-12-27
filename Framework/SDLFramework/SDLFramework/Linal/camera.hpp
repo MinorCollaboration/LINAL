@@ -55,11 +55,11 @@ namespace Linal
 
 	void Camera::Draw(FWApplication*& application, Linal::Matrix<Linal::G3D::Point> m)
 	{
-		double lowX{ m.GetMinX() }, lowY{ m.GetMinY() }, lowZ{ m.GetMinZ() };
-		auto translate = Linal::Get3DTranslateMatrix(-lowX, -lowY, -lowZ ) * m;
+		double midX{ (( m.GetMaxX() - m.GetMinX() ) / 2) + m.GetMinX()  }, midY{ ((m.GetMaxY() - m.GetMinY()) / 2) + m.GetMinY() }, midZ{ ((m.GetMaxZ() - m.GetMinZ()) / 2) + m.GetMinZ() };
+		auto translate = Linal::Get3DTranslateMatrix(-midX, -midY, -midZ ) * m;
  
 		auto changedView = rotationMatrix * translate;
-		auto translateBack = Linal::Get3DTranslateMatrix(+lowX, +lowY, +lowZ) * changedView;
+		auto translateBack = Linal::Get3DTranslateMatrix(+midX, +midY, +midZ) * changedView;
 
 		auto movedView = Linal::Get3DTranslateMatrix(17, 10, 0) * changedView;
 		for (int index = 1; index <= m.GetWidth(); index++)
