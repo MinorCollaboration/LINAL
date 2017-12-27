@@ -9,8 +9,9 @@
 //#include "ExampleGameObject.h"
 #include "./Linal/graphical3D/3dpoint.h"
 
+#include "./Linal/camera.hpp"
 #include "./Linal/constants.h"
-#include "./matrix.h"
+#include "./Linal/matrix.h"
 #include "./Linal/graphical2D/canvas.h"
 
 void ScaleObject(Linal::Matrix<Linal::G2D::Point>& matrix, double scaleX, double scaleY)
@@ -58,7 +59,7 @@ void RotateObjectOnZAxis(Linal::Matrix<Linal::G3D::Point>& matrix, double degree
 {
 	auto translate = Linal::Get3DTranslateMatrix(-originX, -originY, -originZ);
 	auto revertTranslate = Linal::Get3DTranslateMatrix(originX, originY, originZ);
-	auto rotate = Linal::Get3DRotateXAxisMatrix(degree);
+	auto rotate = Linal::Get3DRotateZAxisMatrix(degree);
 
 	auto rotated = (rotate * translate) * matrix;
 	matrix = revertTranslate * rotated;
@@ -78,7 +79,7 @@ void RotateObject(Linal::Matrix<Linal::G2D::Point>& matrix, double degree, doubl
 int main(int args[])
 {
 	//auto window = Window::CreateSDLWindow();
-	auto application = new FWApplication();
+	auto application = new FWApplication(0, 25, 1920, 870);
 	if (!application->GetWindow())
 	{
 		LOG("Couldn't create window...");
@@ -137,10 +138,10 @@ int main(int args[])
 	auto toprightfront = Linal::G3D::Point(8, 8, 2);
 	auto bottomleftfront = Linal::G3D::Point(4, 4, 2);
 	auto bottomrightfront = Linal::G3D::Point(8, 4, 2);
-	auto topleftback = Linal::G3D::Point(4, 8, 4);
-	auto toprightback = Linal::G3D::Point(8, 8, 4);
-	auto bottomleftback = Linal::G3D::Point(4, 4, 4);
-	auto bottomrightback = Linal::G3D::Point(8, 4, 4);
+	auto topleftback = Linal::G3D::Point(4, 8, 6);
+	auto toprightback = Linal::G3D::Point(8, 8, 6);
+	auto bottomleftback = Linal::G3D::Point(4, 4, 6);
+	auto bottomrightback = Linal::G3D::Point(8, 4, 6);
 
 	cube.Set(1, topleftfront);
 	cube.Set(2, toprightfront);
@@ -150,6 +151,16 @@ int main(int args[])
 	cube.Set(6, bottomrightback);
 	cube.Set(7, toprightback);
 	cube.Set(8, topleftback);
+
+	auto camera1 = Linal::Camera(0,		0,	 500, 290);
+	auto camera2 = Linal::Camera(500,	0,	 500, 290, Linal::Get3DRotateXAxisMatrix(-180));
+	auto camera3 = Linal::Camera(1000,	0,	 500, 290);
+	auto camera4 = Linal::Camera(0,		290, 500, 290, Linal::Get3DRotateYAxisMatrix(-90));
+	auto camera5 = Linal::Camera(500,	290, 500, 290, Linal::Get3DRotateXAxisMatrix(-90));
+	auto camera6 = Linal::Camera(1000,	290, 500, 290, Linal::Get3DRotateYAxisMatrix(90));
+	auto camera7 = Linal::Camera(0,		580, 500, 290);
+	auto camera8 = Linal::Camera(500,	580, 500, 290);
+	auto camera9 = Linal::Camera(1000,	580, 500, 290);
 
 	bool debug = true;
 
@@ -220,6 +231,29 @@ int main(int args[])
 		}
 
 		canvasFront->Draw(application);
+
+		camera1.Draw(application, "Inactive");
+		camera2.Draw(application, "BackView");
+		camera3.Draw(application, "Inactive");
+		camera4.Draw(application, "LeftView");
+		camera5.Draw(application, "TopView");
+		camera6.Draw(application, "RightView");
+		camera7.Draw(application, "Inactive");
+		camera8.Draw(application, "FrontView");
+		camera9.Draw(application, "Inactive");
+
+		RotateObjectOnYAxis(cube, 90 / 30, 6, 6, 4);
+
+		//camera1.Draw(application, cube);
+		camera2.Draw(application, cube);
+		//camera3.Draw(application, cube);
+		camera4.Draw(application, cube);
+		camera5.Draw(application, cube);
+		camera6.Draw(application, cube);
+		//camera7.Draw(application, cube);
+		camera8.Draw(application, cube);
+		//camera9.Draw(application, cube);
+
 		/*     numeric matrix    *
 		a.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT - 55);
 		b.Draw(application, Linal::OFFSETX + 75, Linal::OFFSETY + Linal::HEIGHT - 55);
@@ -232,8 +266,8 @@ int main(int args[])
 		//square.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
 		//square.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
 
-		RotateObjectOnYAxis(cube, 90 / 60, 6, 6, 3);
-		cube.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
+		//
+		//cube.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
 
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));

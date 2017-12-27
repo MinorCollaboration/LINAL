@@ -94,6 +94,7 @@
     <ClCompile Include="Linal\graphical2D\vector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Linal\camera.hpp" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Linal\constants.h" />
     <ClInclude Include="drawable.h" />
@@ -102,7 +103,7 @@
     <ClInclude Include="IGameObject.h" />
     <ClInclude Include="Linal\graphical3D\3dpoint.h" />
     <ClInclude Include="Linal\graphical3D\3dvector.h" />
-    <ClInclude Include="matrix.h" />
+    <ClInclude Include="Linal\matrix.h" />
     <ClInclude Include="Linal\graphical2D\canvas.h" />
     <ClInclude Include="Linal\graphical2D\point.h" />
     <ClInclude Include="Linal\graphical2D\vector.h" />

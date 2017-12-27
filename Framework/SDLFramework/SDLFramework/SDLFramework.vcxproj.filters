@@ -28,9 +28,6 @@
     <ClInclude Include="drawable.h">
       <Filter>linal\interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="matrix.h">
-      <Filter>linal</Filter>
-    </ClInclude>
     <ClInclude Include="Linal\graphical2D\canvas.h">
       <Filter>linal\graphical2D</Filter>
     </ClInclude>
@@ -48,6 +45,12 @@
     </ClInclude>
     <ClInclude Include="Linal\graphical3D\3dvector.h">
       <Filter>linal\graphical3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Linal\matrix.h">
+      <Filter>linal</Filter>
+    </ClInclude>
+    <ClInclude Include="Linal\camera.hpp">
+      <Filter>linal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
