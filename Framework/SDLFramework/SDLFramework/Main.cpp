@@ -232,15 +232,15 @@ int main(int args[])
 
 		canvasFront->Draw(application);
 
-		camera1.Draw(application, "Inactive");
+		camera1.Draw(application, "LeftBackView");
 		camera2.Draw(application, "BackView");
-		camera3.Draw(application, "Inactive");
+		camera3.Draw(application, "RightBackView");
 		camera4.Draw(application, "LeftView");
 		camera5.Draw(application, "TopView");
 		camera6.Draw(application, "RightView");
-		camera7.Draw(application, "Inactive");
+		camera7.Draw(application, "LeftFrontView");
 		camera8.Draw(application, "FrontView");
-		camera9.Draw(application, "Inactive");
+		camera9.Draw(application, "RightFrontView");
 
 		RotateObjectOnYAxis(cube, 90 / 30, 6, 6, 4);
 

@@ -103,6 +103,7 @@
     <ClInclude Include="IGameObject.h" />
     <ClInclude Include="Linal\graphical3D\3dpoint.h" />
     <ClInclude Include="Linal\graphical3D\3dvector.h" />
+    <ClInclude Include="Linal\inproduct.hpp" />
     <ClInclude Include="Linal\matrix.h" />
     <ClInclude Include="Linal\graphical2D\canvas.h" />
     <ClInclude Include="Linal\graphical2D\point.h" />

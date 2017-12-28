@@ -52,6 +52,7 @@
     <ClInclude Include="Linal\camera.hpp">
       <Filter>linal</Filter>
     </ClInclude>
+    <ClInclude Include="Linal\inproduct.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="linal">
