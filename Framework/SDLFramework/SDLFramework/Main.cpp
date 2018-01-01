@@ -96,42 +96,10 @@ int main(int args[])
 	application->SetTargetFPS(60);
 	application->SetColor(Color(255, 10, 40, 255));
 
-	auto canvasFront{ std::unique_ptr<Linal::G2D::Canvas>{ new Linal::G2D::Canvas() } };
+	auto canvas { std::unique_ptr<Linal::G2D::Canvas>{ new Linal::G2D::Canvas() } };
 
-	/******************************************
-	 *             Scaling Matrix             *
-	 ******************************************/
-
-	// With Ints/doubles
-	/* *
-	auto a = Linal::Get2DScaleMatrix(1.2, 1.1);
-	auto b = Linal::Matrix<double>{ 2, 4 };
-
-	b.Set(1, 1, 3).Set(1, 2, 4).Set(1, 3, 6).Set(1, 4, 1);
-	b.Set(2, 1, 2).Set(2, 2, 1).Set(2, 3, 7).Set(2, 4, 5);
-
-	/* *
-	auto c = a * b;
-	/* */
-
-	// With Points
-	/* */
-	auto square = Linal::Matrix<Linal::G2D::Point>{ 6 };
-	auto topleft = Linal::G2D::Point(2, 5);
-	auto topcenter = Linal::G2D::Point(4, 5);
-	auto topright = Linal::G2D::Point(6, 5);
-	auto bottomleft = Linal::G2D::Point(2, 2);
-	auto bottomcenter = Linal::G2D::Point(4, 2);
-	auto bottomright = Linal::G2D::Point(6, 2);
-
-
-	square.Set(1, topleft);
-	square.Set(2, topcenter);
-	square.Set(3, topright);
-	square.Set(4, bottomright);
-	square.Set(5, bottomcenter);
-	square.Set(6, bottomleft);
-	/* */
+	auto spaceship = Linal::Matrix<Linal::G3D::Point>{ 1 };
+	spaceship.Set(1, Linal::G3D::Point(0, 0, 0));
 
 	auto cube = Linal::Matrix<Linal::G3D::Point>{ 8 };
 	auto topleftfront = Linal::G3D::Point(4, 8, 2);
@@ -164,49 +132,6 @@ int main(int args[])
 
 	bool debug = true;
 
-	/******************************************
-	*          End of scaling matrix          *
-	******************************************/
-
-	/******************************************
-	 *            Translate Matrix            *
-	 ******************************************/
-	/* *
-	auto a = Linal::GetTranslateMatrix(0.1, 0.1);
-	Linal::Matrix<double> b = Linal::Matrix<float>{ 3, 4 };
-
-	b.Set(1, 1, 3).Set(1, 2, 4).Set(1, 3, 6).Set(1, 4, 1);
-	b.Set(2, 1, 2).Set(2, 2, 1).Set(2, 3, 7).Set(2, 4, 5);
-	b.Set(3, 1, 1).Set(3, 2, 1).Set(3, 3, 1).Set(3, 4, 1);
-
-	auto c = a * b;
-	/* */
-
-	/******************************************
-	 *        End of translate Matrix         *
-	 *****************************************/
-
-	/******************************************
-	 *             Multiple Matrix            *
-	 ******************************************/
-	
-	/* *
-	auto a = Linal::Matrix<int>{ 2, 2 };
-	auto b = Linal::Matrix<int>{ 2, 3 };
-
-	a.Set(1, 1, 4).Set(1, 2, 1);
-	a.Set(2, 1, 2).Set(2, 2, 3);
-
-	b.Set(1, 1, 3).Set(1, 2, 0).Set(1, 3, 4);
-	b.Set(2, 1, 2).Set(2, 2, 5).Set(2, 3, 1);
-
-	auto c = a * b;
-	/* */
-
-	/******************************************
-	 *         End of tultiple Matrix         *
-	 ******************************************/
-
 	//RotateObjectOnZAxis(cube, 90, 4, 4, 2);
 
 	while (application->IsRunning())
@@ -230,7 +155,7 @@ int main(int args[])
 			}
 		}
 
-		canvasFront->Draw(application);
+		canvas->Draw(application);
 
 		camera1.Draw(application, "LeftBackView");
 		camera2.Draw(application, "BackView");
@@ -253,21 +178,6 @@ int main(int args[])
 		camera7.Draw(application, cube);
 		camera8.Draw(application, cube);
 		camera9.Draw(application, cube);
-
-		/*     numeric matrix    *
-		a.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT - 55);
-		b.Draw(application, Linal::OFFSETX + 75, Linal::OFFSETY + Linal::HEIGHT - 55);
-		c.Draw(application, Linal::OFFSETX + 200, Linal::OFFSETY + Linal::HEIGHT - 55);
-		/* End of numeric matrix */
-
-		//RotateObject(square, 90/30, 3.5, 4);
-		//RotateObject(square, -90);
-
-		//square.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
-		//square.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
-
-		//
-		//cube.Draw(application, Linal::OFFSETX, Linal::OFFSETY + Linal::HEIGHT);
 
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));

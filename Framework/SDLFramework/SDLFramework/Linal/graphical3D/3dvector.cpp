@@ -65,6 +65,15 @@ Linal::G3D::Vector Linal::G3D::Vector::operator/(const Linal::G3D::Vector & rhs)
 	return Linal::G3D::Vector(xAxis / rhs.xAxis, yAxis / rhs.yAxis, zAxis / rhs.zAxis, startingX, startingY, startingZ);
 }
 
+Linal::G3D::Vector Linal::G3D::Vector::GetUnitVector()
+{
+	return Linal::G3D::Vector(
+		xAxis / sqrt(pow(xAxis, 2) + pow(yAxis, 2) + pow(zAxis, 2)),
+		yAxis / sqrt(pow(xAxis, 2) + pow(yAxis, 2) + pow(zAxis, 2)),
+		zAxis / sqrt(pow(xAxis, 2) + pow(yAxis, 2) + pow(zAxis, 2))
+	);
+}
+
 Linal::G3D::Point Linal::G3D::Vector::ToPoint()
 {
 	return Point(xAxis, yAxis, zAxis);

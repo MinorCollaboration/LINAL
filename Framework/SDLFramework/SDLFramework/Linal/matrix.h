@@ -12,6 +12,7 @@ using namespace std;
 
 #include "FWApplication.h"
 #include "Linal/constants.h"
+#include "Linal/inoutproduct.hpp"
 #include "Linal/graphical3D/3dpoint.h"
 #include "Linal/graphical2D/point.h"
 #include "drawable.h"
@@ -726,6 +727,41 @@ namespace Linal
 		return matrix;
 	}
 
+	static Linal::Matrix<double> GetCameraMatrix(double eyeX, double eyeY, double eyeZ, double lookX, double lookY, double lookZ)
+	{
+		auto eye	= Linal::G3D::Vector(eyeX, eyeY, eyeZ);
+		auto lookAt = Linal::G3D::Vector(lookX, lookY, lookZ);
+		auto up		= Linal::G3D::Vector(0, 1, 0);
+
+		auto z = (eye - lookAt).GetUnitVector();
+		auto y = up.GetUnitVector();
+		auto x = Linal::GetOutProduct(y, z).GetUnitVector();
+			 y = Linal::GetOutProduct(z, x).GetUnitVector();
+
+		auto output = Linal::Matrix<double>(4, 4);
+
+		auto inx = Linal::GetInProduct(x, eye);
+
+		output.Set(1, 1, x.xAxis).Set(1, 2, x.yAxis).Set(1, 3, x.zAxis).Set(1, 4, -Linal::GetInProduct(x, eye));
+		output.Set(2, 1, y.xAxis).Set(2, 2, y.yAxis).Set(2, 3, y.zAxis).Set(2, 4, -Linal::GetInProduct(y, eye));
+		output.Set(3, 1, z.xAxis).Set(3, 2, z.yAxis).Set(3, 3, z.zAxis).Set(3, 4, -Linal::GetInProduct(z, eye));
+		output.Set(4, 1, 0)		 .Set(4, 2, 0)		.Set(4, 3, 0)	   .Set(4, 4, 1);
+
+		return output;
+	}
+
+	static Linal::Matrix<double> GetPerspectiveMatrix(double near, double far, double fov)
+	{
+		auto matrix = Linal::Matrix<double>(4, 4);
+
+		double a = (fov * M_PI) / 180;
+		double scale = near * tan(a * 0.5);
+
+		matrix.Set(1, 1, scale)	.Set(1, 2, 0)		.Set(1, 3, 0)							.Set(1, 4, 0);
+		matrix.Set(2, 1, 0)		.Set(2, 2, scale)	.Set(2, 3, 0)							.Set(2, 4, 0);
+		matrix.Set(3, 1, 0)		.Set(3, 2, 0)		.Set(3, 3, -far / far-near)				.Set(3, 4, -1);
+		matrix.Set(4, 1, 0)		.Set(4, 2, 0)		.Set(4, 3, -far * near / far - near)	.Set(4, 4, 0);
+	}
 }
 
 #endif
