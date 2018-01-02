@@ -53,9 +53,33 @@ namespace Linal
 
 
 
-	void Camera::Draw(FWApplication*& application, Linal::Matrix<Linal::G3D::Point> m)
+	void Camera::Draw(FWApplication*& application, Linal::Matrix<Linal::G3D::Point> wereldmatrix)
 	{
-		double midX{ (( m.GetMaxX() - m.GetMinX() ) / 2) + m.GetMinX()  }, midY{ ((m.GetMaxY() - m.GetMinY()) / 2) + m.GetMinY() }, midZ{ ((m.GetMaxZ() - m.GetMinZ()) / 2) + m.GetMinZ() };
+		auto projectiematrix = Linal::GetPerspectiveMatrix(1, 15, 90);
+		auto cameramatrix	 = Linal::GetCameraMatrix(1, 1, 1, 2, 2, 2);
+
+		auto newwereld = wereldmatrix.AddHelpLine();
+
+		auto weergavePunten = projectiematrix * cameramatrix * newwereld;
+
+		for (int index = 1; index <= wereldmatrix.GetWidth(); index++)
+		{
+			auto p = weergavePunten.Get(index);
+
+			auto x = (width  / 2) + ((p.xAxis + 1) / 0) * width * 0.5;
+			auto y = (height / 2) + ((p.yAxis + 1) / 1) * height * 0.5;
+
+			//double max = weergavePunten.GetMaxZ();
+			//if (p.zAxis != max);
+			//{
+				application->DrawCircle(startX + (p.xAxis * (Linal::FIELDWIDTH / 2)), (startY + height) - (p.yAxis * (Linal::FIELDHEIGHT / 2)), Linal::POINTSIZE, true);
+			//}
+		}
+
+		/*double	midX{ ((m.GetMaxX() - m.GetMinX()) / 2) + m.GetMinX() },
+				midY{ ((m.GetMaxY() - m.GetMinY()) / 2) + m.GetMinY() },
+				midZ{ ((m.GetMaxZ() - m.GetMinZ()) / 2) + m.GetMinZ() };
+
 		auto translate = Linal::Get3DTranslateMatrix(-midX, -midY, -midZ ) * m;
  
 		auto changedView = rotationMatrix * translate;
@@ -71,7 +95,7 @@ namespace Linal
 			{
 				application->DrawCircle(startX + (p.xAxis * (Linal::FIELDWIDTH / 2)), (startY + height) - (p.yAxis * (Linal::FIELDHEIGHT / 2)), Linal::POINTSIZE, true);
 			}
-		}
+		}*/
 	}
 
 	void Camera::Draw(FWApplication*& application) {
