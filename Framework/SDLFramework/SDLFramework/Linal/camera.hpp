@@ -36,15 +36,15 @@ namespace Linal
 		int height;
 		int startX;
 		int startY;
-		Matrix<double> rotationMatrix = Linal::Get3DRotateXAxisMatrix(0);
+		Matrix<double> cameraMatrix = Linal::GetCameraMatrix(1, 1, 1, 1, 1, 3);
 	};
 
 	Camera::Camera(int startX, int startY, int width, int height) : startX(startX), startY(startY), width(width), height(height)
 	{
-		rotationMatrix = Linal::Get3DRotateXAxisMatrix(0);
+		cameraMatrix = Linal::GetCameraMatrix(1, 1, 1, 1, 1, 3);
 	}
 
-	Camera::Camera(int startX, int startY, int width, int height, Matrix<double> rotationMatrix) : startX(startX), startY(startY), width(width), height(height), rotationMatrix(rotationMatrix)
+	Camera::Camera(int startX, int startY, int width, int height, Matrix<double> cameraMatrix) : startX(startX), startY(startY), width(width), height(height), cameraMatrix(cameraMatrix)
 	{
 	}
 
@@ -56,46 +56,24 @@ namespace Linal
 	void Camera::Draw(FWApplication*& application, Linal::Matrix<Linal::G3D::Point> wereldmatrix)
 	{
 		auto projectiematrix = Linal::GetPerspectiveMatrix(1, 15, 90);
-		auto cameramatrix	 = Linal::GetCameraMatrix(1, 1, 1, 2, 2, 2);
-
 		auto newwereld = wereldmatrix.AddHelpLine();
+		auto weergavePunten = projectiematrix * cameraMatrix * newwereld;
 
-		auto weergavePunten = projectiematrix * cameramatrix * newwereld;
+		auto movedView = Linal::Get3DTranslateMatrix(19, 7, 0) * weergavePunten;
 
 		for (int index = 1; index <= wereldmatrix.GetWidth(); index++)
 		{
-			auto p = weergavePunten.Get(index);
+			auto p = movedView.Get(index);
 
 			auto x = (width  / 2) + ((p.xAxis + 1) / 0) * width * 0.5;
 			auto y = (height / 2) + ((p.yAxis + 1) / 1) * height * 0.5;
 
 			//double max = weergavePunten.GetMaxZ();
-			//if (p.zAxis != max);
+			//if (weergavePunten.matrix.at(weergavePunten.ConvertToIndex(4, index)) >= 0);
 			//{
 				application->DrawCircle(startX + (p.xAxis * (Linal::FIELDWIDTH / 2)), (startY + height) - (p.yAxis * (Linal::FIELDHEIGHT / 2)), Linal::POINTSIZE, true);
 			//}
 		}
-
-		/*double	midX{ ((m.GetMaxX() - m.GetMinX()) / 2) + m.GetMinX() },
-				midY{ ((m.GetMaxY() - m.GetMinY()) / 2) + m.GetMinY() },
-				midZ{ ((m.GetMaxZ() - m.GetMinZ()) / 2) + m.GetMinZ() };
-
-		auto translate = Linal::Get3DTranslateMatrix(-midX, -midY, -midZ ) * m;
- 
-		auto changedView = rotationMatrix * translate;
-		auto translateBack = Linal::Get3DTranslateMatrix(+midX, +midY, +midZ) * changedView;
-
-		auto movedView = Linal::Get3DTranslateMatrix(17, 10, 0) * changedView;
-		for (int index = 1; index <= m.GetWidth(); index++)
-		{
-			auto p = movedView.Get(index);
-
-			double max = movedView.GetMaxZ();
-			if (p.zAxis != max)
-			{
-				application->DrawCircle(startX + (p.xAxis * (Linal::FIELDWIDTH / 2)), (startY + height) - (p.yAxis * (Linal::FIELDHEIGHT / 2)), Linal::POINTSIZE, true);
-			}
-		}*/
 	}
 
 	void Camera::Draw(FWApplication*& application) {

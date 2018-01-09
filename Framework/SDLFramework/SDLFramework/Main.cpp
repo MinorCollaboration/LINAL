@@ -79,7 +79,7 @@ void RotateObject(Linal::Matrix<Linal::G2D::Point>& matrix, double degree, doubl
 int main(int args[])
 {
 	//auto window = Window::CreateSDLWindow();
-	auto application = new FWApplication(0, 25, 1920, 870);
+	auto application = new FWApplication(0, 25, 1920, 834);
 	if (!application->GetWindow())
 	{
 		LOG("Couldn't create window...");
@@ -120,15 +120,15 @@ int main(int args[])
 	cube.Set(7, toprightback);
 	cube.Set(8, topleftback);
 
-	auto camera1 = Linal::Camera(0,		0,	 500, 290, Linal::Get3DRotateYAxisMatrix(135));
-	auto camera2 = Linal::Camera(500,	0,	 500, 290, Linal::Get3DRotateYAxisMatrix(-180));
-	auto camera3 = Linal::Camera(1000,	0,	 500, 290, Linal::Get3DRotateYAxisMatrix(-135));
-	auto camera4 = Linal::Camera(0,		290, 500, 290, Linal::Get3DRotateYAxisMatrix(-90));
-	auto camera5 = Linal::Camera(500,	290, 500, 290, Linal::Get3DRotateXAxisMatrix(-90));
-	auto camera6 = Linal::Camera(1000,	290, 500, 290, Linal::Get3DRotateYAxisMatrix(90));
-	auto camera7 = Linal::Camera(0,		580, 500, 290, Linal::Get3DRotateYAxisMatrix(-45));
-	auto camera8 = Linal::Camera(500,	580, 500, 290);
-	auto camera9 = Linal::Camera(1000,	580, 500, 290, Linal::Get3DRotateYAxisMatrix(-45));
+	auto camera1 = Linal::Camera(0,		0,	 500, 278, Linal::GetCameraMatrix(1, 1, 1, 1, 1, 3));
+	auto camera2 = Linal::Camera(500,	0,	 500, 278, Linal::GetCameraMatrix(1, 1, 1, 1, 1, 3));
+	auto camera3 = Linal::Camera(1000,	0,	 500, 278, Linal::GetCameraMatrix(1, 1, 1, 1, 1, 3));
+	auto camera4 = Linal::Camera(0,		278, 500, 278, Linal::GetCameraMatrix(1, 1, 1, 1, 1, 3));
+	auto camera5 = Linal::Camera(500,	278, 500, 278, Linal::GetCameraMatrix(1, 10, 10, 1, 1, 1));
+	auto camera6 = Linal::Camera(1000,	278, 500, 278, Linal::GetCameraMatrix(1, 1, 1, 1, 1, 3));
+	auto camera7 = Linal::Camera(0,		556, 500, 278, Linal::GetCameraMatrix(1, 1, 1, -4, 1, 6));
+	auto camera8 = Linal::Camera(500,	556, 500, 278, Linal::GetCameraMatrix(1, 1, 1, 1, 1, 3));
+	auto camera9 = Linal::Camera(1000,	556, 500, 278, Linal::GetCameraMatrix(1, 1, 1, 5, 1, 6));
 
 	bool debug = true;
 

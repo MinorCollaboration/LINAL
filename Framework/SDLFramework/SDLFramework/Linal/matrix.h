@@ -315,7 +315,7 @@ namespace Linal
 			}
 		}
 
-		if (lhsHelpLines) {
+		/*if (lhsHelpLines) {
 			for (int i = 0; i < lhsHelpLines; i++)
 				lhs = RemoveHelpLine(lhs);
 		}
@@ -324,7 +324,7 @@ namespace Linal
 				output = output.RemoveHelpLine();
 				rhs = rhs.RemoveHelpLine();
 			}
-		}
+		}*/
 
 		return output;
 	}
@@ -739,8 +739,6 @@ namespace Linal
 			 y = Linal::GetOutProduct(z, x).GetUnitVector();
 
 		auto output = Linal::Matrix<double>(4, 4);
-
-		auto inx = Linal::GetInProduct(x, eye);
 
 		output.Set(1, 1, x.xAxis).Set(1, 2, x.yAxis).Set(1, 3, x.zAxis).Set(1, 4, -Linal::GetInProduct(x, eye));
 		output.Set(2, 1, y.xAxis).Set(2, 2, y.yAxis).Set(2, 3, y.zAxis).Set(2, 4, -Linal::GetInProduct(y, eye));

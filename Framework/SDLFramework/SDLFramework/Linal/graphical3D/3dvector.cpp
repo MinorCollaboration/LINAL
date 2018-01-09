@@ -67,11 +67,17 @@ Linal::G3D::Vector Linal::G3D::Vector::operator/(const Linal::G3D::Vector & rhs)
 
 Linal::G3D::Vector Linal::G3D::Vector::GetUnitVector()
 {
-	return Linal::G3D::Vector(
+	auto output = Linal::G3D::Vector(
 		xAxis / sqrt(pow(xAxis, 2) + pow(yAxis, 2) + pow(zAxis, 2)),
 		yAxis / sqrt(pow(xAxis, 2) + pow(yAxis, 2) + pow(zAxis, 2)),
 		zAxis / sqrt(pow(xAxis, 2) + pow(yAxis, 2) + pow(zAxis, 2))
 	);
+
+	if (isnan(output.xAxis)) output.xAxis = 0;
+	if (isnan(output.yAxis)) output.yAxis = 0;
+	if (isnan(output.zAxis)) output.zAxis = 0;
+
+	return output;
 }
 
 Linal::G3D::Point Linal::G3D::Vector::ToPoint()
