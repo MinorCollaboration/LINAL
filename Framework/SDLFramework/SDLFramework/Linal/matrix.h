@@ -293,16 +293,19 @@ namespace Linal
 		int lhsHelpLines = 0;
 		int rhsHelpLines = 0;
 
-		Matrix<G3D::Point> output = Matrix<G3D::Point>(rhs.GetWidth());
+		Matrix<G3D::Point> output = Matrix<G3D::Point>(rhs.GetWidth(), lhs.GetHeight());
 
-		if (lhs.GetWidth() < rhs.GetHeight()) {
+		if (lhs.GetWidth() < output.GetHeight()) {
 			AddHelpLine(lhs);
 			lhsHelpLines++;
 		}
 		else if (lhs.GetWidth() > rhs.GetHeight()) {
-			output = output.AddHelpLine();
 			rhs = rhs.AddHelpLine();
 			rhsHelpLines++;
+
+			if (lhs.GetWidth() > output.GetHeight()) {
+				output = output.AddHelpLine();
+			}
 		}
 
 		for (int row = 1; row <= output.GetHeight(); row++) {
@@ -482,6 +485,9 @@ namespace Linal
 			matrix = std::vector<double>(Width * Height);
 		}
 		Matrix(int cols) : Width(cols), Height(3) {
+			matrix = std::vector<double>(Width * Height);
+		}
+		Matrix(int cols, int rows) : Width(cols), Height(rows) {
 			matrix = std::vector<double>(Width * Height);
 		}
 		Matrix(const Matrix& toCopy)

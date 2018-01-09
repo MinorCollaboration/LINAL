@@ -120,15 +120,15 @@ int main(int args[])
 	cube.Set(7, toprightback);
 	cube.Set(8, topleftback);
 
-	auto camera1 = Linal::Camera(0,		0,	 500, 278, Linal::GetCameraMatrix(1, 1, 1, 1, 1, 3));
-	auto camera2 = Linal::Camera(500,	0,	 500, 278, Linal::GetCameraMatrix(1, 1, 1, 1, 1, 3));
-	auto camera3 = Linal::Camera(1000,	0,	 500, 278, Linal::GetCameraMatrix(1, 1, 1, 1, 1, 3));
-	auto camera4 = Linal::Camera(0,		278, 500, 278, Linal::GetCameraMatrix(1, 1, 1, 1, 1, 3));
-	auto camera5 = Linal::Camera(500,	278, 500, 278, Linal::GetCameraMatrix(1, 10, 10, 1, 1, 1));
-	auto camera6 = Linal::Camera(1000,	278, 500, 278, Linal::GetCameraMatrix(1, 1, 1, 1, 1, 3));
-	auto camera7 = Linal::Camera(0,		556, 500, 278, Linal::GetCameraMatrix(1, 1, 1, -4, 1, 6));
-	auto camera8 = Linal::Camera(500,	556, 500, 278, Linal::GetCameraMatrix(1, 1, 1, 1, 1, 3));
-	auto camera9 = Linal::Camera(1000,	556, 500, 278, Linal::GetCameraMatrix(1, 1, 1, 5, 1, 6));
+	auto camera1 = Linal::Camera(0,		0,	 500, 278, Linal::GetCameraMatrix(1, 1, -15, 1, 1, 3));
+	auto camera2 = Linal::Camera(500,	0,	 500, 278, Linal::GetCameraMatrix(1, 1, -15, 1, 1, 3));
+	auto camera3 = Linal::Camera(1000,	0,	 500, 278, Linal::GetCameraMatrix(1, 1, -15, 1, 1, 3));
+	auto camera4 = Linal::Camera(0,		278, 500, 278, Linal::GetCameraMatrix(1, 1, -15, 1, 1, 3));
+	auto camera5 = Linal::Camera(500,	278, 500, 278, Linal::GetCameraMatrix(1, 10, -15, 1, 1, 2));
+	auto camera6 = Linal::Camera(1000,	278, 500, 278, Linal::GetCameraMatrix(1, 1, -15, 1, 1, 1));
+	auto camera7 = Linal::Camera(0,		556, 500, 278, Linal::GetCameraMatrix(1, 1, -15, -4, 1, 1));
+	auto camera8 = Linal::Camera(500,	556, 500, 278, Linal::GetCameraMatrix(1, 1, -15, 1, 1, 1));
+	auto camera9 = Linal::Camera(1000,	556, 500, 278, Linal::GetCameraMatrix(1, 1, -15, 5, 1, 1));
 
 	bool debug = true;
 
@@ -167,6 +167,7 @@ int main(int args[])
 		camera8.Draw(application, "FrontView");
 		camera9.Draw(application, "RightFrontView");
 
+		//camera5.SetCameraMatrix(Linal::GetCameraMatrix(1, frameCount, -15, 1, 1, 1));
 		RotateObjectOnYAxis(cube, 90 / 30, 6, 6, 4);
 
 		camera1.Draw(application, cube);
