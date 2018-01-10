@@ -1,5 +1,5 @@
 ﻿  Main.cpp
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\camera.hpp(91): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\main.cpp(154): warning C4065: switch statement contains 'default' but no 'case' labels
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\camera.hpp(93): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\main.cpp(155): warning C4065: switch statement contains 'default' but no 'case' labels
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\matrix.h(123): warning C4172: returning address of local variable or temporary: copiedMatrix
   SDLFramework.vcxproj -> C:\Users\mark_\Documents\Herkansingen\LINAL\Framework\SDLFramework\Debug\SDLFramework.exe

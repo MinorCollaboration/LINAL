@@ -290,12 +290,11 @@ namespace Linal
 		auto lhs = *this;
 		auto rhs = initialRhs;
 
-		int lhsHelpLines = 0;
-		int rhsHelpLines = 0;
+		int lhsHelpLines = 0, rhsHelpLines = 0, outputHelpLines = 0;
 
 		Matrix<G3D::Point> output = Matrix<G3D::Point>(rhs.GetWidth(), lhs.GetHeight());
 
-		if (lhs.GetWidth() < output.GetHeight()) {
+		if (lhs.GetWidth() < rhs.GetHeight()) {
 			AddHelpLine(lhs);
 			lhsHelpLines++;
 		}
@@ -305,6 +304,7 @@ namespace Linal
 
 			if (lhs.GetWidth() > output.GetHeight()) {
 				output = output.AddHelpLine();
+				outputHelpLines++;
 			}
 		}
 
@@ -318,16 +318,20 @@ namespace Linal
 			}
 		}
 
-		/*if (lhsHelpLines) {
+		if (lhsHelpLines) {
 			for (int i = 0; i < lhsHelpLines; i++)
 				lhs = RemoveHelpLine(lhs);
 		}
 		else if (rhsHelpLines) {
 			for (int i = 0; i < rhsHelpLines; i++) {
-				output = output.RemoveHelpLine();
 				rhs = rhs.RemoveHelpLine();
 			}
-		}*/
+			if (outputHelpLines) {
+				for (int i = 0; i < outputHelpLines; i++) {
+					output = output.RemoveHelpLine();
+				}
+			}
+		}
 
 		return output;
 	}
@@ -762,7 +766,7 @@ namespace Linal
 		double scale = near * tan(a * 0.5);
 
 		matrix.Set(1, 1, scale)	.Set(1, 2, 0)		.Set(1, 3, 0)							.Set(1, 4, 0);
-		matrix.Set(2, 1, 0)		.Set(2, 2, scale)	.Set(2, 3, 0)							.Set(2, 4, 0);
+		matrix.Set(2, 1, 0)		.Set(2, 2, scale * (16 / 9))	.Set(2, 3, 0)							.Set(2, 4, 0);
 		matrix.Set(3, 1, 0)		.Set(3, 2, 0)		.Set(3, 3, -far / far-near)				.Set(3, 4, -1);
 		matrix.Set(4, 1, 0)		.Set(4, 2, 0)		.Set(4, 3, -far * near / far - near)	.Set(4, 4, 0);
 
