@@ -734,7 +734,7 @@ namespace Linal
 		matrix.Set(3, 1, 0)			.Set(3, 2, 0)			.Set(3, 3, 1).Set(3, 4, 0);
 		matrix.Set(4, 1, 0)			.Set(4, 2, 0)			.Set(4, 3, 0).Set(4, 4, 1);
 
-		return matrix;
+		return matrix; 
 	}
 
 	static Linal::Matrix<double> GetCameraMatrix(double eyeX, double eyeY, double eyeZ, double lookX, double lookY, double lookZ)
