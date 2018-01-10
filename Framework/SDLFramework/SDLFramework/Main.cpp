@@ -80,7 +80,7 @@ void RotateObject(Linal::Matrix<Linal::G2D::Point>& matrix, double degree, doubl
 int main(int args[])
 {
 	//auto window = Window::CreateSDLWindow();
-	auto application = new FWApplication(0, 25, 1920, 834);
+	auto application = new FWApplication(0, 25, 600, 600);
 	if (!application->GetWindow())
 	{
 		LOG("Couldn't create window...");
@@ -97,7 +97,7 @@ int main(int args[])
 	application->SetTargetFPS(60);
 	application->SetColor(Color(255, 10, 40, 255));
 
-	auto canvas { std::unique_ptr<Linal::G2D::Canvas>{ new Linal::G2D::Canvas() } };
+	//auto canvas { std::unique_ptr<Linal::G2D::Canvas>{ new Linal::G2D::Canvas() } };
 
 	auto spaceship = Linal::Matrix<Linal::G3D::Point>{ 1 };
 	spaceship.Set(1, Linal::G3D::Point(0, 0, 0));
@@ -121,15 +121,15 @@ int main(int args[])
 	cube.Set(7, toprightback);
 	cube.Set(8, topleftback);
 
-	auto camera1 = Linal::Camera(0,		0,	 500, 278, Linal::GetCameraMatrix(1, 1, 15, 1, 1, 3));
-	auto camera2 = Linal::Camera(500,	0,	 500, 278, Linal::GetCameraMatrix(1, 1, 15, 1, 1, 3));
-	auto camera3 = Linal::Camera(1000,	0,	 500, 278, Linal::GetCameraMatrix(1, 1, 15, 1, 1, 3));
-	auto camera4 = Linal::Camera(0,		278, 500, 278, Linal::GetCameraMatrix(1, 1, 15, 1, 1, 3));
-	auto camera5 = Linal::Camera(500,	278, 500, 278, Linal::GetCameraMatrix(1, 10, 15, 1, 1, 1));
-	auto camera6 = Linal::Camera(1000,	278, 500, 278, Linal::GetCameraMatrix(1, 1, 15, 1, 1, 1));
-	auto camera7 = Linal::Camera(0,		556, 500, 278, Linal::GetCameraMatrix(1, 1, 15, -4, 1, 1));
-	auto camera8 = Linal::Camera(500,	556, 500, 278, Linal::GetCameraMatrix(1, 1, 15, 1, 1, 1));
-	auto camera9 = Linal::Camera(1000,	556, 500, 278, Linal::GetCameraMatrix(1, 1, 15, 5, 1, 1));
+	auto camera1 = Linal::Camera(0,		0,	 200, 200, Linal::GetCameraMatrix(1, 1, 1, 4, 4, 4));
+	auto camera2 = Linal::Camera(200,	0,	 200, 200, Linal::GetCameraMatrix(1, 1, 15, 1, 1, 3));
+	auto camera3 = Linal::Camera(400,	0,	 200, 200, Linal::GetCameraMatrix(1, 1, 15, 1, 1, 3));
+	auto camera4 = Linal::Camera(0,		200, 200, 200, Linal::GetCameraMatrix(1, 1, 15, 1, 1, 3));
+	auto camera5 = Linal::Camera(200,	200, 200, 200, Linal::GetCameraMatrix(1, 1, 15, 1, 1, 1));
+	auto camera6 = Linal::Camera(400,	200, 200, 200, Linal::GetCameraMatrix(1, 1, 15, 1, 1, 3));
+	auto camera7 = Linal::Camera(0,		400, 200, 200, Linal::GetCameraMatrix(1, 1, 1, -4, 1, 1));
+	auto camera8 = Linal::Camera(200,	400, 200, 200, Linal::GetCameraMatrix(1, 1, 1, 1, 3, 1));
+	auto camera9 = Linal::Camera(400,	400, 200, 200, Linal::GetCameraMatrix(1, 1, 1, 5, 1, 1));
 
 	bool debug = true;
 
@@ -156,7 +156,7 @@ int main(int args[])
 			}
 		}
 
-		canvas->Draw(application);
+		//canvas->Draw(application);
 
 		camera1.Draw(application, "LeftBackView");
 		camera2.Draw(application, "BackView");

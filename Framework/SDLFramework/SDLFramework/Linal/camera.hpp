@@ -90,7 +90,7 @@ namespace Linal
 			{
 				//application->DrawCircle(startX + (p.xAxis  * (Linal::FIELDWIDTH / 2)), (startY + height) - (p.yAxis * (Linal::FIELDHEIGHT / 2)), Linal::POINTSIZE, true);
 				//application->DrawCircle(startX +  width / 2, startY + height / 2, Linal::POINTSIZE, true);
-				application->DrawCircle(startX + x, startY - y, Linal::POINTSIZE, true);
+				application->DrawCircle(startX + x, (startY + height) - y, Linal::POINTSIZE, true);
 			}
 		}
 	}
