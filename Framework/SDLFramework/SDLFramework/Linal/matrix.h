@@ -767,8 +767,8 @@ namespace Linal
 
 		matrix.Set(1, 1, scale)	.Set(1, 2, 0)		.Set(1, 3, 0)							.Set(1, 4, 0);
 		matrix.Set(2, 1, 0)		.Set(2, 2, scale)	.Set(2, 3, 0)							.Set(2, 4, 0);
-		matrix.Set(3, 1, 0)		.Set(3, 2, 0)		.Set(3, 3, -far / far-near)				.Set(3, 4, -1);
-		matrix.Set(4, 1, 0)		.Set(4, 2, 0)		.Set(4, 3, -far * near / far - near)	.Set(4, 4, 0);
+		matrix.Set(3, 1, 0)		.Set(3, 2, 0)		.Set(3, 3, -far / (far-near))			.Set(3, 4, -1);
+		matrix.Set(4, 1, 0)		.Set(4, 2, 0)		.Set(4, 3, (-far * near) / (far - near)).Set(4, 4, 0);
 
 		return matrix;
 	}

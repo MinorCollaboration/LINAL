@@ -26,18 +26,18 @@ namespace Linal
 	static Linal::G3D::Point GetOutProduct(Linal::G3D::Point a, Linal::G3D::Point b)
 	{
 		return Linal::G3D::Point(
-			a.yAxis * b.zAxis - a.zAxis * b.yAxis,
-			a.zAxis * b.xAxis - a.xAxis * b.yAxis,
-			a.xAxis * b.yAxis - a.yAxis * b.xAxis
+			(a.yAxis * b.zAxis) - (a.zAxis * b.yAxis),
+			(a.zAxis * b.xAxis) - (a.xAxis * b.zAxis),
+			(a.xAxis * b.yAxis) - (a.yAxis * b.xAxis)
 		);
 	}
 
 	static Linal::G3D::Vector GetOutProduct(Linal::G3D::Vector a, Linal::G3D::Vector b)
 	{
 		return Linal::G3D::Vector(
-			a.yAxis * b.zAxis - a.zAxis * b.yAxis,
-			a.zAxis * b.xAxis - a.xAxis * b.yAxis,
-			a.xAxis * b.yAxis - a.yAxis * b.xAxis
+			(a.yAxis * b.zAxis) - (a.zAxis * b.yAxis),
+			(a.zAxis * b.xAxis) - (a.xAxis * b.zAxis),
+			(a.xAxis * b.yAxis) - (a.yAxis * b.xAxis)
 		);
 	}
 }

@@ -40,7 +40,7 @@ namespace Linal
 		int height;
 		int startX;
 		int startY;
-		Matrix<double> cameraMatrix = Linal::GetCameraMatrix(1, 1, 1, 1, 1, 3);
+		Matrix<double> cameraMatrix = Linal::GetCameraMatrix(1, 1, 1, 4, 4, 4);
 	};
 
 	Camera::Camera(int startX, int startY, int width, int height) : startX(startX), startY(startY), width(width), height(height)
@@ -65,31 +65,19 @@ namespace Linal
 	void Camera::Draw(FWApplication*& application, Linal::Matrix<Linal::G3D::Point> wereldmatrix)
 	{
 		auto projectiematrix = Linal::GetPerspectiveMatrix(1, 100, 90);
-		//wereldmatrix = wereldmatrix.AddHelpLine();
-
-		//auto translatie = Linal::Get3DTranslateMatrix(-25, 6, 0);
-		//wereldmatrix = translatie * wereldmatrix;
-
 		auto weergavePunten = projectiematrix * cameraMatrix * wereldmatrix;
 
-		// DOESN'T WORK ANYMORE DUE HELPLINE CHANGES
-		auto translatie = Linal::Get3DTranslateMatrix(25, 6, 0);
-		//weergavePunten = translatie * weergavePunten;
-
-		for (int index = 1; index <= wereldmatrix.GetWidth(); index++)
+		for (int index = 1; index <= weergavePunten.GetWidth(); index++)
 		{
 			auto p = weergavePunten.Get(index);
 
 			auto w = weergavePunten.matrix.at(weergavePunten.ConvertToIndex(4, index));
 			auto x = (width  / 2) + ((p.xAxis + 1) / w) * width * 0.5;
 			auto y = (height / 2) + ((p.yAxis + 1) / w) * height * 0.5;
-			auto z = -p.zAxis;
+			//auto z = -p.zAxis;
 
-			//double max = weergavePunten.GetMaxZ();
-			if (weergavePunten.matrix.at(weergavePunten.ConvertToIndex(4, index)) >= 0)
-			{
+			if (w >= 0) {
 				//application->DrawCircle(startX + (p.xAxis  * (Linal::FIELDWIDTH / 2)), (startY + height) - (p.yAxis * (Linal::FIELDHEIGHT / 2)), Linal::POINTSIZE, true);
-				//application->DrawCircle(startX +  width / 2, startY + height / 2, Linal::POINTSIZE, true);
 				application->DrawCircle(startX + x, (startY + height) - y, Linal::POINTSIZE, true);
 			}
 		}

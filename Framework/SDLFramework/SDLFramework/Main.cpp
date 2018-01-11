@@ -83,9 +83,8 @@ void RotateObject(Linal::Matrix<Linal::G2D::Point>& matrix, double degree, doubl
 int main(int args[])
 {
 	//camera variables
-	int camera_x = 0;
-	int camera_y = 0;
-	int camera_z = 4;
+	int eyeX = 0, eyeY = 0, eyeZ = 4;
+	int lookAtX = 4, lookAtY = 4, lookAtZ = 4;
 	//auto window = Window::CreateSDLWindow();
 	auto application = new FWApplication(0, 25, 600, 600);
 	if (!application->GetWindow())
@@ -149,40 +148,59 @@ int main(int args[])
 				std::cout << "key pressed " << event.key.keysym.sym << " interperterd as";
 				switch (event.key.keysym.sym) {
 				case 119:
-					std::cout << " up" << std::endl;
-					camera_z++;
+					std::cout << " w" << std::endl;
+					eyeZ++;
 					break;
 				case 115:
-					std::cout << " down" << std::endl;
-					camera_z--;
+					std::cout << " s" << std::endl;
+					eyeZ--;
 					break;
 				case 100:
-					std::cout << " right" << std::endl;
-					camera_x++;
+					std::cout << " d" << std::endl;
+					eyeX++;
 					break;
 				case 97:
-					std::cout << " left" << std::endl;
-					camera_x--;
+					std::cout << " a" << std::endl;
+					eyeX--;
 					break;
 				case 61:
-					std::cout << " zoom in" << std::endl;
-					camera_y++;
+					std::cout << " +" << std::endl;
+					eyeY++;
 					break;
 				case 45:
-					std::cout << " zoom out" << std::endl;
-					camera_y--;
+					std::cout << " -" << std::endl;
+					eyeY--;
+					break;
+				case SDLK_DOWN:
+					std::cout << " down arrow" << std::endl;
+					lookAtY--;
+					break;
+				case SDLK_UP:
+					std::cout << " up arrow" << std::endl;
+					lookAtY++;
+					break;
+				case SDLK_LEFT:
+					std::cout << " left arrow" << std::endl;
+					lookAtX--;
+					break;
+				case SDLK_RIGHT:
+					std::cout << " right arrow" << std::endl;
+					lookAtX++;
 					break;
 				case SDLK_ESCAPE:
 					application->Quit();
 					break;
+				default:
+					std::cout << "none" << std::endl;
+					break;
 				}
-				std::cout << "Eye (" << camera_x << "," << camera_y << "," << camera_z << ")" << std::endl;
-				std::cout << "LookAt (" << "4,4,4" << ")" << std::endl;
+				std::cout << "Eye (" << eyeX << "," << eyeY << "," << eyeZ << ")" << std::endl;
+				std::cout << "LookAt (" << lookAtX << "," << lookAtY << "," << lookAtZ << ")" << std::endl;
 			default:
 				break;
 			}
 		}
-		auto camera = Linal::Camera(0, 0, 600, 600, Linal::GetCameraMatrix(camera_x, camera_y, camera_z, 4, 4, 4));
+		auto camera = Linal::Camera(0, 0, 600, 600, Linal::GetCameraMatrix(eyeX, eyeY, eyeZ, lookAtX, lookAtY, lookAtZ));
 
 		//canvas->Draw(application);
 
