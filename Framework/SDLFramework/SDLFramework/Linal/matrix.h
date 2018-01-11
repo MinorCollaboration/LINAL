@@ -365,9 +365,9 @@ namespace Linal
 			for (int col = 1; col <= output.GetWidth(); col++) {
 				T val = 0;
 				for (int colrows = 1; colrows <= Width; colrows++)
-					val += lhs.Get(row, colrows) * rhs.matrix.at(rhs.ConvertToIndex(colrows, col));
+					val += lhs.Get(row, colrows) * rhs.matrix.at(rhs.ConvertToIndex(col, colrows));
 
-				output.Set(row, col, val);
+				output.Set(col, row, val);
 			}
 		}
 
@@ -710,8 +710,8 @@ namespace Linal
 
 			return *this;
 		}
-		Matrix<Linal::G3D::Vector>& Set(int row, int col, double val) {
-			matrix.at(ConvertToIndex(row, col)) = val;
+		Matrix<Linal::G3D::Vector>& Set(int col, int row, double val) {
+			matrix.at(ConvertToIndex(col, row)) = val;
 
 			return *this;
 		}
