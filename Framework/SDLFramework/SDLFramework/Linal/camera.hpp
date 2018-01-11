@@ -30,8 +30,8 @@ namespace Linal
 		void Draw(FWApplication*& application, Linal::G3D::Point p);
 		void Draw(FWApplication*& application, Linal::G3D::Vector v);
 
-		void Draw(FWApplication*& application, Linal::Matrix<Linal::G2D::Point> m);
 		void Draw(FWApplication*& application, Linal::Matrix<Linal::G3D::Point> m);
+		void Draw(FWApplication*& application, Linal::Matrix<Linal::G3D::Vector> m);
 
 		
 
@@ -79,6 +79,32 @@ namespace Linal
 			if (w >= 0) {
 				//application->DrawCircle(startX + (p.xAxis  * (Linal::FIELDWIDTH / 2)), (startY + height) - (p.yAxis * (Linal::FIELDHEIGHT / 2)), Linal::POINTSIZE, true);
 				application->DrawCircle(startX + x, (startY + height) - y, Linal::POINTSIZE, true);
+			}
+		}
+	}
+
+	void Camera::Draw(FWApplication*& application, Linal::Matrix<Linal::G3D::Vector> wereldmatrix)
+	{
+		auto projectiematrix = Linal::GetPerspectiveMatrix(1, 100, 90);
+		auto weergavePunten = projectiematrix * cameraMatrix * wereldmatrix;
+
+		for (int index = 2; index <= weergavePunten.GetWidth(); index++)
+		{
+			auto o = weergavePunten.Get(1);
+			auto p = weergavePunten.Get(index);
+
+			auto w = weergavePunten.matrix.at(weergavePunten.ConvertToIndex(4, index));
+			auto x = (width / 2) + ((p.xAxis + 1) / w) * width * 0.5;
+			auto y = (height / 2) + ((p.yAxis + 1) / w) * height * 0.5;
+
+			auto ow = weergavePunten.matrix.at(weergavePunten.ConvertToIndex(4, 1));
+			auto ox = (width / 2) + ((o.xAxis + 1) / w) * width * 0.5;
+			auto oy = (height / 2) + ((o.yAxis + 1) / w) * width * 0.5;
+			//auto z = -p.zAxis;
+
+			if (w >= 0 || ow >= 0) {
+				//application->DrawCircle(startX + (p.xAxis  * (Linal::FIELDWIDTH / 2)), (startY + height) - (p.yAxis * (Linal::FIELDHEIGHT / 2)), Linal::POINTSIZE, true);
+				application->DrawLine(startX + ox, (startY + height) - oy, startX + x, (startY + height) - y, 2);
 			}
 		}
 	}

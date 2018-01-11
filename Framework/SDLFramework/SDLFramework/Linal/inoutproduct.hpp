@@ -15,12 +15,12 @@ namespace Linal
 {
 	static double GetInProduct(Linal::G3D::Point a, Linal::G3D::Point b)
 	{
-		return a.xAxis * b.xAxis + a.yAxis * b.yAxis + a.zAxis * b.zAxis;
+		return (a.xAxis * b.xAxis) + (a.yAxis * b.yAxis) + (a.zAxis * b.zAxis);
 	}
 
 	static double GetInProduct(Linal::G3D::Vector a, Linal::G3D::Vector b)
 	{
-		return a.xAxis * b.xAxis + a.yAxis * b.yAxis + a.zAxis * b.zAxis;
+		return (a.xAxis * b.xAxis) + (a.yAxis * b.yAxis) + (a.zAxis * b.zAxis);
 	}
 
 	static Linal::G3D::Point GetOutProduct(Linal::G3D::Point a, Linal::G3D::Point b)

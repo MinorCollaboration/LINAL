@@ -108,6 +108,17 @@ int main(int args[])
 	auto spaceship = Linal::Matrix<Linal::G3D::Point>{ 1 };
 	spaceship.Set(1, Linal::G3D::Point(0, 0, 0));
 
+	auto canvas = Linal::Matrix<Linal::G3D::Vector>{ 4 };
+	auto origin = Linal::G3D::Vector(0, 0, 0, 0, 0, 0);
+	auto xLine = Linal::G3D::Vector(1000, 0, 0, 0, 0, 0);
+	auto yLine = Linal::G3D::Vector(0, 1000, 0, 0, 0, 0);
+	auto zLine = Linal::G3D::Vector(0, 0, 1000, 0, 0, 0);
+
+	canvas.Set(1, origin);
+	canvas.Set(2, xLine);
+	canvas.Set(3, yLine);
+	canvas.Set(4, zLine);
+
 	auto cube = Linal::Matrix<Linal::G3D::Point>{ 8 };
 	auto topleftfront = Linal::G3D::Point(4, 8, 2);
 	auto toprightfront = Linal::G3D::Point(8, 8, 2);
@@ -211,6 +222,7 @@ int main(int args[])
 
 		//RotateObjectOnYAxis(cube, 90 / 30, 6, 6, 4);
 
+		camera.Draw(application, canvas);
 		camera.Draw(application, cube);
 
 		// For the background
