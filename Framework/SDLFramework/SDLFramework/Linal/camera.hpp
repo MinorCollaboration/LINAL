@@ -88,18 +88,17 @@ namespace Linal
 		auto projectiematrix = Linal::GetPerspectiveMatrix(1, 1000, 90);
 		auto weergavePunten = projectiematrix * cameraMatrix * wereldmatrix;
 
-		for (int index = 2; index <= weergavePunten.GetWidth(); index++)
+		for (int index = 1; index <= weergavePunten.GetWidth(); index++)
 		{
-			auto o = weergavePunten.Get(1);
 			auto p = weergavePunten.Get(index);
 
-			auto w = weergavePunten.matrix.at(weergavePunten.ConvertToIndex(4, index));
+			auto w = weergavePunten.matrix.at(weergavePunten.ConvertToIndex((index * 2) - 1, 4));
 			auto x = (width / 2) + ((p.xAxis + 1) / w) * width * 0.5;
 			auto y = (height / 2) + ((p.yAxis + 1) / w) * height * 0.5;
 
-			auto ow = weergavePunten.matrix.at(weergavePunten.ConvertToIndex(4, 1));
-			auto ox = (width / 2) + ((o.xAxis + 1) / w) * width * 0.5;
-			auto oy = (height / 2) + ((o.yAxis + 1) / w) * width * 0.5;
+			auto ow = weergavePunten.matrix.at(weergavePunten.ConvertToIndex((index * 2), 4));
+			auto ox = (width / 2) + ((p.startingX + 1) / w) * width * 0.5;
+			auto oy = (height / 2) + ((p.startingY + 1) / w) * width * 0.5;
 			//auto z = -p.zAxis;
 
 			if (w >= 0 || ow >= 0) {

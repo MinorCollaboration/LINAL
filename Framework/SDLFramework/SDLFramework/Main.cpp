@@ -108,16 +108,14 @@ int main(int args[])
 	auto spaceship = Linal::Matrix<Linal::G3D::Point>{ 1 };
 	spaceship.Set(1, Linal::G3D::Point(0, 0, 0));
 
-	auto canvas = Linal::Matrix<Linal::G3D::Vector>{ 4 };
-	auto origin = Linal::G3D::Vector(0, 0, 0, 0, 0, 0);
+	auto canvas = Linal::Matrix<Linal::G3D::Vector>{ 3 };
 	auto xLine = Linal::G3D::Vector(100000, 0, 0, 0, 0, 0);
 	auto yLine = Linal::G3D::Vector(0, 100000, 0, 0, 0, 0);
 	auto zLine = Linal::G3D::Vector(0, 0, 100000, 0, 0, 0);
 
-	canvas.Set(1, origin);
-	canvas.Set(2, xLine);
-	canvas.Set(3, yLine);
-	canvas.Set(4, zLine);
+	canvas.Set(1, xLine);
+	canvas.Set(2, yLine);
+	canvas.Set(3, zLine);
 
 	auto cube = Linal::Matrix<Linal::G3D::Point>{ 8 };
 	auto topleftfront = Linal::G3D::Point(400, 800, 200);
@@ -131,12 +129,12 @@ int main(int args[])
 
 	cube.Set(1, topleftfront);
 	cube.Set(2, toprightfront);
-	cube.Set(3, bottomrightfront);
-	cube.Set(4, bottomleftfront);
+	cube.Set(3, bottomleftfront);
+	cube.Set(4, bottomrightfront);
 	cube.Set(5, bottomleftback);
 	cube.Set(6, bottomrightback);
-	cube.Set(7, toprightback);
-	cube.Set(8, topleftback);
+	cube.Set(7, topleftback);
+	cube.Set(8, toprightback);
 
 	bool debug = true;
 

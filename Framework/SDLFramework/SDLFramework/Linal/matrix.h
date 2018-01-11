@@ -670,13 +670,13 @@ namespace Linal
 	class Matrix <Linal::G3D::Vector> {
 	public:
 		Matrix() : Width(1), Height(3) {
-			matrix = std::vector<double>(Width * Height);
+			matrix = std::vector<double>((Width * 2) * Height);
 		}
 		Matrix(int cols) : Width(cols), Height(3) {
-			matrix = std::vector<double>(Width * Height);
+			matrix = std::vector<double>((Width * 2) * Height);
 		}
 		Matrix(int cols, int rows) : Width(cols), Height(rows) {
-			matrix = std::vector<double>(Width * Height);
+			matrix = std::vector<double>((Width * 2) * Height);
 		}
 		Matrix(const Matrix& toCopy)
 		{
@@ -686,19 +686,27 @@ namespace Linal
 		}
 
 		Linal::G3D::Vector Get(int index) {
-			return Linal::G3D::Vector(matrix.at(ConvertToIndex(1, index)), matrix.at(ConvertToIndex(2, index)), matrix.at(ConvertToIndex(3, index)));
+			index = (index * 2) - 1;
+
+			return Linal::G3D::Vector(matrix.at(ConvertToIndex(index, 1)), matrix.at(ConvertToIndex(index, 2)), matrix.at(ConvertToIndex(index, 3)),
+									  matrix.at(ConvertToIndex(index + 1, 1)), matrix.at(ConvertToIndex(index + 1, 2)), matrix.at(ConvertToIndex(index + 1, 3)));
 		}
 		Linal::G3D::Vector Get(int index) const {
-			return Linal::G3D::Vector(matrix.at(ConvertToIndex(1, index)), matrix.at(ConvertToIndex(2, index)), matrix.at(ConvertToIndex(3, index)));
+			index = (index * 2) - 1;
+
+			return Linal::G3D::Vector(matrix.at(ConvertToIndex(index, 1)), matrix.at(ConvertToIndex(index, 2)), matrix.at(ConvertToIndex(index, 3)),
+									  matrix.at(ConvertToIndex(index + 1, 1)), matrix.at(ConvertToIndex(index + 1, 2)), matrix.at(ConvertToIndex(index + 1, 3)));
 		}
 		Matrix<Linal::G3D::Vector>& Set(int index, Linal::G3D::Vector p) {
-			int indexX = ConvertToIndex(1, index);
-			int indexY = ConvertToIndex(2, index);
-			int indexZ = ConvertToIndex(3, index);
+			index = (index * 2) - 1;
 
-			matrix.at(indexX) = p.xAxis;
-			matrix.at(indexY) = p.yAxis;
-			matrix.at(indexZ) = p.zAxis;
+			matrix.at(ConvertToIndex(index, 1)) = p.xAxis; // xDest
+			matrix.at(ConvertToIndex(index, 2)) = p.yAxis; // yDest
+			matrix.at(ConvertToIndex(index, 3)) = p.zAxis; // zDest
+
+			matrix.at(ConvertToIndex(index + 1, 1)) = p.startingX; // xOrig
+			matrix.at(ConvertToIndex(index + 1, 2)) = p.startingY; // yOrig
+			matrix.at(ConvertToIndex(index + 1, 3)) = p.startingZ; // zOrig
 
 			return *this;
 		}
@@ -710,7 +718,7 @@ namespace Linal
 
 		Matrix<Linal::G3D::Vector> AddHelpLine() {
 			Matrix<G3D::Vector> output = Matrix<G3D::Vector>{ GetWidth() };
-			output.matrix = std::vector<double>(GetWidth() * (GetHeight() + 1));
+			output.matrix = std::vector<double>((GetWidth() * 2) * (GetHeight() + 1));
 			output.Height++;
 
 			for (int col = 1; col <= GetWidth(); col++) {
@@ -722,7 +730,7 @@ namespace Linal
 		}
 		Matrix<Linal::G3D::Vector> RemoveHelpLine() {
 			Matrix<G3D::Vector> output = Matrix<G3D::Vector>{ GetWidth() };
-			output.matrix = std::vector<double>(GetWidth() * 3);
+			output.matrix = std::vector<double>((GetWidth() * 2) * 3);
 			output.Height = 3;
 
 			for (int col = 1; col <= GetWidth(); col++)
@@ -739,7 +747,8 @@ namespace Linal
 		std::vector<double> matrix;
 
 		int ConvertToIndex(int col, int row) const {
-			return (col - 1)*Width + (row - 1);
+			int actualWidth = Width * 2;
+			return (row - 1)*actualWidth + (col - 1);
 		}
 	private:
 		int Width;
