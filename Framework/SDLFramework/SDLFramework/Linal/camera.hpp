@@ -85,7 +85,7 @@ namespace Linal
 
 	void Camera::Draw(FWApplication*& application, Linal::Matrix<Linal::G3D::Vector> wereldmatrix)
 	{
-		auto projectiematrix = Linal::GetPerspectiveMatrix(1, 100, 90);
+		auto projectiematrix = Linal::GetPerspectiveMatrix(1, 1000, 90);
 		auto weergavePunten = projectiematrix * cameraMatrix * wereldmatrix;
 
 		for (int index = 2; index <= weergavePunten.GetWidth(); index++)

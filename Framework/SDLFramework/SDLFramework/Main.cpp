@@ -83,8 +83,8 @@ void RotateObject(Linal::Matrix<Linal::G2D::Point>& matrix, double degree, doubl
 int main(int args[])
 {
 	//camera variables
-	int eyeX = 0, eyeY = 0, eyeZ = 4;
-	int lookAtX = 4, lookAtY = 4, lookAtZ = 4;
+	int eyeX = 0, eyeY = 0, eyeZ = 0;
+	int lookAtX = 400, lookAtY = 400, lookAtZ = 400;
 	//auto window = Window::CreateSDLWindow();
 	auto application = new FWApplication(0, 25, 600, 600);
 	if (!application->GetWindow())
@@ -110,9 +110,9 @@ int main(int args[])
 
 	auto canvas = Linal::Matrix<Linal::G3D::Vector>{ 4 };
 	auto origin = Linal::G3D::Vector(0, 0, 0, 0, 0, 0);
-	auto xLine = Linal::G3D::Vector(1000, 0, 0, 0, 0, 0);
-	auto yLine = Linal::G3D::Vector(0, 1000, 0, 0, 0, 0);
-	auto zLine = Linal::G3D::Vector(0, 0, 1000, 0, 0, 0);
+	auto xLine = Linal::G3D::Vector(100000, 0, 0, 0, 0, 0);
+	auto yLine = Linal::G3D::Vector(0, 100000, 0, 0, 0, 0);
+	auto zLine = Linal::G3D::Vector(0, 0, 100000, 0, 0, 0);
 
 	canvas.Set(1, origin);
 	canvas.Set(2, xLine);
@@ -120,14 +120,14 @@ int main(int args[])
 	canvas.Set(4, zLine);
 
 	auto cube = Linal::Matrix<Linal::G3D::Point>{ 8 };
-	auto topleftfront = Linal::G3D::Point(4, 8, 2);
-	auto toprightfront = Linal::G3D::Point(8, 8, 2);
-	auto bottomleftfront = Linal::G3D::Point(4, 4, 2);
-	auto bottomrightfront = Linal::G3D::Point(8, 4, 2);
-	auto topleftback = Linal::G3D::Point(4, 8, 6);
-	auto toprightback = Linal::G3D::Point(8, 8, 6);
-	auto bottomleftback = Linal::G3D::Point(4, 4, 6);
-	auto bottomrightback = Linal::G3D::Point(8, 4, 6);
+	auto topleftfront = Linal::G3D::Point(400, 800, 200);
+	auto toprightfront = Linal::G3D::Point(800, 800, 200);
+	auto bottomleftfront = Linal::G3D::Point(400, 400, 200);
+	auto bottomrightfront = Linal::G3D::Point(800, 400, 200);
+	auto topleftback = Linal::G3D::Point(400, 800, 600);
+	auto toprightback = Linal::G3D::Point(800, 800, 600);
+	auto bottomleftback = Linal::G3D::Point(400, 400, 600);
+	auto bottomrightback = Linal::G3D::Point(800, 400, 600);
 
 	cube.Set(1, topleftfront);
 	cube.Set(2, toprightfront);
@@ -160,43 +160,43 @@ int main(int args[])
 				switch (event.key.keysym.sym) {
 				case 119:
 					std::cout << " w" << std::endl;
-					eyeZ++;
+					eyeZ += Linal::CAMERASTEP;
 					break;
 				case 115:
 					std::cout << " s" << std::endl;
-					eyeZ--;
+					eyeZ -= Linal::CAMERASTEP;
 					break;
 				case 100:
 					std::cout << " d" << std::endl;
-					eyeX++;
+					eyeX += Linal::CAMERASTEP;
 					break;
 				case 97:
 					std::cout << " a" << std::endl;
-					eyeX--;
+					eyeX -= Linal::CAMERASTEP;
 					break;
 				case 61:
 					std::cout << " +" << std::endl;
-					eyeY++;
+					eyeY -= Linal::CAMERASTEP;
 					break;
 				case 45:
 					std::cout << " -" << std::endl;
-					eyeY--;
+					eyeY += Linal::CAMERASTEP;
 					break;
 				case SDLK_DOWN:
 					std::cout << " down arrow" << std::endl;
-					lookAtY--;
+					lookAtY -= Linal::CAMERASTEP;
 					break;
 				case SDLK_UP:
 					std::cout << " up arrow" << std::endl;
-					lookAtY++;
+					lookAtY += Linal::CAMERASTEP;
 					break;
 				case SDLK_LEFT:
 					std::cout << " left arrow" << std::endl;
-					lookAtX--;
+					lookAtX -= Linal::CAMERASTEP;
 					break;
 				case SDLK_RIGHT:
 					std::cout << " right arrow" << std::endl;
-					lookAtX++;
+					lookAtX += Linal::CAMERASTEP;
 					break;
 				case SDLK_ESCAPE:
 					application->Quit();

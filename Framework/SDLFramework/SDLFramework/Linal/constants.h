@@ -11,6 +11,7 @@ namespace Linal
 	static const int	FIELDHEIGHT = 25;
 
 	static const int	POINTSIZE = 7;
+	static const int	CAMERASTEP = 10;
 }
 
 #endif // !LINAL_CONSTANTS
