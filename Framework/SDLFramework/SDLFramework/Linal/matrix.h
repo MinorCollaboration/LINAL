@@ -3,6 +3,9 @@
 #ifndef SDLFRAMEWORK_MATRIX
 #define SDLFRAMEWORK_MATRIX
 
+#define _USE_MATH_DEFINES
+#include <cmath>
+
 #include <memory>
 #include <iomanip>
 #include <math.h>
@@ -723,7 +726,7 @@ namespace Linal
 
 			for (int col = 1; col <= GetWidth(); col++) {
 				output.Set(col, Get(col));
-				output.matrix.at(ConvertToIndex(GetHeight() + 1, col)) = 1;
+				output.matrix.at(ConvertToIndex(col, GetHeight() + 1)) = 1;
 			}
 
 			return output;

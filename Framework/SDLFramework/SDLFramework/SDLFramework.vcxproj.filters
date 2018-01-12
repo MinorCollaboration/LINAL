@@ -19,6 +19,9 @@
     <ClCompile Include="Linal\graphical3D\3dvector.cpp">
       <Filter>linal\graphical3D</Filter>
     </ClCompile>
+    <ClCompile Include="cube.cpp">
+      <Filter>spaceshooter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Config.h" />
@@ -55,6 +58,9 @@
     <ClInclude Include="Linal\inoutproduct.hpp">
       <Filter>linal</Filter>
     </ClInclude>
+    <ClInclude Include="cube.h">
+      <Filter>spaceshooter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="linal">
@@ -68,6 +74,9 @@
     </Filter>
     <Filter Include="linal\graphical2D">
       <UniqueIdentifier>{126179ed-b3fe-4bb2-b623-f27655b32959}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="spaceshooter">
+      <UniqueIdentifier>{6df608f3-d3c9-4b29-b392-88dfcba14c04}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

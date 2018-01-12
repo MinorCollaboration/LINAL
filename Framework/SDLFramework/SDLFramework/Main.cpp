@@ -14,8 +14,7 @@
 #include "./Linal/matrix.h"
 #include "./Linal/graphical2D/canvas.h"
 
-
-
+#include "./cube.h"
 
 void ScaleObject(Linal::Matrix<Linal::G2D::Point>& matrix, double scaleX, double scaleY)
 {
@@ -126,24 +125,7 @@ int main(int args[])
 	canvas.Set(2, yLine);
 	canvas.Set(3, zLine);
 
-	auto cube = Linal::Matrix<Linal::G3D::Point>{ 8 };
-	auto topleftfront = Linal::G3D::Point(400, 800, 200);
-	auto toprightfront = Linal::G3D::Point(800, 800, 200);
-	auto bottomleftfront = Linal::G3D::Point(400, 400, 200);
-	auto bottomrightfront = Linal::G3D::Point(800, 400, 200);
-	auto topleftback = Linal::G3D::Point(400, 800, 600);
-	auto toprightback = Linal::G3D::Point(800, 800, 600);
-	auto bottomleftback = Linal::G3D::Point(400, 400, 600);
-	auto bottomrightback = Linal::G3D::Point(800, 400, 600);
-
-	cube.Set(1, topleftfront);
-	cube.Set(2, toprightfront);
-	cube.Set(3, bottomleftfront);
-	cube.Set(4, bottomrightfront);
-	cube.Set(5, bottomleftback);
-	cube.Set(6, bottomrightback);
-	cube.Set(7, topleftback);
-	cube.Set(8, toprightback);
+	auto cube = Spaceshooter::Cube(200, 200, 200, 400);
 
 	bool debug = true;
 
@@ -230,7 +212,8 @@ int main(int args[])
 		//RotateObjectOnYAxis(cube, 90 / 30, 6, 6, 4);
 
 		camera.Draw(application, canvas);
-		camera.Draw(application, cube);
+		camera.Draw(application, cube.GetPolygons());
+		camera.Draw(application, cube.GetConnections());
 
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));

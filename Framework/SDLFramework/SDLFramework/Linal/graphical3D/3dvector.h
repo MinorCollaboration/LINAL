@@ -49,6 +49,8 @@ namespace Linal
 		private:
 			Color myColor;
 		};
+
+		Vector GetConnection(Point a, Point b);
 	}
 }
 
