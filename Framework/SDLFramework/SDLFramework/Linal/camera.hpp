@@ -88,6 +88,10 @@ namespace Linal
 		auto projectiematrix = Linal::GetPerspectiveMatrix(1, 1000, 90);
 		auto weergavePunten = projectiematrix * cameraMatrix * wereldmatrix;
 
+		auto x = weergavePunten.Get(1);
+		auto y = weergavePunten.Get(2);
+		auto z = weergavePunten.Get(3);
+
 		for (int index = 1; index <= weergavePunten.GetWidth(); index++)
 		{
 			auto p = weergavePunten.Get(index);

@@ -362,7 +362,7 @@ namespace Linal
 		}
 
 		for (int row = 1; row <= output.GetHeight(); row++) {
-			for (int col = 1; col <= output.GetWidth(); col++) {
+			for (int col = 1; col <= output.GetWidth() * 2; col++) {
 				T val = 0;
 				for (int colrows = 1; colrows <= Width; colrows++)
 					val += lhs.Get(row, colrows) * rhs.matrix.at(rhs.ConvertToIndex(col, colrows));

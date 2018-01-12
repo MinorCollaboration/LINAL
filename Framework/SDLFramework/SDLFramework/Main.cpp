@@ -109,19 +109,22 @@ int main(int args[])
 	spaceship.Set(1, Linal::G3D::Point(0, 0, 0));
 
 	auto canvas = Linal::Matrix<Linal::G3D::Vector>{ 3 };
-	auto xLine = Linal::G3D::Vector(1, 2, 3, 4, 5, 6);
-	auto yLine = Linal::G3D::Vector(7, 8, 9, 10, 11, 12);
-	auto zLine = Linal::G3D::Vector(13, 14, 15, 16, 17, 18);
+	auto xLine = Linal::G3D::Vector(99999, 0, 0,
+										0, 0, 0);
+	auto yLine = Linal::G3D::Vector(0, 99999, 0,
+										0, 0, 0);
+	auto zLine = Linal::G3D::Vector(0, 0, 99999,
+										0, 0, 0);
 
-	canvas = canvas.AddHelpLine();
+	/*
+	1 - 0 - 0 - 0 - 0 - 0
+	0 - 0 - 1 - 0 - 0 - 0
+	0 - 0 - 0 - 0 - 1 - 0
+	/* */
 
 	canvas.Set(1, xLine);
 	canvas.Set(2, yLine);
 	canvas.Set(3, zLine);
-
-	auto x = canvas.Get(1);
-	auto y = canvas.Get(2);
-	auto z = canvas.Get(3);
 
 	auto cube = Linal::Matrix<Linal::G3D::Point>{ 8 };
 	auto topleftfront = Linal::G3D::Point(400, 800, 200);

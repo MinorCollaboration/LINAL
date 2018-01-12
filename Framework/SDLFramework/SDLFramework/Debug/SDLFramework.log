@@ -1,5 +1,5 @@
 ﻿  Main.cpp
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\camera.hpp(81): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\camera.hpp(106): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\camera.hpp(110): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\matrix.h(124): warning C4172: returning address of local variable or temporary: copiedMatrix
   SDLFramework.vcxproj -> C:\Users\mark_\Documents\Herkansingen\LINAL\Framework\SDLFramework\Debug\SDLFramework.exe
