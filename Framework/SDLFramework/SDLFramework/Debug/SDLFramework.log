@@ -1,10 +1,2 @@
-﻿  Main.cpp
-c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\math.h(1001): warning C4005: 'M_PI': macro redefinition
-  c:\users\mark_\documents\herkansingen\linal\framework\sdl2-2.0.3\include\sdl_stdinc.h(350): note: see previous definition of 'M_PI'
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\camera.hpp(81): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\camera.hpp(114): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  Generating Code...
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\matrix.h(127): warning C4172: returning address of local variable or temporary: copiedMatrix
-  Skipping... (no relevant changes detected)
-  cube.cpp
+﻿  cube.cpp
   SDLFramework.vcxproj -> C:\Users\mark_\Documents\Herkansingen\LINAL\Framework\SDLFramework\Debug\SDLFramework.exe

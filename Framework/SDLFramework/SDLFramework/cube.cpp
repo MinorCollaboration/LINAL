@@ -24,7 +24,7 @@ Cube::Cube(double offsetX, double offsetY, double offsetZ, double size)
 	points.Set(7, bottomleftback);
 	points.Set(8, bottomrightback);
 
-	connections = Linal::Matrix<Linal::G3D::Vector>{ 12 };
+	connections = Linal::Matrix<Linal::G3D::Vector>{ 8 };
 
 	auto fronttop = Linal::G3D::GetConnection(topleftfront, toprightfront);
 	auto frontright = Linal::G3D::GetConnection(toprightfront, bottomrightfront);
@@ -36,10 +36,12 @@ Cube::Cube(double offsetX, double offsetY, double offsetZ, double size)
 	auto backbottom = Linal::G3D::GetConnection(bottomrightback, bottomleftback);
 	auto backleft = Linal::G3D::GetConnection(bottomleftback, topleftback);
 
+	/* *
 	auto topleft = Linal::G3D::GetConnection(topleftfront, topleftback);
 	auto topright = Linal::G3D::GetConnection(toprightfront, toprightback);
 	auto bottomright = Linal::G3D::GetConnection(bottomrightfront, bottomrightback);
 	auto bottomleft = Linal::G3D::GetConnection(bottomleftfront, bottomleftback);
+	/* */
 
 	connections.Set(1, fronttop);
 	/* */
@@ -52,6 +54,7 @@ Cube::Cube(double offsetX, double offsetY, double offsetZ, double size)
 	connections.Set(7, backbottom);
 	connections.Set(8, backleft);
 
+	/* *
 	connections.Set(9, topleft);
 	connections.Set(10, topright);
 	connections.Set(11, bottomright);

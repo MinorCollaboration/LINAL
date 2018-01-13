@@ -13,6 +13,7 @@
 #include "./Linal/constants.h"
 #include "./Linal/matrix.h"
 #include "./Linal/graphical2D/canvas.h"
+#include "spaceship.h"
 
 #include "./cube.h"
 
@@ -81,9 +82,18 @@ void RotateObject(Linal::Matrix<Linal::G2D::Point>& matrix, double degree, doubl
 
 int main(int args[])
 {
+	//ship
+	spaceship ship;
+
 	//camera variables
 	int eyeX = 0, eyeY = 0, eyeZ = 0;
 	int lookAtX = 400, lookAtY = 400, lookAtZ = 400;
+	int camera_x = 0;
+	int camera_y = 0;
+	int camera_z = 4;
+	int camera_move_x = 1;
+	int camera_move_y = 1;
+	int camera_move_z = 1;
 	//auto window = Window::CreateSDLWindow();
 	auto application = new FWApplication(0, 25, 600, 600);
 	if (!application->GetWindow())
@@ -135,6 +145,7 @@ int main(int args[])
 	{
 		application->StartTick();
 
+
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
 		{
@@ -166,18 +177,21 @@ int main(int args[])
 				case 61:
 					std::cout << " +" << std::endl;
 					eyeY -= Linal::CAMERASTEP;
+					camera_y++;
 					break;
 				case 45:
 					std::cout << " -" << std::endl;
 					eyeY += Linal::CAMERASTEP;
+					camera_y--;
 					break;
 				case SDLK_DOWN:
 					std::cout << " down arrow" << std::endl;
 					lookAtY -= Linal::CAMERASTEP;
 					break;
 				case SDLK_UP:
-					std::cout << " up arrow" << std::endl;
+					std::cout << "move ship" << std::endl;
 					lookAtY += Linal::CAMERASTEP;
+					ship.moveObject(1);
 					break;
 				case SDLK_LEFT:
 					std::cout << " left arrow" << std::endl;
@@ -192,10 +206,30 @@ int main(int args[])
 					break;
 				default:
 					std::cout << "none" << std::endl;
+				case SDLK_e:
+					std::cout << "min" << std::endl;
+					camera_move_x--;
+					break;
+				case SDLK_r:
+					std::cout << "min" << std::endl;
+					camera_move_y--;
+					break;
+				case SDLK_t:
+					std::cout << "min" << std::endl;
+					camera_move_z--;
+					break;
+				case SDLK_q:
+					std::cout << "rotate ship" << std::endl;
+					ship.RotateObjectOnXAxis( 90 / 30, 6, 6, 4);
 					break;
 				}
+				/* *
+				std::cout << "Eye (" << camera_x << "," << camera_y << "," << camera_z << ")" << std::endl;
+				std::cout << "LookAt (" << camera_move_x << "," << camera_move_y << "," << camera_move_z << ")" << std::endl;
+				/* */
 				std::cout << "Eye (" << eyeX << "," << eyeY << "," << eyeZ << ")" << std::endl;
 				std::cout << "LookAt (" << lookAtX << "," << lookAtY << "," << lookAtZ << ")" << std::endl;
+				/* */
 			default:
 				break;
 			}
@@ -203,6 +237,7 @@ int main(int args[])
 		auto camera = Linal::Camera(0, 0, 600, 600, Linal::GetCameraMatrix(eyeX, eyeY, eyeZ, lookAtX, lookAtY, lookAtZ));
 
 		//canvas->Draw(application);
+		//auto camera = Linal::Camera(0, 0, 600, 600, Linal::GetCameraMatrix(camera_x, camera_y, camera_z, camera_move_x, camera_move_y, camera_move_z));
 
 		//camera5.SetCameraMatrix(Linal::GetCameraMatrix(1, frameCount, -15, 1, 1, 1));
 		//RotateObjectOnYAxis(cube, 90 / 30, 6, 6, 4);
@@ -210,10 +245,12 @@ int main(int args[])
 		camera.Draw(application, "General");
 
 		//RotateObjectOnYAxis(cube, 90 / 30, 6, 6, 4);
+		auto matrix = ship.get_ship_matrix();
 
 		camera.Draw(application, canvas);
 		camera.Draw(application, cube.GetPolygons());
 		camera.Draw(application, cube.GetConnections());
+		//camera.Draw(application, matrix);
 
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));
