@@ -13,6 +13,7 @@
 #include "./Linal/constants.h"
 #include "./Linal/matrix.h"
 #include "./Linal/graphical2D/canvas.h"
+#include "spaceship.h"
 
 
 
@@ -81,10 +82,16 @@ void RotateObject(Linal::Matrix<Linal::G2D::Point>& matrix, double degree, doubl
 
 int main(int args[])
 {
+	//ship
+	spaceship ship;
+
 	//camera variables
 	int camera_x = 0;
 	int camera_y = 0;
-	int camera_z = 0;
+	int camera_z = 4;
+	int camera_move_x = 1;
+	int camera_move_y = 1;
+	int camera_move_z = 1;
 	//auto window = Window::CreateSDLWindow();
 	auto application = new FWApplication(0, 25, 600, 600);
 	if (!application->GetWindow())
@@ -105,27 +112,7 @@ int main(int args[])
 
 	auto canvas{ std::unique_ptr<Linal::G2D::Canvas>{ new Linal::G2D::Canvas() } };
 
-	auto spaceship = Linal::Matrix<Linal::G3D::Point>{ 1 };
-	spaceship.Set(1, Linal::G3D::Point(0, 0, 0));
 
-	auto cube = Linal::Matrix<Linal::G3D::Point>{ 8 };
-	auto topleftfront = Linal::G3D::Point(4, 8, 2);
-	auto toprightfront = Linal::G3D::Point(8, 8, 2);
-	auto bottomleftfront = Linal::G3D::Point(4, 4, 2);
-	auto bottomrightfront = Linal::G3D::Point(8, 4, 2);
-	auto topleftback = Linal::G3D::Point(4, 8, 6);
-	auto toprightback = Linal::G3D::Point(8, 8, 6);
-	auto bottomleftback = Linal::G3D::Point(4, 4, 6);
-	auto bottomrightback = Linal::G3D::Point(8, 4, 6);
-
-	cube.Set(1, topleftfront);
-	cube.Set(2, toprightfront);
-	cube.Set(3, bottomrightfront);
-	cube.Set(4, bottomleftfront);
-	cube.Set(5, bottomleftback);
-	cube.Set(6, bottomrightback);
-	cube.Set(7, toprightback);
-	cube.Set(8, topleftback);
 
 
 	bool debug = true;
@@ -135,6 +122,7 @@ int main(int args[])
 	while (application->IsRunning())
 	{
 		application->StartTick();
+
 
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
@@ -165,26 +153,47 @@ int main(int args[])
 					std::cout << "left" << std::endl;
 					camera_x--;
 					break;
-				case 43:
+				case 61:
+					std::cout << "plus" << std::endl;
 					camera_y++;
 					break;
 				case SDLK_MINUS:
+					std::cout << "min" << std::endl;
 					camera_y--;
+					break;
+				case SDLK_e:
+					std::cout << "min" << std::endl;
+					camera_move_x--;
+					break;
+				case SDLK_r:
+					std::cout << "min" << std::endl;
+					camera_move_y--;
+					break;
+				case SDLK_t:
+					std::cout << "min" << std::endl;
+					camera_move_z--;
+					break;
+				case SDLK_q:
+					std::cout << "rotate ship" << std::endl;
+					ship.RotateObjectOnXAxis( 90 / 30, 6, 6, 4);
+
+
 					break;
 				}
 			default:
 				break;
 			}
 		}
-		auto camera = Linal::Camera(0, 0, 600, 600, Linal::GetCameraMatrix(camera_x, camera_y, camera_z, 1, 1, 1));
+		auto camera = Linal::Camera(0, 0, 600, 600, Linal::GetCameraMatrix(camera_x, camera_y, camera_z, camera_move_x, camera_move_y, camera_move_z));
 
 		canvas->Draw(application);
 
 		camera.Draw(application, "General");
 
 		//RotateObjectOnYAxis(cube, 90 / 30, 6, 6, 4);
+		auto matrix = ship.get_ship_matrix();
 
-		camera.Draw(application, cube);
+		camera.Draw(application, matrix);
 
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));

@@ -55,6 +55,9 @@
     <ClInclude Include="Linal\inoutproduct.hpp">
       <Filter>linal</Filter>
     </ClInclude>
+    <ClInclude Include="spaceship.h">
+      <Filter>linal\models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="linal">
@@ -68,6 +71,9 @@
     </Filter>
     <Filter Include="linal\graphical2D">
       <UniqueIdentifier>{126179ed-b3fe-4bb2-b623-f27655b32959}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="linal\models">
+      <UniqueIdentifier>{838650bb-9311-4927-a25c-cdf9ea7342cf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

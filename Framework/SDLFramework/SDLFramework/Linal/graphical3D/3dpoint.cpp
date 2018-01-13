@@ -25,7 +25,9 @@ void Linal::G3D::Point::Draw(FWApplication *& application, int offsetX, int offs
 	double finalXAxis = xAxis + (sqrtZ - zAxis);
 	double finalYAxis = yAxis + (sqrtZ - zAxis);
 
+
 	application->DrawCircle(offsetX + (finalXAxis * Linal::FIELDWIDTH), offsetY - (finalYAxis * Linal::FIELDHEIGHT), Linal::POINTSIZE, true);
+
 }
 
 Linal::G3D::Vector operator*(const int & lhs, const Linal::G3D::Point & rhs)
