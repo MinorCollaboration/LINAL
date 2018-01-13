@@ -27,7 +27,14 @@ public:
 	{
 		auto rotate = Linal::Get2DRotateMatrix(degree);
 		ship_matrix = rotate * ship_matrix;
+
 	}
+	void moveObject (double originX){
+		auto translate = Linal::Get3DTranslateMatrix(originX, 0, 0);
+		ship_matrix = translate * ship_matrix;
+	}
+	
+	
 
 	/*
 	*/

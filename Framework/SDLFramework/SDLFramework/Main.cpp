@@ -176,8 +176,10 @@ int main(int args[])
 				case SDLK_q:
 					std::cout << "rotate ship" << std::endl;
 					ship.RotateObjectOnXAxis( 90 / 30, 6, 6, 4);
-
-
+					break;
+				case SDLK_UP:
+					std::cout << "move ship" << std::endl;
+					ship.moveObject(1);
 					break;
 				}
 			default:
