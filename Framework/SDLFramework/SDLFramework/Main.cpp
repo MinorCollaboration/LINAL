@@ -125,7 +125,7 @@ int main(int args[])
 	canvas.Set(2, yLine);
 	canvas.Set(3, zLine);
 
-	auto cube = Spaceshooter::Cube(200, 200, 200, 400);
+	auto cube = Spaceshooter::Cube(200, 200, -200, 400);
 
 	bool debug = true;
 

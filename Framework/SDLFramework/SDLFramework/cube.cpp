@@ -26,20 +26,37 @@ Cube::Cube(double offsetX, double offsetY, double offsetZ, double size)
 
 	connections = Linal::Matrix<Linal::G3D::Vector>{ 12 };
 
-	connections.Set(1, Linal::G3D::GetConnection(topleftfront, toprightfront));
-	connections.Set(2, Linal::G3D::GetConnection(toprightfront, bottomrightfront));
-	connections.Set(3, Linal::G3D::GetConnection(bottomrightfront, bottomleftfront));
-	connections.Set(4, Linal::G3D::GetConnection(bottomleftfront, topleftfront));
+	auto fronttop = Linal::G3D::GetConnection(topleftfront, toprightfront);
+	auto frontright = Linal::G3D::GetConnection(toprightfront, bottomrightfront);
+	auto frontbottom = Linal::G3D::GetConnection(bottomrightfront, bottomleftfront);
+	auto frontleft = Linal::G3D::GetConnection(bottomleftfront, topleftfront);
 
-	connections.Set(5, Linal::G3D::GetConnection(topleftback, toprightback));
-	connections.Set(6, Linal::G3D::GetConnection(toprightback, bottomrightback));
-	connections.Set(7, Linal::G3D::GetConnection(bottomrightback, bottomleftback));
-	connections.Set(8, Linal::G3D::GetConnection(bottomleftback, topleftback));
+	auto backtop = Linal::G3D::GetConnection(topleftback, toprightback);
+	auto backright = Linal::G3D::GetConnection(toprightback, bottomrightback);
+	auto backbottom = Linal::G3D::GetConnection(bottomrightback, bottomleftback);
+	auto backleft = Linal::G3D::GetConnection(bottomleftback, topleftback);
 
-	connections.Set(9, Linal::G3D::GetConnection(topleftfront, topleftback));
-	connections.Set(10, Linal::G3D::GetConnection(toprightfront, toprightback));
-	connections.Set(11, Linal::G3D::GetConnection(bottomrightfront, bottomrightback));
-	connections.Set(12, Linal::G3D::GetConnection(bottomleftfront, bottomleftback));
+	auto topleft = Linal::G3D::GetConnection(topleftfront, topleftback);
+	auto topright = Linal::G3D::GetConnection(toprightfront, toprightback);
+	auto bottomright = Linal::G3D::GetConnection(bottomrightfront, bottomrightback);
+	auto bottomleft = Linal::G3D::GetConnection(bottomleftfront, bottomleftback);
+
+	connections.Set(1, fronttop);
+	/* */
+	connections.Set(2, frontright);
+	connections.Set(3, frontbottom);
+	connections.Set(4, frontleft);
+
+	connections.Set(5, backtop);
+	connections.Set(6, backright);
+	connections.Set(7, backbottom);
+	connections.Set(8, backleft);
+
+	connections.Set(9, topleft);
+	connections.Set(10, topright);
+	connections.Set(11, bottomright);
+	connections.Set(12, bottomleft);
+	/* */
 }
 
 Linal::Matrix<Linal::G3D::Point> Spaceshooter::Cube::GetPolygons() const

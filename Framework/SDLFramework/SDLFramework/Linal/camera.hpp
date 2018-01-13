@@ -85,12 +85,8 @@ namespace Linal
 
 	void Camera::Draw(FWApplication*& application, Linal::Matrix<Linal::G3D::Vector> wereldmatrix)
 	{
-		auto projectiematrix = Linal::GetPerspectiveMatrix(1, 1000, 90);
+		auto projectiematrix = Linal::GetPerspectiveMatrix(1, 100, 90);
 		auto weergavePunten = projectiematrix * cameraMatrix * wereldmatrix;
-
-		auto x = weergavePunten.Get(1);
-		auto y = weergavePunten.Get(2);
-		auto z = weergavePunten.Get(3);
 
 		for (int index = 1; index <= weergavePunten.GetWidth(); index++)
 		{
@@ -101,13 +97,21 @@ namespace Linal
 			auto y = (height / 2) + ((p.yAxis + 1) / w) * height * 0.5;
 
 			auto ow = weergavePunten.matrix.at(weergavePunten.ConvertToIndex((index * 2), 4));
-			auto ox = (width / 2) + ((p.startingX + 1) / w) * width * 0.5;
-			auto oy = (height / 2) + ((p.startingY + 1) / w) * width * 0.5;
+			auto ox = (width / 2) + ((p.startingX + 1) / ow) * width * 0.5;
+			auto oy = (height / 2) + ((p.startingY + 1) / ow) * height * 0.5;
 			//auto z = -p.zAxis;
 
 			if (w >= 0 || ow >= 0) {
 				//application->DrawCircle(startX + (p.xAxis  * (Linal::FIELDWIDTH / 2)), (startY + height) - (p.yAxis * (Linal::FIELDHEIGHT / 2)), Linal::POINTSIZE, true);
-				application->DrawLine(startX + ox, (startY + height) - oy, startX + x, (startY + height) - y, 2);
+				//application->DrawLine(startX + x, (startY + height) - y, startX + (x + ox), (startY + height) - (y + oy), 2);
+
+				auto startingX = startX + ox;
+				auto startingY = (startY + height) - oy;
+
+				auto finalX = startX + x;
+				auto finalY = (startY + height) - y;
+
+				application->DrawLine(startingX, startingY, startingX + finalX, startingY - finalY);
 			}
 		}
 	}
