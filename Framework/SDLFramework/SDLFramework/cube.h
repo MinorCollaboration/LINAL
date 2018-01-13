@@ -15,6 +15,8 @@ namespace Spaceshooter
 	public:
 		Cube(double offsetX, double offsetY, double offsetZ, double size);
 
+		Linal::G3D::Point Shoot();
+
 		Linal::Matrix<Linal::G3D::Point> GetPolygons() const;
 		Linal::Matrix<Linal::G3D::Vector> GetConnections() const;
 	private:

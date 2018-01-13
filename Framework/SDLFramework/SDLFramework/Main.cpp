@@ -159,19 +159,19 @@ int main(int args[])
 				std::cout << "key pressed " << event.key.keysym.sym << " interperterd as";
 				switch (event.key.keysym.sym) {
 				case 119:
-					std::cout << " w" << std::endl;
+					std::cout << " W" << std::endl;
 					eyeZ += Linal::CAMERASTEP;
 					break;
 				case 115:
-					std::cout << " s" << std::endl;
+					std::cout << " S" << std::endl;
 					eyeZ -= Linal::CAMERASTEP;
 					break;
 				case 100:
-					std::cout << " d" << std::endl;
+					std::cout << " D" << std::endl;
 					eyeX += Linal::CAMERASTEP;
 					break;
 				case 97:
-					std::cout << " a" << std::endl;
+					std::cout << " A" << std::endl;
 					eyeX -= Linal::CAMERASTEP;
 					break;
 				case 61:
@@ -189,7 +189,7 @@ int main(int args[])
 					lookAtY -= Linal::CAMERASTEP;
 					break;
 				case SDLK_UP:
-					std::cout << "move ship" << std::endl;
+					std::cout << " up arrow" << std::endl;
 					lookAtY += Linal::CAMERASTEP;
 					ship.moveObject(1);
 					break;
@@ -204,24 +204,24 @@ int main(int args[])
 				case SDLK_ESCAPE:
 					application->Quit();
 					break;
-				default:
-					std::cout << "none" << std::endl;
 				case SDLK_e:
-					std::cout << "min" << std::endl;
+					std::cout << " E" << std::endl;
 					camera_move_x--;
 					break;
 				case SDLK_r:
-					std::cout << "min" << std::endl;
+					std::cout << " R" << std::endl;
 					camera_move_y--;
 					break;
 				case SDLK_t:
-					std::cout << "min" << std::endl;
+					std::cout << " T" << std::endl;
 					camera_move_z--;
 					break;
 				case SDLK_q:
 					std::cout << "rotate ship" << std::endl;
-					ship.RotateObjectOnXAxis( 90 / 30, 6, 6, 4);
+					ship.RotateObjectOnXAxis(90 / 30, 6, 6, 4);
 					break;
+				default:
+					std::cout << "none" << std::endl;
 				}
 				/* *
 				std::cout << "Eye (" << camera_x << "," << camera_y << "," << camera_z << ")" << std::endl;

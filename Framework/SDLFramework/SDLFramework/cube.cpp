@@ -10,6 +10,7 @@ Cube::Cube(double offsetX, double offsetY, double offsetZ, double size)
 	auto toprightfront		= Linal::G3D::Point(offsetX + size, offsetY + size, offsetZ);
 	auto bottomleftfront	= Linal::G3D::Point(offsetX, offsetY, offsetZ);
 	auto bottomrightfront	= Linal::G3D::Point(offsetX + size, offsetY, offsetZ);
+
 	auto topleftback		= Linal::G3D::Point(offsetX, offsetY + size, offsetZ + size);
 	auto toprightback		= Linal::G3D::Point(offsetX + size, offsetY + size, offsetZ + size);
 	auto bottomleftback		= Linal::G3D::Point(offsetX, offsetY, offsetZ + size);
@@ -60,6 +61,15 @@ Cube::Cube(double offsetX, double offsetY, double offsetZ, double size)
 	connections.Set(11, bottomright);
 	connections.Set(12, bottomleft);
 	/* */
+}
+
+Linal::G3D::Point Spaceshooter::Cube::Shoot()
+{
+	auto midX = points.GetMaxX() - points.GetMinX();
+	auto midY = points.GetMaxY() - points.GetMinY();
+	auto midZ = points.GetMaxZ() - points.GetMinZ();
+
+	return Linal::G3D::Point(midX, midY, midZ);
 }
 
 Linal::Matrix<Linal::G3D::Point> Spaceshooter::Cube::GetPolygons() const
