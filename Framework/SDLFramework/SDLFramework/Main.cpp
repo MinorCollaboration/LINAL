@@ -125,7 +125,7 @@ int main(int args[])
 	while (application->IsRunning())
 	{
 		application->StartTick();
-
+		Linal::Camera camera = Linal::Camera(0, 0, 600, 600, Linal::GetCameraMatrix(camera_x, camera_y, camera_z, camera_move_x, camera_move_y, camera_move_z));
 
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
@@ -177,25 +177,33 @@ int main(int args[])
 					camera_move_z--;
 					break;
 				case SDLK_q:
-					std::cout << "rotate ship" << std::endl;
+					std::cout << "rotate ship x" << std::endl;
 					ship.RotateObjectOnXAxis( 90 / 30, 6, 6, 4);
+					break;
+				case SDLK_TAB:
+					std::cout << "rotate ship x" << std::endl;
+					ship.RotateObjectOnYAxis(90 / 30, 6, 6, 4);
 					break;
 				case SDLK_UP:
 					std::cout << "move ship" << std::endl;
-					ship.moveObject(1);
+					ship.moveObject(0.01);
+					break;
+				case SDLK_c:
+					std::cout << "rotate camera " << std::endl;
+					auto camera_matrix = camera.get_camera_matrix();
+					camera.RotateObjectOnXAxis(90 / 30, 6, 6, 4);
+					//RotateObjectOnYAxis(cam, 90 / 30, 6, 6, 4);
 					break;
 				}
 			default:
 				break;
 			}
 		}
-		auto camera = Linal::Camera(0, 0, 600, 600, Linal::GetCameraMatrix(camera_x, camera_y, camera_z, camera_move_x, camera_move_y, camera_move_z));
-
+		
 		canvas->Draw(application);
 
 		camera.Draw(application, "General");
 
-		//RotateObjectOnYAxis(cube, 90 / 30, 6, 6, 4);
 		auto matrix = ship.get_ship_matrix();
 		auto moon_matrix = moon.get_moon_matrix();
 

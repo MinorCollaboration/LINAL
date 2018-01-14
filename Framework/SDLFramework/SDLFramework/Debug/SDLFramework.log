@@ -1,5 +1,8 @@
 ﻿  Main.cpp
-c:\users\glenn\source\repos\linal\framework\sdlframework\sdlframework\linal\camera.hpp(74): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\glenn\source\repos\linal\framework\sdlframework\sdlframework\linal\camera.hpp(68): warning C4723: potential divide by 0
+c:\users\glenn\source\repos\linal\framework\sdlframework\sdlframework\linal\camera.hpp(90): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\glenn\source\repos\linal\framework\sdlframework\sdlframework\linal\camera.hpp(84): warning C4723: potential divide by 0
 c:\users\glenn\source\repos\linal\framework\sdlframework\sdlframework\linal\matrix.h(123): warning C4172: returning address of local variable or temporary: copiedMatrix
+     Creating library C:\Users\Glenn\Source\Repos\LINAL\Framework\SDLFramework\Debug\SDLFramework.lib and object C:\Users\Glenn\Source\Repos\LINAL\Framework\SDLFramework\Debug\SDLFramework.exp
+SDL2_gfx.lib(SDL2_gfxPrimitives.obj) : warning LNK4099: PDB 'SDL2_gfx.pdb' was not found with 'SDL2_gfx.lib(SDL2_gfxPrimitives.obj)' or at 'C:\Users\Glenn\Source\Repos\LINAL\Framework\SDLFramework\Debug\SDL2_gfx.pdb'; linking object as if no debug info
+SDL2_gfx.lib(SDL2_rotozoom.obj) : warning LNK4099: PDB 'SDL2_gfx.pdb' was not found with 'SDL2_gfx.lib(SDL2_rotozoom.obj)' or at 'C:\Users\Glenn\Source\Repos\LINAL\Framework\SDLFramework\Debug\SDL2_gfx.pdb'; linking object as if no debug info
   SDLFramework.vcxproj -> C:\Users\Glenn\Source\Repos\LINAL\Framework\SDLFramework\Debug\SDLFramework.exe

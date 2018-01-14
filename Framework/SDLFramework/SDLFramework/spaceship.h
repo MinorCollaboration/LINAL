@@ -23,21 +23,6 @@ public:
 		auto rotated = rotrans * ship_matrix;
 		ship_matrix = revertTranslate * rotated;
 	}
-	void RotateObject(double degree)
-	{
-		auto rotate = Linal::Get2DRotateMatrix(degree);
-		ship_matrix = rotate * ship_matrix;
-
-	}
-	void moveObject (double originX){
-		auto translate = Linal::Get3DTranslateMatrix(originX, 0, 0);
-		ship_matrix = translate * ship_matrix;
-	}
-	
-	
-
-	/*
-	*/
 	void RotateObjectOnYAxis( double degree, double originX, double originY, double originZ)
 	{
 		auto translate = Linal::Get3DTranslateMatrix(-originX, -originY, -originZ);
@@ -47,6 +32,22 @@ public:
 		auto rotated = (rotate * translate) * ship_matrix;
 		ship_matrix = revertTranslate * rotated;
 	}
+	void RotateObject(double degree)
+	{
+		auto rotate = Linal::Get2DRotateMatrix(degree);
+		ship_matrix = rotate * ship_matrix;
+
+	}
+	void moveObject (double originX){
+		auto translate = Linal::Get3DTranslateMatrix(originX, ship_matrix.GetMinX(), ship_matrix.GetMinY());
+		ship_matrix = translate * ship_matrix;
+	}
+	
+	
+
+	/*
+	*/
+	
 
 	Linal::Matrix<Linal::G3D::Point> get_ship_matrix() {
 		return ship_matrix;
