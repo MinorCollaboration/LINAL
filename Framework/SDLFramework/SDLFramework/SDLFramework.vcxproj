@@ -84,6 +84,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cube.cpp" />
     <ClCompile Include="FWApplication.cpp" />
     <ClCompile Include="Linal\graphical3D\3dpoint.cpp" />
     <ClCompile Include="Linal\graphical3D\3dvector.cpp" />
@@ -94,6 +95,7 @@
     <ClCompile Include="Linal\graphical2D\vector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cube.h" />
     <ClInclude Include="Linal\camera.hpp" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Linal\constants.h" />

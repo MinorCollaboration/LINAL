@@ -3,6 +3,9 @@
 #ifndef SDLFRAMEWORK_MATRIX
 #define SDLFRAMEWORK_MATRIX
 
+#define _USE_MATH_DEFINES
+#include <cmath>
+
 #include <memory>
 #include <iomanip>
 #include <math.h>
@@ -48,6 +51,7 @@ namespace Linal
 		Matrix<T> operator*(const Matrix<T>& rhs);
 		Matrix<G2D::Point> operator*(const Matrix<G2D::Point>& rhs);
 		Matrix<G3D::Point> operator*(const Matrix<G3D::Point>& rhs);
+		Matrix<G3D::Vector> operator*(const Matrix<G3D::Vector>& rhs);
 
 		Matrix<T>& AddHelpLine();
 		Matrix<T>& RemoveHelpLine();
@@ -290,19 +294,22 @@ namespace Linal
 		auto lhs = *this;
 		auto rhs = initialRhs;
 
-		int lhsHelpLines = 0;
-		int rhsHelpLines = 0;
+		int lhsHelpLines = 0, rhsHelpLines = 0, outputHelpLines = 0;
 
-		Matrix<G3D::Point> output = Matrix<G3D::Point>(rhs.GetWidth());
+		Matrix<G3D::Point> output = Matrix<G3D::Point>(rhs.GetWidth(), lhs.GetHeight());
 
 		if (lhs.GetWidth() < rhs.GetHeight()) {
 			AddHelpLine(lhs);
 			lhsHelpLines++;
 		}
 		else if (lhs.GetWidth() > rhs.GetHeight()) {
-			output = output.AddHelpLine();
 			rhs = rhs.AddHelpLine();
 			rhsHelpLines++;
+
+			if (lhs.GetWidth() > output.GetHeight()) {
+				output = output.AddHelpLine();
+				outputHelpLines++;
+			}
 		}
 
 		for (int row = 1; row <= output.GetHeight(); row++) {
@@ -315,16 +322,72 @@ namespace Linal
 			}
 		}
 
-		/*if (lhsHelpLines) {
+		if (lhsHelpLines) {
 			for (int i = 0; i < lhsHelpLines; i++)
 				lhs = RemoveHelpLine(lhs);
 		}
 		else if (rhsHelpLines) {
 			for (int i = 0; i < rhsHelpLines; i++) {
-				output = output.RemoveHelpLine();
 				rhs = rhs.RemoveHelpLine();
 			}
-		}*/
+			if (outputHelpLines) {
+				for (int i = 0; i < outputHelpLines; i++) {
+					output = output.RemoveHelpLine();
+				}
+			}
+		}
+
+		return output;
+	}
+
+	template<class T>
+	inline Matrix<G3D::Vector> Matrix<T>::operator*(const Matrix<G3D::Vector>& initialRhs)
+	{
+		auto lhs = *this;
+		auto rhs = initialRhs;
+
+		int lhsHelpLines = 0, rhsHelpLines = 0, outputHelpLines = 0;
+
+		Matrix<G3D::Vector> output = Matrix<G3D::Vector>(rhs.GetWidth(), lhs.GetHeight());
+
+		if (lhs.GetWidth() < rhs.GetHeight()) {
+			AddHelpLine(lhs);
+			lhsHelpLines++;
+		}
+		else if (lhs.GetWidth() > rhs.GetHeight()) {
+			rhs = rhs.AddHelpLine();
+			rhsHelpLines++;
+
+			if (lhs.GetWidth() > output.GetHeight()) {
+				output = output.AddHelpLine();
+				outputHelpLines++;
+			}
+		}
+
+		for (int row = 1; row <= output.GetHeight(); row++) {
+			for (int col = 1; col <= output.GetWidth() * 2; col++) {
+				T val = 0;
+				for (int colrows = 1; colrows <= Width; colrows++)
+					val += lhs.Get(row, colrows) * rhs.matrix.at(rhs.ConvertToIndex(col, colrows));
+
+				output.Set(col, row, val);
+			}
+		}
+
+		if (lhsHelpLines) {
+			for (int i = 0; i < lhsHelpLines; i++)
+				lhs = RemoveHelpLine(lhs);
+		}
+		else if (rhsHelpLines) {
+			for (int i = 0; i < rhsHelpLines; i++) {
+				rhs = rhs.RemoveHelpLine();
+			}
+			if (outputHelpLines) {
+				for (int i = 0; i < outputHelpLines; i++) {
+					output = output.RemoveHelpLine();
+				}
+			}
+		}
 
 		return output;
 	}
@@ -484,6 +547,9 @@ namespace Linal
 		Matrix(int cols) : Width(cols), Height(3) {
 			matrix = std::vector<double>(Width * Height);
 		}
+		Matrix(int cols, int rows) : Width(cols), Height(rows) {
+			matrix = std::vector<double>(Width * Height);
+		}
 		Matrix(const Matrix& toCopy)
 		{
 			Width = toCopy.Width;
@@ -564,24 +630,6 @@ namespace Linal
 
 				point.Draw(application, offsetX, offsetY);
 			}
-
-			/*for (int leftIndex = 1; leftIndex <= Width; leftIndex++)
-			{
-				int rightIndex = (leftIndex == Width) ? 1 : leftIndex + 1;
-				auto leftPoint = Get(leftIndex);
-				auto rightPoint = Get(rightIndex);
-
-				G3D::Vector v = G3D::Vector(
-					rightPoint.xAxis - leftPoint.xAxis,
-					rightPoint.yAxis - leftPoint.yAxis,
-					rightPoint.zAxis - leftPoint.zAxis,
-					leftPoint.xAxis,
-					leftPoint.yAxis,
-					leftPoint.zAxis
-				);
-
-				v.Draw(application, offsetX, offsetY);
-			}*/
 		}
 		Matrix<Linal::G3D::Point> AddHelpLine() {
 			Matrix<G3D::Point> output = Matrix<G3D::Point>{ GetWidth() };
@@ -621,6 +669,95 @@ namespace Linal
 		int Height;
 	};
 
+	template <>
+	class Matrix <Linal::G3D::Vector> {
+	public:
+		Matrix() : Width(1), Height(3) {
+			matrix = std::vector<double>((Width * 2) * Height);
+		}
+		Matrix(int cols) : Width(cols), Height(3) {
+			matrix = std::vector<double>((Width * 2) * Height);
+		}
+		Matrix(int cols, int rows) : Width(cols), Height(rows) {
+			matrix = std::vector<double>((Width * 2) * Height);
+		}
+		Matrix(const Matrix& toCopy)
+		{
+			Width = toCopy.Width;
+			Height = toCopy.Height;
+			matrix = toCopy.matrix;
+		}
+
+		Linal::G3D::Vector Get(int index) {
+			index = (index * 2) - 1;
+
+			return Linal::G3D::Vector(matrix.at(ConvertToIndex(index, 1)), matrix.at(ConvertToIndex(index, 2)), matrix.at(ConvertToIndex(index, 3)),
+									  matrix.at(ConvertToIndex(index + 1, 1)), matrix.at(ConvertToIndex(index + 1, 2)), matrix.at(ConvertToIndex(index + 1, 3)));
+		}
+		Linal::G3D::Vector Get(int index) const {
+			index = (index * 2) - 1;
+
+			return Linal::G3D::Vector(matrix.at(ConvertToIndex(index, 1)), matrix.at(ConvertToIndex(index, 2)), matrix.at(ConvertToIndex(index, 3)),
+									  matrix.at(ConvertToIndex(index + 1, 1)), matrix.at(ConvertToIndex(index + 1, 2)), matrix.at(ConvertToIndex(index + 1, 3)));
+		}
+		Matrix<Linal::G3D::Vector>& Set(int index, Linal::G3D::Vector p) {
+			index = (index * 2) - 1;
+
+			matrix.at(ConvertToIndex(index, 1)) = p.xAxis; // xDest
+			matrix.at(ConvertToIndex(index, 2)) = p.yAxis; // yDest
+			matrix.at(ConvertToIndex(index, 3)) = p.zAxis; // zDest
+
+			matrix.at(ConvertToIndex(index + 1, 1)) = p.startingX; // xOrig
+			matrix.at(ConvertToIndex(index + 1, 2)) = p.startingY; // yOrig
+			matrix.at(ConvertToIndex(index + 1, 3)) = p.startingZ; // zOrig
+
+			return *this;
+		}
+		Matrix<Linal::G3D::Vector>& Set(int col, int row, double val) {
+			matrix.at(ConvertToIndex(col, row)) = val;
+
+			return *this;
+		}
+
+		Matrix<Linal::G3D::Vector> AddHelpLine() {
+			Matrix<G3D::Vector> output = Matrix<G3D::Vector>{ GetWidth() };
+			output.matrix = std::vector<double>((GetWidth() * 2) * (GetHeight() + 1));
+			output.Height++;
+
+			for (int col = 1; col <= GetWidth(); col++) {
+				output.Set(col, Get(col));
+				output.matrix.at(ConvertToIndex(col, GetHeight() + 1)) = 1;
+			}
+
+			return output;
+		}
+		Matrix<Linal::G3D::Vector> RemoveHelpLine() {
+			Matrix<G3D::Vector> output = Matrix<G3D::Vector>{ GetWidth() };
+			output.matrix = std::vector<double>((GetWidth() * 2) * 3);
+			output.Height = 3;
+
+			for (int col = 1; col <= GetWidth(); col++)
+				output.Set(col, Get(col));
+
+			return output;
+		}
+
+		int GetWidth() { return Width; }
+		int GetWidth() const { return Width; }
+		int GetHeight() { return Height; }
+		int GetHeight() const { return Height; }
+	// protected:
+		std::vector<double> matrix;
+
+		int ConvertToIndex(int col, int row) const {
+			int actualWidth = Width * 2;
+			return (row - 1)*actualWidth + (col - 1);
+		}
+	private:
+		int Width;
+		int Height;
+	};
+
 	static Linal::Matrix<double> Get2DTranslateMatrix(double t, double s)
 	{
 		auto matrix = Linal::Matrix<double>(3, 3);
@@ -638,6 +775,18 @@ namespace Linal
 
 		matrix.Set(1, 1, xScale).Set(1, 2, 0);
 		matrix.Set(2, 1, 0).Set(2, 2, yScale);
+
+		return matrix;
+	}
+
+	static Linal::Matrix<double> Get3DScaleMatrix(double xScale, double yScale, double zScale)
+	{
+		auto matrix = Linal::Matrix<double>(4, 4);
+
+		matrix.Set(1, 1, xScale).Set(1, 2, 0).Set(1, 3, 0).Set(1, 4, 0);
+		matrix.Set(2, 1, 0).Set(2, 2, yScale).Set(2, 3, 0).Set(2, 4, 0);
+		matrix.Set(3, 1, 0).Set(3, 2, 0).Set(3, 3, zScale).Set(3, 4, 0);
+		matrix.Set(4, 1, 0).Set(4, 2, 0).Set(4, 3, 0).Set(4, 4, 1);
 
 		return matrix;
 	}
@@ -724,7 +873,7 @@ namespace Linal
 		matrix.Set(3, 1, 0)			.Set(3, 2, 0)			.Set(3, 3, 1).Set(3, 4, 0);
 		matrix.Set(4, 1, 0)			.Set(4, 2, 0)			.Set(4, 3, 0).Set(4, 4, 1);
 
-		return matrix;
+		return matrix; 
 	}
 
 	static Linal::Matrix<double> GetCameraMatrix(double eyeX, double eyeY, double eyeZ, double lookX, double lookY, double lookZ)
@@ -757,22 +906,12 @@ namespace Linal
 
 		matrix.Set(1, 1, scale)	.Set(1, 2, 0)		.Set(1, 3, 0)							.Set(1, 4, 0);
 		matrix.Set(2, 1, 0)		.Set(2, 2, scale)	.Set(2, 3, 0)							.Set(2, 4, 0);
-		matrix.Set(3, 1, 0)		.Set(3, 2, 0)		.Set(3, 3, -far / far-near)				.Set(3, 4, -1);
-		matrix.Set(4, 1, 0)		.Set(4, 2, 0)		.Set(4, 3, -far * near / far - near)	.Set(4, 4, 0);
+		matrix.Set(3, 1, 0)		.Set(3, 2, 0)		.Set(3, 3, -far / (far-near))			.Set(3, 4, -1);
+		matrix.Set(4, 1, 0)		.Set(4, 2, 0)		.Set(4, 3, (-far * near) / (far - near)).Set(4, 4, 0);
 
 		return matrix;
 	}
-	static Linal::Matrix<double> Get3DScaleMatrix(double xScale, double yScale, double zScale)
-	{
-		auto matrix = Linal::Matrix<double>(4, 4);
 
-		matrix.Set(1, 1, xScale).Set(1, 2, 0).Set(1, 3, 0).Set(1, 4, 0);
-		matrix.Set(2, 1, 0).Set(2, 2, yScale).Set(2, 3, 0).Set(2, 4, 0);
-		matrix.Set(3, 1, 0).Set(3, 2, 0).Set(3, 3, zScale).Set(3, 4, 0);
-		matrix.Set(4, 1, 0).Set(4, 2, 0).Set(4, 3, 0).Set(4, 4, 1);
-
-		return matrix;
-	}
 }
 
 #endif

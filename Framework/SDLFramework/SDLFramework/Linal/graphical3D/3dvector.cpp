@@ -105,3 +105,8 @@ Linal::G3D::Vector operator*(const double & lhs, const Linal::G3D::Vector & rhs)
 {
 	return Linal::G3D::Vector(lhs * rhs.xAxis, lhs * rhs.yAxis, lhs * rhs.xAxis);
 }
+
+Linal::G3D::Vector Linal::G3D::GetConnection(Point a, Point b)
+{
+	return Vector(b.xAxis - a.xAxis, b.yAxis - a.yAxis, b.zAxis - a.zAxis, a.xAxis, a.yAxis, a.zAxis);
+}

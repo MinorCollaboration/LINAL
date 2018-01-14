@@ -19,6 +19,9 @@
     <ClCompile Include="Linal\graphical3D\3dvector.cpp">
       <Filter>linal\graphical3D</Filter>
     </ClCompile>
+    <ClCompile Include="cube.cpp">
+      <Filter>spaceshooter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Config.h" />
@@ -55,8 +58,13 @@
     <ClInclude Include="Linal\inoutproduct.hpp">
       <Filter>linal</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="cube.h">
+      <Filter>spaceshooter</Filter>
+=======
     <ClInclude Include="spaceship.h">
       <Filter>linal\models</Filter>
+>>>>>>> master
     </ClInclude>
     <ClInclude Include="moon.h">
       <Filter>linal\models</Filter>
@@ -75,8 +83,13 @@
     <Filter Include="linal\graphical2D">
       <UniqueIdentifier>{126179ed-b3fe-4bb2-b623-f27655b32959}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
+    <Filter Include="spaceshooter">
+      <UniqueIdentifier>{6df608f3-d3c9-4b29-b392-88dfcba14c04}</UniqueIdentifier>
+=======
     <Filter Include="linal\models">
       <UniqueIdentifier>{838650bb-9311-4927-a25c-cdf9ea7342cf}</UniqueIdentifier>
+>>>>>>> master
     </Filter>
   </ItemGroup>
 </Project>

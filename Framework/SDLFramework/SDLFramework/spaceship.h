@@ -66,14 +66,14 @@ private:
 spaceship::spaceship()
 {
 	ship_matrix = Linal::Matrix<Linal::G3D::Point>{ 8 };
-	auto topleftfront = Linal::G3D::Point(4, 6, 2);
-	auto toprightfront = Linal::G3D::Point(6, 6, 2);
-	auto bottomleftfront = Linal::G3D::Point(4, 4, 2);
-	auto bottomrightfront = Linal::G3D::Point(6, 4, 2);
-	auto topleftback = Linal::G3D::Point(4, 6, 6);
-	auto toprightback = Linal::G3D::Point(6, 6, 6);
-	auto bottomleftback = Linal::G3D::Point(4, 4, 6);
-	auto bottomrightback = Linal::G3D::Point(6, 4, 6);
+	auto topleftfront = Linal::G3D::Point(400, 600, 200);
+	auto toprightfront = Linal::G3D::Point(600, 600, 200);
+	auto bottomleftfront = Linal::G3D::Point(400, 400, 200);
+	auto bottomrightfront = Linal::G3D::Point(600, 400, 200);
+	auto topleftback = Linal::G3D::Point(400, 600, 600);
+	auto toprightback = Linal::G3D::Point(600, 600, 600);
+	auto bottomleftback = Linal::G3D::Point(400, 400, 600);
+	auto bottomrightback = Linal::G3D::Point(600, 400, 600);
 
 	ship_matrix.Set(1, topleftfront);
 	ship_matrix.Set(2, toprightfront);
