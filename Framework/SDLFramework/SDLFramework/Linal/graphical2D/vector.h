@@ -2,7 +2,7 @@
 #define SDLFRAMEWORK_LINAL_GRAPHICAL2D_VECTOR
 
 #include "../../FWApplication.h"
-#include "point.h"
+#include "./point.h"
 
 struct Color;
 

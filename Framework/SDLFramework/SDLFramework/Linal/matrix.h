@@ -7,18 +7,19 @@
 #include <cmath>
 
 #include <memory>
+#include <vector>
 #include <iomanip>
 #include <math.h>
 #include <typeinfo>
 
 using namespace std;
 
-#include "FWApplication.h"
-#include "Linal/constants.h"
-#include "Linal/inoutproduct.hpp"
-#include "Linal/graphical3D/3dpoint.h"
-#include "Linal/graphical2D/point.h"
-#include "drawable.h"
+#include "../FWApplication.h"
+#include "./constants.h"
+#include "./inoutproduct.hpp"
+#include "./graphical3D/3dpoint.h"
+#include "./graphical2D/point.h"
+#include "../drawable.h"
 
 namespace Linal
 {

@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDLFramework", "SDLFramework\SDLFramework.vcxproj", "{1BDED753-9F4B-440C-9BE8-4FA0335A4310}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tests", "Matrix test\Matrix test.vcxproj", "{66D095DC-8AFA-426E-84B6-875858FC890D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -23,6 +25,16 @@ Global
 		{1BDED753-9F4B-440C-9BE8-4FA0335A4310}.Release|Win32.ActiveCfg = Release|Win32
 		{1BDED753-9F4B-440C-9BE8-4FA0335A4310}.Release|Win32.Build.0 = Release|Win32
 		{1BDED753-9F4B-440C-9BE8-4FA0335A4310}.Release|x64.ActiveCfg = Release|Win32
+		{66D095DC-8AFA-426E-84B6-875858FC890D}.Debug|ARM.ActiveCfg = Debug|Win32
+		{66D095DC-8AFA-426E-84B6-875858FC890D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{66D095DC-8AFA-426E-84B6-875858FC890D}.Debug|Win32.Build.0 = Debug|Win32
+		{66D095DC-8AFA-426E-84B6-875858FC890D}.Debug|x64.ActiveCfg = Debug|x64
+		{66D095DC-8AFA-426E-84B6-875858FC890D}.Debug|x64.Build.0 = Debug|x64
+		{66D095DC-8AFA-426E-84B6-875858FC890D}.Release|ARM.ActiveCfg = Release|Win32
+		{66D095DC-8AFA-426E-84B6-875858FC890D}.Release|Win32.ActiveCfg = Release|Win32
+		{66D095DC-8AFA-426E-84B6-875858FC890D}.Release|Win32.Build.0 = Release|Win32
+		{66D095DC-8AFA-426E-84B6-875858FC890D}.Release|x64.ActiveCfg = Release|x64
+		{66D095DC-8AFA-426E-84B6-875858FC890D}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
