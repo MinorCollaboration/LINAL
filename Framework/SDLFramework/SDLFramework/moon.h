@@ -10,10 +10,35 @@ class moon
 public:
 	moon();
 	~moon();
-	void ScaleObject(double scaleX, double scaleY)
+	void ScaleObject(double originX, double originY, double originZ,double scaleX, double scaleY, double scaleZ)
 	{
-		auto scale = Linal::Get2DScaleMatrix(scaleX, scaleY);
+		auto translate = Linal::Get3DTranslateMatrix(-originX, -originY,-originZ);
+		auto revertTranslate = Linal::Get3DTranslateMatrix(originX, originY, originZ);
+		auto scale = Linal::Get3DScaleMatrix(scaleX, scaleY, scaleZ);
+
+		moon_matrix = translate * moon_matrix;
 		moon_matrix = scale * moon_matrix;
+		moon_matrix = revertTranslate * moon_matrix;
+
+	}
+	void pulse(double scale) {
+		
+		if (plus_counter < scale) {
+			min_counter = 0;
+			ScaleObject(moon_matrix.GetMinX(), moon_matrix.GetMinY(), moon_matrix.GetMinZ(), 1.1, 1.1, 1.1);
+			plus_counter++;
+
+		}else if(maxX < moon_matrix.GetMaxX()){
+			ScaleObject(moon_matrix.GetMinX(), moon_matrix.GetMinY(), moon_matrix.GetMinZ(), 0.9, 0.9, 0.9);
+			min_counter++;
+			if (min_counter  == scale) {
+				plus_counter = 0;
+			}
+		}
+		else {
+			plus_counter = 0;
+		}
+		
 	}
 
 	Linal::Matrix<Linal::G3D::Point> get_moon_matrix() {
@@ -21,6 +46,11 @@ public:
 	};
 
 private:
+	int plus_counter = 0;
+	int min_counter = 0;
+	double maxX;
+	double maxY;
+	double maxZ;
 	Linal::Matrix<Linal::G3D::Point> moon_matrix;
 
 
@@ -46,6 +76,12 @@ moon::moon()
 	moon_matrix.Set(6, bottomrightback);
 	moon_matrix.Set(7, toprightback);
 	moon_matrix.Set(8, topleftback);
+
+	//set max variable
+	maxX = moon_matrix.GetMaxX();
+	maxY = moon_matrix.GetMaxY();
+	maxZ = moon_matrix.GetMaxZ();
+
 }
 
 moon::~moon()

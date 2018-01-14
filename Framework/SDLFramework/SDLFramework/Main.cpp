@@ -197,8 +197,10 @@ int main(int args[])
 
 		//RotateObjectOnYAxis(cube, 90 / 30, 6, 6, 4);
 		auto matrix = ship.get_ship_matrix();
-		//moon.ScaleObject(0,0);
 		auto moon_matrix = moon.get_moon_matrix();
+
+		moon.pulse(10);
+
 
 		camera.Draw(application, matrix);
 		camera.Draw(application, moon_matrix);
