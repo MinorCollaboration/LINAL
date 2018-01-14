@@ -86,8 +86,8 @@ int main(int args[])
 	spaceship ship;
 
 	//camera variables
-	int eyeX = 0, eyeY = 0, eyeZ = 0;
-	int lookAtX = 400, lookAtY = 400, lookAtZ = 400;
+	int eyeX = 1000, eyeY = 1000, eyeZ = 1000;
+	int lookAtX = 0, lookAtY = 0, lookAtZ = 0;
 	int camera_x = 0;
 	int camera_y = 0;
 	int camera_z = 4;
