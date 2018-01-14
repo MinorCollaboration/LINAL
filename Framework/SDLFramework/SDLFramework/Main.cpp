@@ -14,6 +14,8 @@
 #include "./Linal/matrix.h"
 #include "./Linal/graphical2D/canvas.h"
 #include "spaceship.h"
+#include "moon.h"
+
 
 
 
@@ -82,8 +84,9 @@ void RotateObject(Linal::Matrix<Linal::G2D::Point>& matrix, double degree, doubl
 
 int main(int args[])
 {
-	//ship
+	//objects
 	spaceship ship;
+	moon moon;
 
 	//camera variables
 	int camera_x = 0;
@@ -194,8 +197,12 @@ int main(int args[])
 
 		//RotateObjectOnYAxis(cube, 90 / 30, 6, 6, 4);
 		auto matrix = ship.get_ship_matrix();
+		//moon.ScaleObject(0,0);
+		auto moon_matrix = moon.get_moon_matrix();
 
 		camera.Draw(application, matrix);
+		camera.Draw(application, moon_matrix);
+
 
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));

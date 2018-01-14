@@ -58,6 +58,9 @@
     <ClInclude Include="spaceship.h">
       <Filter>linal\models</Filter>
     </ClInclude>
+    <ClInclude Include="moon.h">
+      <Filter>linal\models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="linal">
