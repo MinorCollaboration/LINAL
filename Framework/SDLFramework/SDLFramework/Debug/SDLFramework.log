@@ -2,15 +2,10 @@
 c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\math.h(1001): warning C4005: 'M_PI': macro redefinition
   c:\users\mark_\documents\herkansingen\linal\framework\sdl2-2.0.3\include\sdl_stdinc.h(350): note: see previous definition of 'M_PI'
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\camera.hpp(97): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\camera.hpp(130): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\camera.hpp(170): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\camera.hpp(128): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\camera.hpp(168): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   Generating Code...
 c:\users\mark_\documents\herkansingen\linal\framework\sdlframework\sdlframework\linal\matrix.h(127): warning C4172: returning address of local variable or temporary: copiedMatrix
-  Compiling...
+  Skipping... (no relevant changes detected)
   cube.cpp
-  Generating Code...
-  LINK : C:\Users\mark_\Documents\Herkansingen\LINAL\Framework\SDLFramework\Debug\SDLFramework.exe not found or not built by the last incremental link; performing full link
-     Creating library C:\Users\mark_\Documents\Herkansingen\LINAL\Framework\SDLFramework\Debug\SDLFramework.lib and object C:\Users\mark_\Documents\Herkansingen\LINAL\Framework\SDLFramework\Debug\SDLFramework.exp
-SDL2_gfx.lib(SDL2_gfxPrimitives.obj) : warning LNK4099: PDB 'SDL2_gfx.pdb' was not found with 'SDL2_gfx.lib(SDL2_gfxPrimitives.obj)' or at 'C:\Users\mark_\Documents\Herkansingen\LINAL\Framework\SDLFramework\Debug\SDL2_gfx.pdb'; linking object as if no debug info
-SDL2_gfx.lib(SDL2_rotozoom.obj) : warning LNK4099: PDB 'SDL2_gfx.pdb' was not found with 'SDL2_gfx.lib(SDL2_rotozoom.obj)' or at 'C:\Users\mark_\Documents\Herkansingen\LINAL\Framework\SDLFramework\Debug\SDL2_gfx.pdb'; linking object as if no debug info
   SDLFramework.vcxproj -> C:\Users\mark_\Documents\Herkansingen\LINAL\Framework\SDLFramework\Debug\SDLFramework.exe

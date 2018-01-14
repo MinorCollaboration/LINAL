@@ -59,14 +59,14 @@ private:
 moon::moon()
 {
 	moon_matrix = Linal::Matrix<Linal::G3D::Point>{ 8 };
-	auto topleftfront = Linal::G3D::Point(14,16, 12);
-	auto toprightfront = Linal::G3D::Point(16, 16, 12);
-	auto bottomleftfront = Linal::G3D::Point(14, 14, 12);
-	auto bottomrightfront = Linal::G3D::Point(16, 14, 12);
-	auto topleftback = Linal::G3D::Point(14, 16, 16);
-	auto toprightback = Linal::G3D::Point(16, 16, 16);
-	auto bottomleftback = Linal::G3D::Point(14, 14, 16);
-	auto bottomrightback = Linal::G3D::Point(16, 14, 16);
+	auto topleftfront = Linal::G3D::Point(1400,1600, 1200);
+	auto toprightfront = Linal::G3D::Point(1600, 1600, 1200);
+	auto bottomleftfront = Linal::G3D::Point(1400, 1400, 1200);
+	auto bottomrightfront = Linal::G3D::Point(1600, 1400, 1200);
+	auto topleftback = Linal::G3D::Point(1400, 1600, 1600);
+	auto toprightback = Linal::G3D::Point(1600, 1600, 1600);
+	auto bottomleftback = Linal::G3D::Point(1400, 1400, 1600);
+	auto bottomrightback = Linal::G3D::Point(1600, 1400, 1600);
 
 	moon_matrix.Set(1, topleftfront);
 	moon_matrix.Set(2, toprightfront);

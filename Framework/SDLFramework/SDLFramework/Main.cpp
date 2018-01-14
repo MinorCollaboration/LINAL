@@ -279,7 +279,7 @@ int main(int args[])
 		moon.pulse(10);
 
 		
-		camera.Draw(application, canvas);
+		//camera.Draw(application, canvas);
 		camera.Draw(application, cube.GetPolygons());
 
 		application->SetColor(Color(0, 255, 0, 255));

@@ -118,8 +118,6 @@ namespace Linal
 			//auto z = -p.zAxis;
 
 			if (w >= 0 || ow >= 0) {
-				//application->DrawCircle(startX + (p.xAxis  * (Linal::FIELDWIDTH / 2)), (startY + height) - (p.yAxis * (Linal::FIELDHEIGHT / 2)), Linal::POINTSIZE, true);
-				//application->DrawLine(startX + x, (startY + height) - y, startX + (x + ox), (startY + height) - (y + oy), 2);
 
 				auto startingX = startX + ox;
 				auto startingY = (startY + height) - oy;
