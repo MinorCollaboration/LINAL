@@ -19,9 +19,21 @@ namespace Linal
 	class Camera
 	{
 	public:
+		void RotateObjectOnXAxis(double degree, double originX, double originY, double originZ)
+		{
+			auto translate = Linal::Get3DTranslateMatrix(-originX, -originY, -originZ);
+			auto revertTranslate = Linal::Get3DTranslateMatrix(originX, originY, originZ);
+			auto rotate = Linal::Get3DRotateXAxisMatrix(degree);
+
+			auto rotrans = rotate * translate;
+			auto rotated = rotrans * cameraMatrix;
+			cameraMatrix = revertTranslate * rotated;
+		}
 		Camera(int startX, int startY, int width, int height);
 		Camera(int startX, int startY, int width, int height, Matrix<double> cameraMatrix);
 		~Camera();
+		Matrix<double>  get_camera_matrix();
+
 
 		Camera& SetCameraMatrix(Linal::Matrix<double> cM);
 
@@ -53,6 +65,10 @@ namespace Linal
 	}
 
 	Camera::~Camera() {
+	}
+
+	Matrix<double> Camera::get_camera_matrix() {
+		return cameraMatrix;
 	}
 
 	Camera& Camera::SetCameraMatrix(Linal::Matrix<double> cM)

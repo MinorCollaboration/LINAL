@@ -66,6 +66,9 @@
       <Filter>linal\models</Filter>
 >>>>>>> master
     </ClInclude>
+    <ClInclude Include="moon.h">
+      <Filter>linal\models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="linal">

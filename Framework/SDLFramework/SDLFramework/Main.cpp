@@ -14,6 +14,8 @@
 #include "./Linal/matrix.h"
 #include "./Linal/graphical2D/canvas.h"
 #include "spaceship.h"
+#include "moon.h"
+
 
 #include "./cube.h"
 
@@ -82,8 +84,9 @@ void RotateObject(Linal::Matrix<Linal::G2D::Point>& matrix, double degree, doubl
 
 int main(int args[])
 {
-	//ship
+	//objects
 	spaceship ship;
+	moon moon;
 
 	//camera variables
 	int eyeX = 1000, eyeY = 1000, eyeZ = 1000;
@@ -142,12 +145,13 @@ int main(int args[])
 	//RotateObjectOnZAxis(cube, 90, 4, 4, 2);
 
 	Linal::G3D::Point bullet;
+	Linal::Matrix<double> camera_matrix{ 1, 1 };
 
 	while (application->IsRunning())
 	{
 		application->StartTick();
-
 		auto camera = Linal::Camera(0, 0, 600, 600, Linal::GetCameraMatrix(eyeX, eyeY, eyeZ, lookAtX, lookAtY, lookAtZ));
+		//Linal::Camera camera = Linal::Camera(0, 0, 600, 600, Linal::GetCameraMatrix(camera_x, camera_y, camera_z, camera_move_x, camera_move_y, camera_move_z));
 
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
@@ -230,6 +234,20 @@ int main(int args[])
 					std::cout << "Placed at (" << bullet.xAxis << "," << bullet.yAxis << "," << bullet.zAxis << ")" << std::endl;
 					application->SetColor(Color(255, 255, 255, 255));
 					break;
+				case SDLK_TAB:
+					std::cout << "rotate ship x" << std::endl;
+					ship.RotateObjectOnYAxis(90 / 30, 6, 6, 4);
+					break;
+				/*case SDLK_UP:
+					std::cout << "move ship" << std::endl;
+					ship.moveObject(0.01);
+					break;*/
+				case SDLK_c:
+					std::cout << "rotate camera " << std::endl;
+					camera_matrix = camera.get_camera_matrix();
+					camera.RotateObjectOnXAxis(90 / 30, 6, 6, 4);
+					//RotateObjectOnYAxis(cam, 90 / 30, 6, 6, 4);
+					break;
 				default:
 					std::cout << "none" << std::endl;
 				}
@@ -250,11 +268,15 @@ int main(int args[])
 
 		//camera5.SetCameraMatrix(Linal::GetCameraMatrix(1, frameCount, -15, 1, 1, 1));
 		//RotateObjectOnYAxis(cube, 90 / 30, 6, 6, 4);
+		
+		//canvas.Draw(application);
 
 		camera.Draw(application, "General");
 
-		//RotateObjectOnYAxis(cube, 90 / 30, 6, 6, 4);
 		auto matrix = ship.get_ship_matrix();
+		auto moon_matrix = moon.get_moon_matrix();
+
+		moon.pulse(10);
 
 		
 		camera.Draw(application, canvas);
@@ -265,6 +287,8 @@ int main(int args[])
 		application->SetColor(Color(255, 255, 255, 255));
 		//camera.Draw(application, cube.GetConnections());
 		//camera.Draw(application, matrix);
+		camera.Draw(application, matrix);
+		camera.Draw(application, moon_matrix);
 
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));

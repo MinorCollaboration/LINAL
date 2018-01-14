@@ -911,6 +911,7 @@ namespace Linal
 
 		return matrix;
 	}
+
 }
 
 #endif

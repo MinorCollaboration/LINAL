@@ -110,6 +110,7 @@
     <ClInclude Include="Linal\graphical2D\canvas.h" />
     <ClInclude Include="Linal\graphical2D\point.h" />
     <ClInclude Include="Linal\graphical2D\vector.h" />
+    <ClInclude Include="moon.h" />
     <ClInclude Include="spaceship.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
