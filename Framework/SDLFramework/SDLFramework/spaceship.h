@@ -23,6 +23,15 @@ public:
 		auto rotated = rotrans * ship_matrix;
 		ship_matrix = revertTranslate * rotated;
 	}
+	void RotateObjectOnZAxis(double degree)
+	{
+		auto translate = Linal::Get3DTranslateMatrix(-(ship_matrix.GetMaxX()- ship_matrix.GetMinX()), -(ship_matrix.GetMaxY() - ship_matrix.GetMinY()), -(ship_matrix.GetMaxZ() - ship_matrix.GetMinZ()));
+		auto revertTranslate = Linal::Get3DTranslateMatrix((ship_matrix.GetMaxX() - ship_matrix.GetMinX()), (ship_matrix.GetMaxY() - ship_matrix.GetMinY()), (ship_matrix.GetMaxZ() - ship_matrix.GetMinZ()));
+		auto rotate = Linal::Get3DRotateZAxisMatrix(degree);
+
+		auto rotated = (rotate * translate) * ship_matrix;
+		ship_matrix = revertTranslate * rotated;
+	}
 	void RotateObjectOnYAxis( double degree, double originX, double originY, double originZ)
 	{
 		auto translate = Linal::Get3DTranslateMatrix(-originX, -originY, -originZ);

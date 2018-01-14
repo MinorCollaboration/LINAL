@@ -198,7 +198,7 @@ int main(int args[])
 				case SDLK_UP:
 					std::cout << " up arrow" << std::endl;
 					lookAtY += Linal::CAMERASTEP;
-					ship.moveObject(1);
+					ship.moveObject(0.1);
 					break;
 				case SDLK_LEFT:
 					std::cout << " left arrow" << std::endl;
@@ -237,6 +237,10 @@ int main(int args[])
 				case SDLK_TAB:
 					std::cout << "rotate ship x" << std::endl;
 					ship.RotateObjectOnYAxis(90 / 30, 6, 6, 4);
+					break;
+				case SDLK_1:
+					std::cout << "rotate ship x" << std::endl;
+					ship.RotateObjectOnZAxis(90 / 30);
 					break;
 				/*case SDLK_UP:
 					std::cout << "move ship" << std::endl;
