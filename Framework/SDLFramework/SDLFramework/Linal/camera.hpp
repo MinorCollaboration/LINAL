@@ -134,6 +134,27 @@ namespace Linal
 		application->SetColor(Color(0, 0, 0, 255));
 		application->DrawText(label, startX + (width / 2), startY + height - 10);
 	}
+
+	void Camera::Draw(FWApplication *& application, Linal::G3D::Point p)
+	{
+		auto wereldmatrix = Linal::Matrix<Linal::G3D::Point>(1);
+		wereldmatrix.Set(1, p);
+		auto projectiematrix = Linal::GetPerspectiveMatrix(1, 100, 90);
+		auto weergavePunten = projectiematrix * cameraMatrix * wereldmatrix;
+
+		for (int index = 1; index <= weergavePunten.GetWidth(); index++)
+		{
+			auto p = weergavePunten.Get(index);
+
+			auto w = weergavePunten.matrix.at(weergavePunten.ConvertToIndex(4, index));
+			auto x = (width / 2) + ((p.xAxis + 1) / w) * width * 0.5;
+			auto y = (height / 2) + ((p.yAxis + 1) / w) * height * 0.5;
+
+			if (w >= 0) {
+				application->DrawCircle(startX + x, (startY + height) - y, Linal::POINTSIZE, true);
+			}
+		}
+	}
 }
 
 #endif

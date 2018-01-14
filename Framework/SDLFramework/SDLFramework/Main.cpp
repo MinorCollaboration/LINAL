@@ -141,10 +141,13 @@ int main(int args[])
 
 	//RotateObjectOnZAxis(cube, 90, 4, 4, 2);
 
+	Linal::G3D::Point bullet;
+
 	while (application->IsRunning())
 	{
 		application->StartTick();
 
+		auto camera = Linal::Camera(0, 0, 600, 600, Linal::GetCameraMatrix(eyeX, eyeY, eyeZ, lookAtX, lookAtY, lookAtZ));
 
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
@@ -217,8 +220,15 @@ int main(int args[])
 					camera_move_z--;
 					break;
 				case SDLK_q:
-					std::cout << "rotate ship" << std::endl;
+					std::cout << " Q" << std::endl;
 					ship.RotateObjectOnXAxis(90 / 30, 6, 6, 4);
+					break;
+				case SDLK_SPACE:
+					std::cout << " Spacebar" << std::endl;
+					application->SetColor(Color(0, 255, 0, 255));
+					bullet = cube.Shoot();
+					std::cout << "Placed at (" << bullet.xAxis << "," << bullet.yAxis << "," << bullet.zAxis << ")" << std::endl;
+					application->SetColor(Color(255, 255, 255, 255));
 					break;
 				default:
 					std::cout << "none" << std::endl;
@@ -234,7 +244,6 @@ int main(int args[])
 				break;
 			}
 		}
-		auto camera = Linal::Camera(0, 0, 600, 600, Linal::GetCameraMatrix(eyeX, eyeY, eyeZ, lookAtX, lookAtY, lookAtZ));
 
 		//canvas->Draw(application);
 		//auto camera = Linal::Camera(0, 0, 600, 600, Linal::GetCameraMatrix(camera_x, camera_y, camera_z, camera_move_x, camera_move_y, camera_move_z));
@@ -247,9 +256,14 @@ int main(int args[])
 		//RotateObjectOnYAxis(cube, 90 / 30, 6, 6, 4);
 		auto matrix = ship.get_ship_matrix();
 
+		
 		camera.Draw(application, canvas);
 		camera.Draw(application, cube.GetPolygons());
-		camera.Draw(application, cube.GetConnections());
+
+		application->SetColor(Color(0, 255, 0, 255));
+		camera.Draw(application, bullet);
+		application->SetColor(Color(255, 255, 255, 255));
+		//camera.Draw(application, cube.GetConnections());
 		//camera.Draw(application, matrix);
 
 		// For the background
